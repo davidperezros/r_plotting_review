@@ -1,0 +1,115 @@
+--- 
+title: "Gráficos en R"
+author: "David Pérez Ros"
+date: "`r format(Sys.time(), '%d/%m/%y')`" 
+output:
+  html_document:
+    df_print: paged
+subtitle: Instituto Nacional de Estadística (INE)
+documentclass: book
+bibliography: book.bib
+biblio-style: apa
+description: Guia sobre los principales paquetes para graficar en R.
+github-repo: "rstudio/bookdown-demo"
+site: bookdown::bookdown_site
+link-citations: yes
+linkcolor: blue
+---
+
+```{r,echo=FALSE}
+knitr::opts_chunk$set(
+  cache = TRUE, echo = TRUE, message = FALSE, warning = FALSE,
+  fig.pos = "h",
+  fig.align = "center", out.width = "50%"
+)
+```
+
+```{r htmlTemp3, echo=FALSE, eval=TRUE}
+# Esto sirve para que aparezca botón de ocultar chunks
+codejs <- readr::read_lines("js/codefolding.js")
+collapsejs <- readr::read_lines("js/collapse.js")
+transitionjs <- readr::read_lines("js/transition.js")
+
+htmlhead <-
+  paste("
+<script>",
+    paste(transitionjs, collapse = "\n"),
+    "</script>
+<script>",
+    paste(collapsejs, collapse = "\n"),
+    "</script>
+<script>",
+    paste(codejs, collapse = "\n"),
+    '</script>
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+.row { display: flex; }
+.collapse { display: none; }
+.in { display:block }
+</style>
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+',
+    sep = "\n"
+  )
+
+readr::write_lines(htmlhead, path = "header.html")
+```
+
+
+
+
+
+# Introducción
+
+
+
+
+La visualización de datos es una herramienta fundamental en el análisis estadístico y la ciencia de datos, ya que permite interpretar y comunicar información compleja de manera efectiva. Con el creciente volumen de datos disponibles en diversas disciplinas, la capacidad de visualizar patrones y tendencias se ha vuelto esencial para la toma de decisiones informadas. En este contexto, [R](https://www.r-project.org), un lenguaje de programación y entorno de software para análisis estadístico, ha desarrollado un ecosistema robusto y diverso de paquetes para la creación de gráficos.
+
+Las funciones gráficas base de [R](https://www.r-project.org) ofrecían una solución sencilla y eficiente para la creación de gráficos básicos. Con el tiempo, la necesidad de visualizaciones más sofisticadas y personalizables llevó al desarrollo de paquetes adicionales que ampliaron significativamente las capacidades gráficas de R.
+
+
+Hoy en día, la comunidad de R dispone de una variedad de paquetes especializados que permiten desde la creación de gráficos simples hasta la construcción de visualizaciones interactivas y altamente personalizadas. Esta interactividad mejora significativamente la capacidad de los usuarios para explorar datos de manera dinámica, ofreciendo nuevas perspectivas y facilitando la comprensión de información compleja.
+
+En este estado del arte, se revisan los paquetes más relevantes para la visualización de datos en R, destacando sus características, ventajas y aplicaciones. Su versatilidad y su reciente incorporación de formatos como [Bookdown](https://bookdown.org/), [R Markdown](https://rmarkdown.rstudio.com/), y [Quarto](https://quarto.org/) lo hacen idóneo para realizar análisis de datos centrándose únicamente en dicho análisis y no perder tiempo en diseñar el entorno en el que se presentarán.
+
+Este proyecto se ha realizado en [Bookdown](https://bookdown.org/)[^9] con la idea de que sea fácilmente exportable a PDF o leído desde la web, además de poder evolucionar en el tiempo, incluyendo correcciones tipográficas o nuevos apartados. Se expondrán los diferentes tipos de paquetes para graficar en R, clasificándolos según su propósito: visualización exploratoria, visualización de resultados estadísticos, gráficos interactivos, gráficos para informes y publicaciones, entre otros. Esto permitirá una comprensión integral de las herramientas disponibles y su adecuada aplicación en diversos contextos de análisis de datos.
+
+## Paquetes Principales
+
+
+  -  **ggplot2**: permite construir visualizaciones complejas mediante una sintaxis declarativa y altamente personalizable[^1]. Su flexibilidad y capacidad para manejar grandes conjuntos de datos lo convierten en una herramienta esencial para analistas y científicos de datos.
+
+[^1]: Wickham, H. (2016). *ggplot2: Elegant Graphics for Data Analysis*. Springer.
+
+  -  **plotly**: paquete popular que extiende la funcionalidad de ggplot2 al ofrecer gráficos interactivos. Desarrollado inicialmente como una biblioteca para Python, su integración con R ha permitido a los usuarios crear visualizaciones dinámicas y envolventes que pueden ser fácilmente compartidas en plataformas web[^2]. 
+
+[^2]: Sievert, C. (2020). *Interactive Web-Based Data Visualization with R, plotly, and shiny*. CRC Press.
+
+  -  **lattice**: paquete diseñado para gráficos multivariantes, basado en el concepto de gráficos en trellis. Proporciona un enfoque sistemático para la visualización de datos multivariados mediante el uso de paneles condicionados[^3]. Es particularmente útil en el análisis exploratorio de datos complejos.
+
+[^3]: Sarkar, D. (2008). *Lattice: Multivariate Data Visualization with R*. Springer.
+
+
+  -  **sf** y **tmap**: para la visualización de datos espaciales, los paquetes **sf** y **tmap** proporcionan herramientas especializadas. **sf** facilita la manipulación de datos geoespaciales, mientras que **tmap** permite la creación de mapas temáticos interactivos y estáticos[^5]. Estos paquetes son esenciales para el análisis geoespacial y la presentación de resultados en disciplinas como la geografía y la ecología.
+
+[^5]: Lovelace, R., Nowosad, J., & Muenchow, J. (2019). *Geocomputation with R*. CRC Press.
+
+  -  **Tendencias Actuales**: Las tendencias actuales en la visualización de datos con R incluyen un aumento en la demanda de gráficos interactivos y dashboards, la integración con herramientas de presentación web, y el desarrollo de paquetes que hacen más accesible la creación de gráficos para usuarios menos técnicos[^6]. 
+
+[^6]: Chang, W., Cheng, J., Allaire, J., Xie, Y., & McPherson, J. (2021). *shiny: Web Application Framework for R*. R package version 1.7.1.
+
+
+
+
+## Datos
+
+
+En este proyecto la mayor parte de datos usados se han extraído directamente del servicio API del INE, a través del paquete `ineapir`. Para más información, (véase [@ineapir]). Esto contribuye a la independencia del proyecto, sin necesidad de descargar datos de fuentes externas de manera "manual" para poder replicar los ejemplos. Del mismo modo, promociona y expone casos de uso para dicha herramienta.
+
+
+[^9]: Ver [@main_book] para más información sobre Bookdown. 

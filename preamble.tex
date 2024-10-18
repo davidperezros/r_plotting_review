@@ -1,0 +1,40 @@
+
+
+% Para el titulo
+\usepackage{titling}
+\pretitle{\begin{center}
+\href{https://www.ine.es}{\includegraphics[width=2in,height=2in]{fig/ine_logo.pdf}}\LARGE\\}
+\posttitle{\end{center}}
+% Para poder definir el background color de los chunks de R
+% al generar el pdf
+\usepackage{xcolor}
+\definecolor{granate_ine}{RGB}{136,19,51}
+\definecolor{verde_fuerte_ine}{RGB}{69,126,118}
+\definecolor{verde_claro_ine}{RGB}{221,238,236}
+
+\usepackage{etoolbox}
+\patchcmd{\tableofcontents}{Contents}{\'Indice}{}{}
+
+% Para los márgenes del pdf
+\usepackage[a4paper,
+            left=1in,
+            right=1in,
+            top=1.2in,
+            bottom=1in,
+            footskip=.25in]{geometry}
+% Para cambiar el color de los títulos a granate INE
+\usepackage{sectsty}
+\chapterfont{\color{granate_ine}}  % sets colour of chapters
+\sectionfont{\color{granate_ine}}  % sets colour of sections
+\subsectionfont{\color{granate_ine}}  % sets colour of subsections
+
+
+% Ponemos en español estas palabras
+\renewcommand{\contentsname}{Indice}
+\renewcommand{\chaptername}{Capítulo}
+
+% Ponemos todo el texto en negrita como el verde INE
+\let\oldtextbf\textbf
+\renewcommand{\textbf}[1]{\textcolor{verde_fuerte_ine}{\oldtextbf{#1}}}
+
+

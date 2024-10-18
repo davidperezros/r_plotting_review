@@ -1,0 +1,373 @@
+---
+---
+---
+
+# plotly
+
+El paquete [plotly](https://plotly.com/r/getting-started/) es una poderosa herramienta para la creación de gráficos interactivos en R. Desarrollado inicialmente como una biblioteca para Python, plotly ha sido adaptado para R, permitiendo a los usuarios beneficiarse de sus capacidades de visualización dinámica y envolvente. La interactividad de los gráficos generados con plotly facilita que se puedan integrar en sitios web, y en combinación con otros paquetes como `ineapir` (véase [@ineapir]) se puede proporcionar un análisis directo e interactivo de datos extraidos en bruto del INE.
+
+## Características Principales
+
+1.  **Interactividad**: plotly destaca por sus capacidades interactivas, permitiendo a los usuarios hacer zoom, desplazar, y obtener información detallada mediante "hover" sobre los elementos del gráfico.
+2.  **Compatibilidad con ggplot2**: plotly puede convertir gráficos estáticos de ggplot2 en gráficos interactivos sin necesidad de reescribir el código original.
+3.  **Soporte para gráficos en 3D**: plotly facilita la creación de gráficos tridimensionales, como superficies y dispersión en 3D, que son difíciles de lograr con otras herramientas.
+4.  **Integración con R Markdown y Shiny**: los gráficos de plotly pueden integrarse fácilmente en documentos R Markdown y aplicaciones Shiny, mejorando la presentación de informes y el desarrollo de aplicaciones interactivas.
+5.  **Variedad de tipos de gráficos**: desde gráficos de líneas y barras hasta mapas y gráficos de superficie, plotly soporta una amplia gama de visualizaciones.
+
+## Tipos de gráficos
+
+La base de *plotly* es la interactividad de los gráficos que permite exploraciones más profundas y detalladas. En general, se pueden realizar:
+
+-   **Mapas interactivos**: Permiten explorar datos geoespaciales por diferentes áreas.
+-   **Gráficos de barras**: Facilitan la comparación de categorías y pueden permitir la selección dinámica de subcategorías.
+-   **Series temporales**: Posibilitan filtrar por años y observar tendencias a lo largo del tiempo.
+-   **Histogramas interactivos**: Permiten ajustar el número de bins y explorar la distribución de los datos.
+-   **Box plots**: Ofrecen interactividad para seleccionar y resaltar datos atípicos o rangos específicos.
+-   **Gráficos de dispersión**: Permiten hacer zoom y seleccionar áreas específicas para análisis detallado.
+-   **Gráficos de calor**: Visualizan matrices de datos con interactividad para resaltar valores específicos.
+-   **Gráficos de burbujas**: Facilitan la visualización de relaciones entre múltiples variables con capacidad de ajuste de tamaño y color de las burbujas.
+
+### Nota
+
+Debido a que los gráficos generados con `ploty` son interactivos, se genera un conflicto a la hora de guardar estos como pdf ya que se debe seleccionar una de las posibles vistas estáticas de dichos gráficos. La siguiente línea de código incluye el paquete `webshot` que se encarga de guardar capturas (imágenes estáticas) de dichos gráficos interactivos a la hora de imprimir la página como *.pdf* .
+
+## Ejemplo de Uso
+
+### Gráfico interactivo
+
+A continuación se muestra un ejemplo básico de cómo crear un gráfico interactivo con plotly a partir de un conjunto de datos:
+
+```{r out.width = "100%"}
+# Instalar y cargar el paquete plotly
+# install.packages("plotly")
+
+# Verificar si está instalado
+if (!require("plotly")) install.packages("dplyr")
+if (!require("webshot")) install.packages("webshot")
+# Cargar paquete
+library(dplyr)
+library(webshot)
+
+# Datos de ejemplo
+data <- mtcars
+```
+
+```{r, webshot = "webshot"}
+# Crear un grfico interactivo de dispersión
+p <- plot_ly(data,
+  x = ~wt, y = ~mpg, width = 800, height = 800, type = "scatter", mode = "markers",
+  marker = list(size = 10, color = "rgba(255, 182, 193, .9)", line = list(color = "rgba(152, 0, 0, .8)", width = 2))
+) %>%
+  layout(
+    title = "Relación entre Peso y Consumo de Combustible",
+    xaxis = list(title = "Peso (1000 lbs)"),
+    yaxis = list(title = "Millas por Galón")
+  )
+
+# Mostrar el gráfico
+p
+```
+
+En este ejemplo, se utiliza el conjunto de datos mtcars para crear un gráfico de dispersión interactivo que muestra la relación entre el peso del vehículo y el consumo de combustible. El argumento marker permite personalizar la apariencia de los puntos en el gráfico, mientras que layout se utiliza para añadir títulos y etiquetas a los ejes.
+
+### Series Temporales
+
+Plotly ofrece potentes herramientas para la visualización de series temporales, permitiendo a los usuarios interactuar con los datos de manera dinámica y obtener información valiosa de forma rápida y efectiva. Su capacidad para crear gráficos atractivos y funcionales lo convierte en una opción excelente para el análisis de datos temporales.
+
+**Características Clave de Plotly para Series Temporales**
+
+-   **Interactividad**:
+
+    -   **Zoom y Pan**: Los usuarios pueden acercar y alejar secciones del gráfico.
+    -   **Hover**: Información detallada aparece al pasar el cursor sobre los puntos de datos.
+    -   **Selección de Rangos**: Rangos deslizantes y botones de selector para ajustar la ventana temporal visualizada.
+
+-   **Elementos Visuales**
+
+    -   **Líneas y Marcadores**: Visualización clara de tendencias y puntos específicos.
+    -   **Colores y Estilos Personalizables**: Facilitan la distinción entre diferentes series de datos.
+
+-   **Funciones Avanzadas**:
+
+    -   **Rangeselector**: Botones para seleccionar periodos específicos (e.g., últimos 3 meses, último año).
+    -   **Rangeslider**: Barra deslizante para ajustar el rango de fechas mostrado.
+    -   **Anotaciones y Formateo**: Posibilidad de agregar notas y ajustar el formato de fechas.
+
+
+
+
+
+
+Los datos los obtendremos usando `ineapir`, para más información (véase [@ineapir]). 
+```{r}
+# Población Hombres
+# Mirando en la web del INE cual es el código de la operación
+# ECP319
+
+library("ineapir")
+# Hombres
+a <- get_data_series(codSeries = "ECP319", tip = "AM", dateStart = "1971/01/01", unnest = TRUE)
+# Mujeres
+b <- get_data_series(codSeries = "ECP318", tip = "AM", dateStart = "1971/01/01", unnest = TRUE)
+
+data <- data.frame(fecha = as.Date(a$Fecha), Year = a$Anyo, Hombres = a$Valor, Mujeres = b$Valor)
+
+
+# Filtramos
+data <- data %>%
+  filter(format(as.Date(fecha), "%m") == "01")
+```
+
+
+
+
+
+
+
+
+
+
+
+
+```{r, caption= "Población de España. Fuente: INE", webshot = "webshot",out.width = "800%"}
+# Crear el gráfico interactivo
+fig <- plot_ly(data, x = ~Year) %>%
+  add_lines(y = ~Mujeres, name = "Mujeres", line = list(color = "#457e76")) %>%
+  add_lines(y = ~Hombres, name = "Hombres", line = list(color = "#881333")) %>%
+  layout(
+    title = "Evolución de la Población",
+    xaxis = list(
+      title = "Año"
+    ),
+    yaxis = list(title = "Población"),
+    legend = list(title = list(text = "<b>Sexo</b>")),
+    hovermode = "closest"
+  )
+
+# Mostrar el gráfico
+fig
+```
+
+
+Ahora vamos a mostrar la evolución del IPC y el IPC Subyacente a lo largo de los años. Para ello, lo primero buscamos en la web del INE en que tabla se encuentran dichos datos, siendo esta la "50902". A continuación, con `get_metadata_table_varval(50902)` vemos que variables y valores hay que tomar para filtrar IPC por Índice General y por Variación Anual.
+
+```{r}
+# get_metadata_table_varval(50902)
+# get_metadata_variables()
+
+# Filter cpi overall index
+# Todos los approaches son similares
+# 762(grupo)= 304092(Indie general).      3(tipodato)=74(Variacion anual)
+filter <- list(values = c("variación anual", "índice general"))
+filter <- list(grupo = "304092", tipodato = "74")
+filter <- list("762" = "304092", "3" = "74")
+
+
+
+# Request data of cpi
+# Table url: https://www.ine.es/jaxiT3/Tabla.htm?t=50902&L=0
+general <- get_data_table(
+  idTable = 50902, filter = filter, unnest = TRUE,
+  tip = "A", validate = FALSE
+)
+
+
+
+
+# get_metadata_table_varval(50907)
+# get_metadata_variables()
+
+filter <- list(
+  "3" = "74", # Fk_variable=Id
+  "269" = "12850" # Fk_variable=Id
+)
+# Filter core cpi
+filter <- list(values = c(
+  "variación anual",
+  "General sin alimentos no elaborados ni productos energéticos"
+))
+
+# Request data of core cpi
+# Table url: https://www.ine.es/jaxiT3/Tabla.htm?t=50907&L=0
+subyacente <- get_data_table(
+  idTable = 50907, filter = filter, unnest = TRUE,
+  tip = "A", validate = FALSE
+)
+
+# Format Fecha column as date
+general$Fecha <- as.Date(general$Fecha)
+subyacente$Fecha <- as.Date(subyacente$Fecha)
+
+```
+
+Una vez hemos preparado los datos, los dibujamos en un gráfico interactivo:
+
+```{r , webshot="webshot",out.width = "100%"}
+
+# Plot cpi overall index
+fig <- plot_ly(general,
+  x = ~Fecha, y = ~Valor, name = "General",
+  type = "scatter", mode = "lines", line = list(color = "#457e76", dash = "dashed")
+)
+
+## Plot core cpi
+fig <- fig %>%
+  add_trace(
+    y = ~ subyacente$Valor, name = "Subyacente",
+    mode = "lines", line = list(color = "#881333", dash = "dashed")
+  ) %>%
+  layout(
+    yaxis = list(title = "Variación anual (%)"),
+    legend = list(
+      title = list(text = "<b> IPC </b>"),
+      x = 0.25,
+      y = -0.25,
+      orientation = "h"
+    ),
+    hovermode = "x"
+  ) %>%
+  config(displayModeBar = FALSE)
+
+fig
+```
+
+
+
+### Grafico de barras
+
+
+Los gráficos de barras en Plotly permiten comparar fácilmente valores entre diferentes categorías. Pueden ser verticales u horizontales, y se pueden personalizar con colores específicos para cada barra. También soportan la agrupación de barras (bar charts) y la apilación (stacked bar charts). La orientación, orden y formato de los ejes pueden ser ajustados para mejorar la legibilidad, y se pueden añadir anotaciones y etiquetas detalladas para proporcionar contexto adicional a los datos visualizados.
+
+
+```{r}
+# get_metadata_table_varval(2915)
+# 34(Tamaño municipios)=20275(Total)
+# nlast=1 nos devuelve el útlimo año sólo
+
+filter <- list("34" = "20275")
+data2 <- get_data_table(2915, filter = filter, unnest = TRUE, tip = "AM", nlast = 1, metanames = TRUE)
+data2 <- data2[-1, ] # Quitamos primera observación. Total España
+```
+
+```{r}
+# Ordenar el dataframe por la columna 'poblacion'
+data2 <- data.frame(poblacion = data2$Valor, ccaa = data2$Comunidades.y.Ciudades.Autónomas)
+data2 <- data2[order(data2$poblacion), ]
+
+
+
+# Crear el gráfico de barras horizontales
+fig <- plot_ly(data2,
+  x = ~poblacion, y = ~ factor(ccaa, levels = data2$ccaa), type = "bar", orientation = "h",
+  marker = list(color = "#ddeeec", line = list(color = "#457e76", width = 1.5))
+) %>%
+  layout(
+    title = "Población por Comunidad Autónoma",
+    xaxis = list(
+      title = "Población",
+      tickformat = ".,", # Formatear los números para que se muestren con punto como separador de miles
+      tickprefix = " ", # Espacio para mejorar la legibilidad
+      separatethousands = TRUE # Asegurar que los miles se separen correctamente
+    ),
+    yaxis = list(title = "Comunidad Autónoma"),
+    margin = list(l = 150) # Ajustar el margen izquierdo para evitar que las etiquetas se corten
+  )
+```
+```{r, webshot="webshot",out.width = "100%"}
+# Mostrar el gráfico
+fig
+```
+
+### Gráfico Sankey 
+
+Este tipo de gráfico es poco conocido pero muy útil para visualizar ciertos fenómenos sociales/demográficos. Por ejemplo: mostrar la evolución de la intención de voto, representando como se han desplazado las intenciones entre diferentes periodos; mostrar la evolución de la situación laboral de la comunidad, mostrando los flujos entre distintos estados laborales en distintos periodos.
+
+Veamos pues este último gráfico. El objetivo es intentar reproducir la aplicación del INE [Flujos de personas en el mercado laboral](https://public.tableau.com/views/EPAFlujosSankeyES_16252266850430/Dashboardccaa?:showVizHome=no&:embed=true#5). En este caso, dentro de bookdown, la aplicación no se puede hacer tan dinámica como la presentada en la web del INE, ya que el formato no es el adecuado para ello [^21].
+
+
+[^21]: Para ver una aplicación dinámica como la presente en la web del INE, ver apartado de Shiny Apps o FlexDashboards.
+
+```{r}
+# Tabla 66257. Información del mercado laboral
+# Vemos sus metadatos para ver por que filtrar
+get_metadata_table_varval(66257)
+
+filter <- list("18" = "454") # "Sexo"="Ambos sexos"
+
+datos <- get_data_table(66257, filter = filter, metanames = TRUE, tip = "AM", metacodes = TRUE, unnest = TRUE, nlast = 1)
+
+# Quitamos los datos totales
+datos <- datos %>%
+  filter(Relación.con.la.actividad.en.el.trimestre.actual.Id != "283949") %>%
+  filter(Relación.con.la.actividad.en.trimestre.anterior.Id != "283949")
+```
+ 
+
+
+ 
+```{r}
+#Necesario para el sankey plot
+# Crear etiquetas únicas
+labels <- unique(c(
+  datos$Relación.con.la.actividad.en.trimestre.anterior,
+  datos$Relación.con.la.actividad.en.el.trimestre.actual
+))
+labels <- c(labels[3], labels[1], labels[2], labels[4], labels[7], labels[5], labels[6])
+# Crear un dataframe para mapear las etiquetas a índices
+label_map <- data.frame(label = labels, id = seq_along(labels) - 1)
+```
+
+```{r}
+# Hacemos join con las etiquetas
+filtered_data <- datos %>%
+  left_join(label_map, by = c("Relación.con.la.actividad.en.trimestre.anterior" = "label")) %>%
+  rename(source = id) %>%
+  left_join(label_map, by = c("Relación.con.la.actividad.en.el.trimestre.actual" = "label")) %>%
+  rename(target = id)
+```
+ 
+ 
+```{r, out.width="100%",fig.cap="Flujos de personas en el mercado laboral en España 2024 T2",webshot="webshot"}
+
+
+# Asignar colores a los enlaces (opcional)
+link_colors <- ifelse(filtered_data$source == 0, "#FFD700", #Inactivos
+                      ifelse(filtered_data$source  ==1,"#CD853F", #Ocupados
+                             ifelse(filtered_data$source  == 2,"#FF4500", #Parados
+                              "#9e3a26" #No consta
+                              )))
+
+
+fig <- plot_ly(
+  type = "sankey",
+  orientation = "h",
+  node = list(
+    label = labels,
+    color = c("#FFD700", "#CD853F", "#FF4500", "#9e3a26", "#FFD700", "#CD853F", "#FF4500", "#9e3a26"),
+    pad = 15,
+    thickness = 20,
+    line = list(color = "black", width = 0.5)
+  ),
+  link = list(
+    source = filtered_data$source,
+    target = filtered_data$target,
+    value = filtered_data$Valor,
+    color = link_colors
+  )
+)
+
+fig <- fig %>%
+  layout(
+    title = "Transición de Actividades Económicas entre Trimestres",
+    font = list(size = 10)
+  )
+fig
+```
+ 
+
+
+## Más información
+
+Para más información sobre el paquete plotly y sus posibles funciones, buscar en la siguiente web:
+  
+    - [https://plotly.com/r/getting-started/](https://plotly.com/r/getting-started/)

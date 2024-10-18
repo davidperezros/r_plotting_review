@@ -1,0 +1,36 @@
+bookdown::gitbook:
+  css: style.css
+  includes:
+      in_header: header.html #Esto sirve junto a la carpeta js y al primer chunk de index.rmd para que en el html aparezca botón de ocultar chunks
+  config:
+    code-fold: true
+    toc:
+      before: |
+        <li style="display: flex; align-items: center; justify-content: space-between;">
+          <a href="./">Gráficos en R</a>
+          <a href="https://www.ine.es" target="_blank">
+            <img src="fig/ine_logo.svg" alt="INE Logo" class="ine-logo"/>
+          </a>
+        </li>
+      after: |
+        <li><a rel="license" href="https://eupl.eu/1.2/en/">
+        Licensed under <img alt="EUROPEAN UNION PUBLIC LICENCE v. 1.2" style="border-width:0;width:15%; vertical-align:bottom" src="fig/EUPL_logo.png" ></a></li>
+        <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+    download: ["pdf", "epub"]
+    sharing:
+      github: no
+      facebook: no
+      twitter: no
+      all: no
+    info: false
+  
+
+
+bookdown::pdf_book:
+  includes:
+    in_header: preamble.tex
+  latex_engine: xelatex
+  citation_package: biblatex
+  keep_tex: FALSE
+  
+bookdown::epub_book: default

@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title> 4 plotly | Gráficos en R</title>
+  <meta name="description" content="Guia sobre los principales paquetes para graficar en R." />
+  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
+
+  <meta property="og:title" content=" 4 plotly | Gráficos en R" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Guia sobre los principales paquetes para graficar en R." />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content=" 4 plotly | Gráficos en R" />
+  
+  <meta name="twitter:description" content="Guia sobre los principales paquetes para graficar en R." />
+  
+
+<meta name="author" content="David Pérez Ros" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="lattice.html"/>
+<link rel="next" href="sdf.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.10.4/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+<link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.2.2/leaflet.js"></script>
+<script src="libs/leaflet-providers-2.0.0/leaflet-providers_2.0.0.js"></script>
+<script src="libs/leaflet-providers-plugin-2.2.2/leaflet-providers-plugin.js"></script>
+
+<script>
+/* ========================================================================
+ * Bootstrap: transition.js v3.3.7
+ * http://getbootstrap.com/javascript/#transitions
+ * ========================================================================
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * ======================================================================== */
+
+
++function ($) {
+  'use strict';
+
+  // CSS TRANSITION SUPPORT (Shoutout: http://www.modernizr.com/)
+  // ============================================================
+
+  function transitionEnd() {
+    var el = document.createElement('bootstrap')
+
+    var transEndEventNames = {
+      WebkitTransition : 'webkitTransitionEnd',
+      MozTransition    : 'transitionend',
+      OTransition      : 'oTransitionEnd otransitionend',
+      transition       : 'transitionend'
+    }
+
+    for (var name in transEndEventNames) {
+      if (el.style[name] !== undefined) {
+        return { end: transEndEventNames[name] }
+      }
+    }
+
+    return false // explicit for ie8 (  ._.)
+  }
+
+  // http://blog.alexmaccaw.com/css-transitions
+  $.fn.emulateTransitionEnd = function (duration) {
+    var called = false
+    var $el = this
+    $(this).one('bsTransitionEnd', function () { called = true })
+    var callback = function () { if (!called) $($el).trigger($.support.transition.end) }
+    setTimeout(callback, duration)
+    return this
+  }
+
+  $(function () {
+    $.support.transition = transitionEnd()
+
+    if (!$.support.transition) return
+
+    $.event.special.bsTransitionEnd = {
+      bindType: $.support.transition.end,
+      delegateType: $.support.transition.end,
+      handle: function (e) {
+        if ($(e.target).is(this)) return e.handleObj.handler.apply(this, arguments)
+      }
+    }
+  })
+
+}(jQuery);
+</script>
+<script>
+/* ========================================================================
+ * Bootstrap: collapse.js v3.3.7
+ * http://getbootstrap.com/javascript/#collapse
+ * ========================================================================
+ * Copyright 2011-2016 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ * ======================================================================== */
+
+/* jshint latedef: false */
+
++function ($) {
+  'use strict';
+
+  // COLLAPSE PUBLIC CLASS DEFINITION
+  // ================================
+
+  var Collapse = function (element, options) {
+    this.$element      = $(element)
+    this.options       = $.extend({}, Collapse.DEFAULTS, options)
+    this.$trigger      = $('[data-toggle="collapse"][href="#' + element.id + '"],' +
+                           '[data-toggle="collapse"][data-target="#' + element.id + '"]')
+    this.transitioning = null
+
+    if (this.options.parent) {
+      this.$parent = this.getParent()
+    } else {
+      this.addAriaAndCollapsedClass(this.$element, this.$trigger)
+    }
+
+    if (this.options.toggle) this.toggle()
+  }
+
+  Collapse.VERSION  = '3.3.7'
+
+  Collapse.TRANSITION_DURATION = 350
+
+  Collapse.DEFAULTS = {
+    toggle: true
+  }
+
+  Collapse.prototype.dimension = function () {
+    var hasWidth = this.$element.hasClass('width')
+    return hasWidth ? 'width' : 'height'
+  }
+
+  Collapse.prototype.show = function () {
+    if (this.transitioning || this.$element.hasClass('in')) return
+
+    var activesData
+    var actives = this.$parent && this.$parent.children('.panel').children('.in, .collapsing')
+
+    if (actives && actives.length) {
+      activesData = actives.data('bs.collapse')
+      if (activesData && activesData.transitioning) return
+    }
+
+    var startEvent = $.Event('show.bs.collapse')
+    this.$element.trigger(startEvent)
+    if (startEvent.isDefaultPrevented()) return
+
+    if (actives && actives.length) {
+      Plugin.call(actives, 'hide')
+      activesData || actives.data('bs.collapse', null)
+    }
+
+    var dimension = this.dimension()
+
+    this.$element
+      .removeClass('collapse')
+      .addClass('collapsing')[dimension](0)
+      .attr('aria-expanded', true)
+
+    this.$trigger
+      .removeClass('collapsed')
+      .attr('aria-expanded', true)
+
+    this.transitioning = 1
+
+    var complete = function () {
+      this.$element
+        .removeClass('collapsing')
+        .addClass('collapse in')[dimension]('')
+      this.transitioning = 0
+      this.$element
+        .trigger('shown.bs.collapse')
+    }
+
+    if (!$.support.transition) return complete.call(this)
+
+    var scrollSize = $.camelCase(['scroll', dimension].join('-'))
+
+    this.$element
+      .one('bsTransitionEnd', $.proxy(complete, this))
+      .emulateTransitionEnd(Collapse.TRANSITION_DURATION)[dimension](this.$element[0][scrollSize])
+  }
+
+  Collapse.prototype.hide = function () {
+    if (this.transitioning || !this.$element.hasClass('in')) return
+
+    var startEvent = $.Event('hide.bs.collapse')
+    this.$element.trigger(startEvent)
+    if (startEvent.isDefaultPrevented()) return
+
+    var dimension = this.dimension()
+
+    this.$element[dimension](this.$element[dimension]())[0].offsetHeight
+
+    this.$element
+      .addClass('collapsing')
+      .removeClass('collapse in')
+      .attr('aria-expanded', false)
+
+    this.$trigger
+      .addClass('collapsed')
+      .attr('aria-expanded', false)
+
+    this.transitioning = 1
+
+    var complete = function () {
+      this.transitioning = 0
+      this.$element
+        .removeClass('collapsing')
+        .addClass('collapse')
+        .trigger('hidden.bs.collapse')
+    }
+
+    if (!$.support.transition) return complete.call(this)
+
+    this.$element
+      [dimension](0)
+      .one('bsTransitionEnd', $.proxy(complete, this))
+      .emulateTransitionEnd(Collapse.TRANSITION_DURATION)
+  }
+
+  Collapse.prototype.toggle = function () {
+    this[this.$element.hasClass('in') ? 'hide' : 'show']()
+  }
+
+  Collapse.prototype.getParent = function () {
+    return $(this.options.parent)
+      .find('[data-toggle="collapse"][data-parent="' + this.options.parent + '"]')
+      .each($.proxy(function (i, element) {
+        var $element = $(element)
+        this.addAriaAndCollapsedClass(getTargetFromTrigger($element), $element)
+      }, this))
+      .end()
+  }
+
+  Collapse.prototype.addAriaAndCollapsedClass = function ($element, $trigger) {
+    var isOpen = $element.hasClass('in')
+
+    $element.attr('aria-expanded', isOpen)
+    $trigger
+      .toggleClass('collapsed', !isOpen)
+      .attr('aria-expanded', isOpen)
+  }
+
+  function getTargetFromTrigger($trigger) {
+    var href
+    var target = $trigger.attr('data-target')
+      || (href = $trigger.attr('href')) && href.replace(/.*(?=#[^\s]+$)/, '') // strip for ie7
+
+    return $(target)
+  }
+
+
+  // COLLAPSE PLUGIN DEFINITION
+  // ==========================
+
+  function Plugin(option) {
+    return this.each(function () {
+      var $this   = $(this)
+      var data    = $this.data('bs.collapse')
+      var options = $.extend({}, Collapse.DEFAULTS, $this.data(), typeof option == 'object' && option)
+
+      if (!data && options.toggle && /show|hide/.test(option)) options.toggle = false
+      if (!data) $this.data('bs.collapse', (data = new Collapse(this, options)))
+      if (typeof option == 'string') data[option]()
+    })
+  }
+
+  var old = $.fn.collapse
+
+  $.fn.collapse             = Plugin
+  $.fn.collapse.Constructor = Collapse
+
+
+  // COLLAPSE NO CONFLICT
+  // ====================
+
+  $.fn.collapse.noConflict = function () {
+    $.fn.collapse = old
+    return this
+  }
+
+
+  // COLLAPSE DATA-API
+  // =================
+
+  $(document).on('click.bs.collapse.data-api', '[data-toggle="collapse"]', function (e) {
+    var $this   = $(this)
+
+    if (!$this.attr('data-target')) e.preventDefault()
+
+    var $target = getTargetFromTrigger($this)
+    var data    = $target.data('bs.collapse')
+    var option  = data ? 'toggle' : $this.data()
+
+    Plugin.call($target, option)
+  })
+
+}(jQuery);
+</script>
+<script>
+window.initializeCodeFolding = function(show) {
+
+  // handlers for show-all and hide all
+  $("#rmd-show-all-code").click(function() {
+    $('div.r-code-collapse').each(function() {
+      $(this).collapse('show');
+    });
+  });
+  $("#rmd-hide-all-code").click(function() {
+    $('div.r-code-collapse').each(function() {
+      $(this).collapse('hide');
+    });
+  });
+
+  // index for unique code element ids
+  var currentIndex = 1;
+
+  // select all R code blocks
+  var rCodeBlocks = $('pre.sourceCode, pre.r, pre.python, pre.bash, pre.sql, pre.cpp, pre.stan');
+  rCodeBlocks.each(function() {
+
+    // create a collapsable div to wrap the code in
+    var div = $('<div class="collapse r-code-collapse"></div>');
+    if (show)
+      div.addClass('in');
+    var id = 'rcode-643E0F36' + currentIndex++;
+    div.attr('id', id);
+    $(this).before(div);
+    $(this).detach().appendTo(div);
+
+    // add a show code button right above
+    var showCodeText = $('<span>' + (show ? 'Hide' : 'Code') + '</span>');
+    var showCodeButton = $('<button type="button" class="btn btn-default btn-xs code-folding-btn pull-right"></button>');
+    showCodeButton.append(showCodeText);
+    showCodeButton
+        .attr('data-toggle', 'collapse')
+        .attr('data-target', '#' + id)
+        .attr('aria-expanded', show)
+        .attr('aria-controls', id);
+
+    var buttonRow = $('<div class="row"></div>');
+    var buttonCol = $('<div class="col-md-12"></div>');
+
+    buttonCol.append(showCodeButton);
+    buttonRow.append(buttonCol);
+
+    div.before(buttonRow);
+
+    // update state of button on show/hide
+    div.on('hidden.bs.collapse', function () {
+      showCodeText.text('Code');
+    });
+    div.on('show.bs.collapse', function () {
+      showCodeText.text('Hide');
+    });
+  });
+
+}
+</script>
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+.row { display: flex; }
+.collapse { display: none; }
+.in { display:block }
+</style>
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li style="display: flex; align-items: center; justify-content: space-between;">
+  <a href="./">Gráficos en R</a>
+  <a href="https://www.ine.es" target="_blank">
+    <img src="fig/ine_logo.svg" alt="INE Logo" class="ine-logo"/>
+  </a>
+</li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introducción</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#paquetes-principales"><i class="fa fa-check"></i><b>1.1</b> Paquetes Principales</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#datos"><i class="fa fa-check"></i><b>1.2</b> Datos</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="truco-para-infografías.html"><a href="truco-para-infografías.html"><i class="fa fa-check"></i><b>2</b> Truco para infografías</a></li>
+<li class="part"><span><b>Paquetes principales</b></span></li>
+<li class="chapter" data-level="3" data-path="lattice.html"><a href="lattice.html"><i class="fa fa-check"></i><b>3</b> lattice</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="lattice.html"><a href="lattice.html#características-principales"><i class="fa fa-check"></i><b>3.1</b> Características Principales</a></li>
+<li class="chapter" data-level="3.2" data-path="lattice.html"><a href="lattice.html#datos-de-ejemplo"><i class="fa fa-check"></i><b>3.2</b> Datos de ejemplo</a></li>
+<li class="chapter" data-level="3.3" data-path="lattice.html"><a href="lattice.html#realización-manual"><i class="fa fa-check"></i><b>3.3</b> Realización manual</a></li>
+<li class="chapter" data-level="3.4" data-path="lattice.html"><a href="lattice.html#realización-automática-lattice"><i class="fa fa-check"></i><b>3.4</b> Realización automática (lattice)</a></li>
+<li class="chapter" data-level="3.5" data-path="lattice.html"><a href="lattice.html#más-información"><i class="fa fa-check"></i><b>3.5</b> Más información</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="plotly.html"><a href="plotly.html"><i class="fa fa-check"></i><b>4</b> plotly</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="plotly.html"><a href="plotly.html#características-principales-1"><i class="fa fa-check"></i><b>4.1</b> Características Principales</a></li>
+<li class="chapter" data-level="4.2" data-path="plotly.html"><a href="plotly.html#tipos-de-gráficos"><i class="fa fa-check"></i><b>4.2</b> Tipos de gráficos</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="plotly.html"><a href="plotly.html#nota"><i class="fa fa-check"></i><b>4.2.1</b> Nota</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="plotly.html"><a href="plotly.html#ejemplo-de-uso"><i class="fa fa-check"></i><b>4.3</b> Ejemplo de Uso</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="plotly.html"><a href="plotly.html#gráfico-interactivo"><i class="fa fa-check"></i><b>4.3.1</b> Gráfico interactivo</a></li>
+<li class="chapter" data-level="4.3.2" data-path="plotly.html"><a href="plotly.html#series-temporales"><i class="fa fa-check"></i><b>4.3.2</b> Series Temporales</a></li>
+<li class="chapter" data-level="4.3.3" data-path="plotly.html"><a href="plotly.html#grafico-de-barras"><i class="fa fa-check"></i><b>4.3.3</b> Grafico de barras</a></li>
+<li class="chapter" data-level="4.3.4" data-path="plotly.html"><a href="plotly.html#gráfico-sankey"><i class="fa fa-check"></i><b>4.3.4</b> Gráfico Sankey</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="plotly.html"><a href="plotly.html#más-información-1"><i class="fa fa-check"></i><b>4.4</b> Más información</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="sdf.html"><a href="sdf.html"><i class="fa fa-check"></i><b>5</b> sdf</a></li>
+<li class="chapter" data-level="6" data-path="jk.html"><a href="jk.html"><i class="fa fa-check"></i><b>6</b> jk</a></li>
+<li class="appendix"><span><b>Anexos</b></span></li>
+<li class="chapter" data-level="A" data-path="leaflet.html"><a href="leaflet.html"><i class="fa fa-check"></i><b>A</b> Leaflet</a>
+<ul>
+<li class="chapter" data-level="A.1" data-path="leaflet.html"><a href="leaflet.html#general"><i class="fa fa-check"></i><b>A.1</b> General</a>
+<ul>
+<li class="chapter" data-level="A.1.1" data-path="leaflet.html"><a href="leaflet.html#características-principales-de-leaflet"><i class="fa fa-check"></i><b>A.1.1</b> Características Principales de Leaflet</a></li>
+<li class="chapter" data-level="A.1.2" data-path="leaflet.html"><a href="leaflet.html#tipos-de-gráficos-en-leaflet"><i class="fa fa-check"></i><b>A.1.2</b> Tipos de Gráficos en Leaflet</a></li>
+</ul></li>
+<li class="chapter" data-level="A.2" data-path="leaflet.html"><a href="leaflet.html#mapas"><i class="fa fa-check"></i><b>A.2</b> Mapas</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a rel="license" href="https://eupl.eu/1.2/en/">
+Licensed under <img alt="EUROPEAN UNION PUBLIC LICENCE v. 1.2" style="border-width:0;width:15%; vertical-align:bottom" src="fig/EUPL_logo.png" ></a></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Gráficos en R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="plotly" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number"> 4</span> plotly<a href="plotly.html#plotly" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>El paquete <a href="https://plotly.com/r/getting-started/">plotly</a> es una poderosa herramienta para la creación de gráficos interactivos en R. Desarrollado inicialmente como una biblioteca para Python, plotly ha sido adaptado para R, permitiendo a los usuarios beneficiarse de sus capacidades de visualización dinámica y envolvente. La interactividad de los gráficos generados con plotly facilita que se puedan integrar en sitios web, y en combinación con otros paquetes como <code>ineapir</code> (véase <span class="citation">(<a href="#ref-ineapir">Crespo 2024</a>)</span>) se puede proporcionar un análisis directo e interactivo de datos extraidos en bruto del INE.</p>
+<div id="características-principales-1" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> Características Principales<a href="plotly.html#características-principales-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ol style="list-style-type: decimal">
+<li><strong>Interactividad</strong>: plotly destaca por sus capacidades interactivas, permitiendo a los usuarios hacer zoom, desplazar, y obtener información detallada mediante “hover” sobre los elementos del gráfico.</li>
+<li><strong>Compatibilidad con ggplot2</strong>: plotly puede convertir gráficos estáticos de ggplot2 en gráficos interactivos sin necesidad de reescribir el código original.</li>
+<li><strong>Soporte para gráficos en 3D</strong>: plotly facilita la creación de gráficos tridimensionales, como superficies y dispersión en 3D, que son difíciles de lograr con otras herramientas.</li>
+<li><strong>Integración con R Markdown y Shiny</strong>: los gráficos de plotly pueden integrarse fácilmente en documentos R Markdown y aplicaciones Shiny, mejorando la presentación de informes y el desarrollo de aplicaciones interactivas.</li>
+<li><strong>Variedad de tipos de gráficos</strong>: desde gráficos de líneas y barras hasta mapas y gráficos de superficie, plotly soporta una amplia gama de visualizaciones.</li>
+</ol>
+</div>
+<div id="tipos-de-gráficos" class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> Tipos de gráficos<a href="plotly.html#tipos-de-gráficos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>La base de <em>plotly</em> es la interactividad de los gráficos que permite exploraciones más profundas y detalladas. En general, se pueden realizar:</p>
+<ul>
+<li><strong>Mapas interactivos</strong>: Permiten explorar datos geoespaciales por diferentes áreas.</li>
+<li><strong>Gráficos de barras</strong>: Facilitan la comparación de categorías y pueden permitir la selección dinámica de subcategorías.</li>
+<li><strong>Series temporales</strong>: Posibilitan filtrar por años y observar tendencias a lo largo del tiempo.</li>
+<li><strong>Histogramas interactivos</strong>: Permiten ajustar el número de bins y explorar la distribución de los datos.</li>
+<li><strong>Box plots</strong>: Ofrecen interactividad para seleccionar y resaltar datos atípicos o rangos específicos.</li>
+<li><strong>Gráficos de dispersión</strong>: Permiten hacer zoom y seleccionar áreas específicas para análisis detallado.</li>
+<li><strong>Gráficos de calor</strong>: Visualizan matrices de datos con interactividad para resaltar valores específicos.</li>
+<li><strong>Gráficos de burbujas</strong>: Facilitan la visualización de relaciones entre múltiples variables con capacidad de ajuste de tamaño y color de las burbujas.</li>
+</ul>
+<div id="nota" class="section level3 hasAnchor" number="4.2.1">
+<h3><span class="header-section-number">4.2.1</span> Nota<a href="plotly.html#nota" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Debido a que los gráficos generados con <code>ploty</code> son interactivos, se genera un conflicto a la hora de guardar estos como pdf ya que se debe seleccionar una de las posibles vistas estáticas de dichos gráficos. La siguiente línea de código incluye el paquete <code>webshot</code> que se encarga de guardar capturas (imágenes estáticas) de dichos gráficos interactivos a la hora de imprimir la página como <em>.pdf</em> .</p>
+</div>
+</div>
+<div id="ejemplo-de-uso" class="section level2 hasAnchor" number="4.3">
+<h2><span class="header-section-number">4.3</span> Ejemplo de Uso<a href="plotly.html#ejemplo-de-uso" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="gráfico-interactivo" class="section level3 hasAnchor" number="4.3.1">
+<h3><span class="header-section-number">4.3.1</span> Gráfico interactivo<a href="plotly.html#gráfico-interactivo" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>A continuación se muestra un ejemplo básico de cómo crear un gráfico interactivo con plotly a partir de un conjunto de datos:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="plotly.html#cb17-1" tabindex="-1"></a><span class="co"># Instalar y cargar el paquete plotly</span></span>
+<span id="cb17-2"><a href="plotly.html#cb17-2" tabindex="-1"></a><span class="co"># install.packages(&quot;plotly&quot;)</span></span>
+<span id="cb17-3"><a href="plotly.html#cb17-3" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="plotly.html#cb17-4" tabindex="-1"></a><span class="co"># Verificar si está instalado</span></span>
+<span id="cb17-5"><a href="plotly.html#cb17-5" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&quot;plotly&quot;</span>)) <span class="fu">install.packages</span>(<span class="st">&quot;dplyr&quot;</span>)</span>
+<span id="cb17-6"><a href="plotly.html#cb17-6" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&quot;webshot&quot;</span>)) <span class="fu">install.packages</span>(<span class="st">&quot;webshot&quot;</span>)</span>
+<span id="cb17-7"><a href="plotly.html#cb17-7" tabindex="-1"></a><span class="co"># Cargar paquete</span></span>
+<span id="cb17-8"><a href="plotly.html#cb17-8" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb17-9"><a href="plotly.html#cb17-9" tabindex="-1"></a><span class="fu">library</span>(webshot)</span>
+<span id="cb17-10"><a href="plotly.html#cb17-10" tabindex="-1"></a></span>
+<span id="cb17-11"><a href="plotly.html#cb17-11" tabindex="-1"></a><span class="co"># Datos de ejemplo</span></span>
+<span id="cb17-12"><a href="plotly.html#cb17-12" tabindex="-1"></a>data <span class="ot">&lt;-</span> mtcars</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="plotly.html#cb18-1" tabindex="-1"></a><span class="co"># Crear un grfico interactivo de dispersión</span></span>
+<span id="cb18-2"><a href="plotly.html#cb18-2" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">plot_ly</span>(data,</span>
+<span id="cb18-3"><a href="plotly.html#cb18-3" tabindex="-1"></a>  <span class="at">x =</span> <span class="sc">~</span>wt, <span class="at">y =</span> <span class="sc">~</span>mpg, <span class="at">width =</span> <span class="dv">800</span>, <span class="at">height =</span> <span class="dv">800</span>, <span class="at">type =</span> <span class="st">&quot;scatter&quot;</span>, <span class="at">mode =</span> <span class="st">&quot;markers&quot;</span>,</span>
+<span id="cb18-4"><a href="plotly.html#cb18-4" tabindex="-1"></a>  <span class="at">marker =</span> <span class="fu">list</span>(<span class="at">size =</span> <span class="dv">10</span>, <span class="at">color =</span> <span class="st">&quot;rgba(255, 182, 193, .9)&quot;</span>, <span class="at">line =</span> <span class="fu">list</span>(<span class="at">color =</span> <span class="st">&quot;rgba(152, 0, 0, .8)&quot;</span>, <span class="at">width =</span> <span class="dv">2</span>))</span>
+<span id="cb18-5"><a href="plotly.html#cb18-5" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb18-6"><a href="plotly.html#cb18-6" tabindex="-1"></a>  <span class="fu">layout</span>(</span>
+<span id="cb18-7"><a href="plotly.html#cb18-7" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Relación entre Peso y Consumo de Combustible&quot;</span>,</span>
+<span id="cb18-8"><a href="plotly.html#cb18-8" tabindex="-1"></a>    <span class="at">xaxis =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">&quot;Peso (1000 lbs)&quot;</span>),</span>
+<span id="cb18-9"><a href="plotly.html#cb18-9" tabindex="-1"></a>    <span class="at">yaxis =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">&quot;Millas por Galón&quot;</span>)</span>
+<span id="cb18-10"><a href="plotly.html#cb18-10" tabindex="-1"></a>  )</span>
+<span id="cb18-11"><a href="plotly.html#cb18-11" tabindex="-1"></a></span>
+<span id="cb18-12"><a href="plotly.html#cb18-12" tabindex="-1"></a><span class="co"># Mostrar el gráfico</span></span>
+<span id="cb18-13"><a href="plotly.html#cb18-13" tabindex="-1"></a>p</span></code></pre></div>
+<div id="htmlwidget-3bae760c44d5d3ff3b70" style="width:800px;height:800px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-3bae760c44d5d3ff3b70">{"x":{"visdat":{"176d658ec102e":["function () ","plotlyVisDat"]},"cur_data":"176d658ec102e","attrs":{"176d658ec102e":{"x":{},"y":{},"mode":"markers","marker":{"size":10,"color":"rgba(255, 182, 193, .9)","line":{"color":"rgba(152, 0, 0, .8)","width":2}},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter"}},"layout":{"width":800,"height":800,"margin":{"b":40,"l":60,"t":25,"r":10},"title":"Relación entre Peso y Consumo de Combustible","xaxis":{"domain":[0,1],"automargin":true,"title":"Peso (1000 lbs)"},"yaxis":{"domain":[0,1],"automargin":true,"title":"Millas por Galón"},"hovermode":"closest","showlegend":false},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[2.6200000000000001,2.875,2.3199999999999998,3.2149999999999999,3.4399999999999999,3.46,3.5699999999999998,3.1899999999999999,3.1499999999999999,3.4399999999999999,3.4399999999999999,4.0700000000000003,3.73,3.7799999999999998,5.25,5.4240000000000004,5.3449999999999998,2.2000000000000002,1.615,1.835,2.4649999999999999,3.52,3.4350000000000001,3.8399999999999999,3.8450000000000002,1.9350000000000001,2.1400000000000001,1.5129999999999999,3.1699999999999999,2.77,3.5699999999999998,2.7799999999999998],"y":[21,21,22.800000000000001,21.399999999999999,18.699999999999999,18.100000000000001,14.300000000000001,24.399999999999999,22.800000000000001,19.199999999999999,17.800000000000001,16.399999999999999,17.300000000000001,15.199999999999999,10.4,10.4,14.699999999999999,32.399999999999999,30.399999999999999,33.899999999999999,21.5,15.5,15.199999999999999,13.300000000000001,19.199999999999999,27.300000000000001,26,30.399999999999999,15.800000000000001,19.699999999999999,15,21.399999999999999],"mode":"markers","marker":{"color":"rgba(255, 182, 193, .9)","size":10,"line":{"color":"rgba(152, 0, 0, .8)","width":2}},"type":"scatter","error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"line":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<p>En este ejemplo, se utiliza el conjunto de datos mtcars para crear un gráfico de dispersión interactivo que muestra la relación entre el peso del vehículo y el consumo de combustible. El argumento marker permite personalizar la apariencia de los puntos en el gráfico, mientras que layout se utiliza para añadir títulos y etiquetas a los ejes.</p>
+</div>
+<div id="series-temporales" class="section level3 hasAnchor" number="4.3.2">
+<h3><span class="header-section-number">4.3.2</span> Series Temporales<a href="plotly.html#series-temporales" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Plotly ofrece potentes herramientas para la visualización de series temporales, permitiendo a los usuarios interactuar con los datos de manera dinámica y obtener información valiosa de forma rápida y efectiva. Su capacidad para crear gráficos atractivos y funcionales lo convierte en una opción excelente para el análisis de datos temporales.</p>
+<p><strong>Características Clave de Plotly para Series Temporales</strong></p>
+<ul>
+<li><p><strong>Interactividad</strong>:</p>
+<ul>
+<li><strong>Zoom y Pan</strong>: Los usuarios pueden acercar y alejar secciones del gráfico.</li>
+<li><strong>Hover</strong>: Información detallada aparece al pasar el cursor sobre los puntos de datos.</li>
+<li><strong>Selección de Rangos</strong>: Rangos deslizantes y botones de selector para ajustar la ventana temporal visualizada.</li>
+</ul></li>
+<li><p><strong>Elementos Visuales</strong></p>
+<ul>
+<li><strong>Líneas y Marcadores</strong>: Visualización clara de tendencias y puntos específicos.</li>
+<li><strong>Colores y Estilos Personalizables</strong>: Facilitan la distinción entre diferentes series de datos.</li>
+</ul></li>
+<li><p><strong>Funciones Avanzadas</strong>:</p>
+<ul>
+<li><strong>Rangeselector</strong>: Botones para seleccionar periodos específicos (e.g., últimos 3 meses, último año).</li>
+<li><strong>Rangeslider</strong>: Barra deslizante para ajustar el rango de fechas mostrado.</li>
+<li><strong>Anotaciones y Formateo</strong>: Posibilidad de agregar notas y ajustar el formato de fechas.</li>
+</ul></li>
+</ul>
+<p>Los datos los obtendremos usando <code>ineapir</code>, para más información (véase <span class="citation">(<a href="#ref-ineapir">Crespo 2024</a>)</span>).</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="plotly.html#cb19-1" tabindex="-1"></a><span class="co"># Población Hombres</span></span>
+<span id="cb19-2"><a href="plotly.html#cb19-2" tabindex="-1"></a><span class="co"># Mirando en la web del INE cual es el código de la operación</span></span>
+<span id="cb19-3"><a href="plotly.html#cb19-3" tabindex="-1"></a><span class="co"># ECP319</span></span>
+<span id="cb19-4"><a href="plotly.html#cb19-4" tabindex="-1"></a></span>
+<span id="cb19-5"><a href="plotly.html#cb19-5" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;ineapir&quot;</span>)</span>
+<span id="cb19-6"><a href="plotly.html#cb19-6" tabindex="-1"></a><span class="co"># Hombres</span></span>
+<span id="cb19-7"><a href="plotly.html#cb19-7" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">get_data_series</span>(<span class="at">codSeries =</span> <span class="st">&quot;ECP319&quot;</span>, <span class="at">tip =</span> <span class="st">&quot;AM&quot;</span>, <span class="at">dateStart =</span> <span class="st">&quot;1971/01/01&quot;</span>, <span class="at">unnest =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb19-8"><a href="plotly.html#cb19-8" tabindex="-1"></a><span class="co"># Mujeres</span></span>
+<span id="cb19-9"><a href="plotly.html#cb19-9" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">get_data_series</span>(<span class="at">codSeries =</span> <span class="st">&quot;ECP318&quot;</span>, <span class="at">tip =</span> <span class="st">&quot;AM&quot;</span>, <span class="at">dateStart =</span> <span class="st">&quot;1971/01/01&quot;</span>, <span class="at">unnest =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb19-10"><a href="plotly.html#cb19-10" tabindex="-1"></a></span>
+<span id="cb19-11"><a href="plotly.html#cb19-11" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">fecha =</span> <span class="fu">as.Date</span>(a<span class="sc">$</span>Fecha), <span class="at">Year =</span> a<span class="sc">$</span>Anyo, <span class="at">Hombres =</span> a<span class="sc">$</span>Valor, <span class="at">Mujeres =</span> b<span class="sc">$</span>Valor)</span>
+<span id="cb19-12"><a href="plotly.html#cb19-12" tabindex="-1"></a></span>
+<span id="cb19-13"><a href="plotly.html#cb19-13" tabindex="-1"></a></span>
+<span id="cb19-14"><a href="plotly.html#cb19-14" tabindex="-1"></a><span class="co"># Filtramos</span></span>
+<span id="cb19-15"><a href="plotly.html#cb19-15" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb19-16"><a href="plotly.html#cb19-16" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">format</span>(<span class="fu">as.Date</span>(fecha), <span class="st">&quot;%m&quot;</span>) <span class="sc">==</span> <span class="st">&quot;01&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="plotly.html#cb20-1" tabindex="-1"></a><span class="co"># Crear el gráfico interactivo</span></span>
+<span id="cb20-2"><a href="plotly.html#cb20-2" tabindex="-1"></a>fig <span class="ot">&lt;-</span> <span class="fu">plot_ly</span>(data, <span class="at">x =</span> <span class="sc">~</span>Year) <span class="sc">%&gt;%</span></span>
+<span id="cb20-3"><a href="plotly.html#cb20-3" tabindex="-1"></a>  <span class="fu">add_lines</span>(<span class="at">y =</span> <span class="sc">~</span>Mujeres, <span class="at">name =</span> <span class="st">&quot;Mujeres&quot;</span>, <span class="at">line =</span> <span class="fu">list</span>(<span class="at">color =</span> <span class="st">&quot;#457e76&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb20-4"><a href="plotly.html#cb20-4" tabindex="-1"></a>  <span class="fu">add_lines</span>(<span class="at">y =</span> <span class="sc">~</span>Hombres, <span class="at">name =</span> <span class="st">&quot;Hombres&quot;</span>, <span class="at">line =</span> <span class="fu">list</span>(<span class="at">color =</span> <span class="st">&quot;#881333&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb20-5"><a href="plotly.html#cb20-5" tabindex="-1"></a>  <span class="fu">layout</span>(</span>
+<span id="cb20-6"><a href="plotly.html#cb20-6" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Evolución de la Población&quot;</span>,</span>
+<span id="cb20-7"><a href="plotly.html#cb20-7" tabindex="-1"></a>    <span class="at">xaxis =</span> <span class="fu">list</span>(</span>
+<span id="cb20-8"><a href="plotly.html#cb20-8" tabindex="-1"></a>      <span class="at">title =</span> <span class="st">&quot;Año&quot;</span></span>
+<span id="cb20-9"><a href="plotly.html#cb20-9" tabindex="-1"></a>    ),</span>
+<span id="cb20-10"><a href="plotly.html#cb20-10" tabindex="-1"></a>    <span class="at">yaxis =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">&quot;Población&quot;</span>),</span>
+<span id="cb20-11"><a href="plotly.html#cb20-11" tabindex="-1"></a>    <span class="at">legend =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="fu">list</span>(<span class="at">text =</span> <span class="st">&quot;&lt;b&gt;Sexo&lt;/b&gt;&quot;</span>)),</span>
+<span id="cb20-12"><a href="plotly.html#cb20-12" tabindex="-1"></a>    <span class="at">hovermode =</span> <span class="st">&quot;closest&quot;</span></span>
+<span id="cb20-13"><a href="plotly.html#cb20-13" tabindex="-1"></a>  )</span>
+<span id="cb20-14"><a href="plotly.html#cb20-14" tabindex="-1"></a></span>
+<span id="cb20-15"><a href="plotly.html#cb20-15" tabindex="-1"></a><span class="co"># Mostrar el gráfico</span></span>
+<span id="cb20-16"><a href="plotly.html#cb20-16" tabindex="-1"></a>fig</span></code></pre></div>
+<div class="plotly html-widget html-fill-item" id="htmlwidget-6b3ab698392d86a54e34" style="width:800%;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-6b3ab698392d86a54e34">{"x":{"visdat":{"176d6679f0bce":["function () ","plotlyVisDat"]},"cur_data":"176d6679f0bce","attrs":{"176d6679f0bce":{"x":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"y":{},"type":"scatter","mode":"lines","name":"Mujeres","line":{"color":"#457e76"},"inherit":true},"176d6679f0bce.1":{"x":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"y":{},"type":"scatter","mode":"lines","name":"Hombres","line":{"color":"#881333"},"inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"title":"Evolución de la Población","xaxis":{"domain":[0,1],"automargin":true,"title":"Año"},"yaxis":{"domain":[0,1],"automargin":true,"title":"Población"},"legend":{"title":{"text":"<b>Sexo<\/b>"}},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[1971,1972,1973,1974,1975,1976,1977,1978,1979,1980,1981,1982,1983,1984,1985,1986,1987,1988,1989,1990,1991,1992,1993,1994,1995,1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024],"y":[17398898,17580397,17772628,17957230,18150004,18333864,18521877,18700859,18868438,19023427,19167940,19290449,19394759,19477809,19558571,19625072,19683096,19735868,19778621,19813442,19838598,19925307,20032646,20130190,20221727,20307916,20391551,20478884,20559311,20643843,20741653,20919749,21285368,21622873,21961052,22290652,22665689,23077454,23358736,23504349,23617698,23719207,23699424,23621034,23603001,23612439,23666286,23755470,23902168,24107382,24152187,24197980,24519768,24804675],"type":"scatter","mode":"lines","name":"Mujeres","line":{"color":"#457e76"},"marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[1971,1972,1973,1974,1975,1976,1977,1978,1979,1980,1981,1982,1983,1984,1985,1986,1987,1988,1989,1990,1991,1992,1993,1994,1995,1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024],"y":[16641744,16827942,17027972,17220063,17419371,17612561,17807322,17993218,18167281,18323513,18467449,18591423,18695393,18775089,18849258,18906124,18954956,18995710,19023679,19039785,19042818,19126029,19231389,19328299,19417999,19500458,19579778,19664565,19744257,19826339,19923892,20115522,20542468,20924581,21335283,21719317,22118970,22591484,22880534,22982272,23049476,23099009,23013226,22874710,22822721,22806445,22831107,22889600,23016783,23210668,23248611,23288747,23565593,23825335],"type":"scatter","mode":"lines","name":"Hombres","line":{"color":"#881333"},"marker":{"color":"rgba(255,127,14,1)","line":{"color":"rgba(255,127,14,1)"}},"error_y":{"color":"rgba(255,127,14,1)"},"error_x":{"color":"rgba(255,127,14,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<p>Ahora vamos a mostrar la evolución del IPC y el IPC Subyacente a lo largo de los años. Para ello, lo primero buscamos en la web del INE en que tabla se encuentran dichos datos, siendo esta la “50902”. A continuación, con <code>get_metadata_table_varval(50902)</code> vemos que variables y valores hay que tomar para filtrar IPC por Índice General y por Variación Anual.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="plotly.html#cb21-1" tabindex="-1"></a><span class="co"># get_metadata_table_varval(50902)</span></span>
+<span id="cb21-2"><a href="plotly.html#cb21-2" tabindex="-1"></a><span class="co"># get_metadata_variables()</span></span>
+<span id="cb21-3"><a href="plotly.html#cb21-3" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="plotly.html#cb21-4" tabindex="-1"></a><span class="co"># Filter cpi overall index</span></span>
+<span id="cb21-5"><a href="plotly.html#cb21-5" tabindex="-1"></a><span class="co"># Todos los approaches son similares</span></span>
+<span id="cb21-6"><a href="plotly.html#cb21-6" tabindex="-1"></a><span class="co"># 762(grupo)= 304092(Indie general).      3(tipodato)=74(Variacion anual)</span></span>
+<span id="cb21-7"><a href="plotly.html#cb21-7" tabindex="-1"></a>filter <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;variación anual&quot;</span>, <span class="st">&quot;índice general&quot;</span>))</span>
+<span id="cb21-8"><a href="plotly.html#cb21-8" tabindex="-1"></a>filter <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">grupo =</span> <span class="st">&quot;304092&quot;</span>, <span class="at">tipodato =</span> <span class="st">&quot;74&quot;</span>)</span>
+<span id="cb21-9"><a href="plotly.html#cb21-9" tabindex="-1"></a>filter <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="st">&quot;762&quot;</span> <span class="ot">=</span> <span class="st">&quot;304092&quot;</span>, <span class="st">&quot;3&quot;</span> <span class="ot">=</span> <span class="st">&quot;74&quot;</span>)</span>
+<span id="cb21-10"><a href="plotly.html#cb21-10" tabindex="-1"></a></span>
+<span id="cb21-11"><a href="plotly.html#cb21-11" tabindex="-1"></a></span>
+<span id="cb21-12"><a href="plotly.html#cb21-12" tabindex="-1"></a></span>
+<span id="cb21-13"><a href="plotly.html#cb21-13" tabindex="-1"></a><span class="co"># Request data of cpi</span></span>
+<span id="cb21-14"><a href="plotly.html#cb21-14" tabindex="-1"></a><span class="co"># Table url: https://www.ine.es/jaxiT3/Tabla.htm?t=50902&amp;L=0</span></span>
+<span id="cb21-15"><a href="plotly.html#cb21-15" tabindex="-1"></a>general <span class="ot">&lt;-</span> <span class="fu">get_data_table</span>(</span>
+<span id="cb21-16"><a href="plotly.html#cb21-16" tabindex="-1"></a>  <span class="at">idTable =</span> <span class="dv">50902</span>, <span class="at">filter =</span> filter, <span class="at">unnest =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb21-17"><a href="plotly.html#cb21-17" tabindex="-1"></a>  <span class="at">tip =</span> <span class="st">&quot;A&quot;</span>, <span class="at">validate =</span> <span class="cn">FALSE</span></span>
+<span id="cb21-18"><a href="plotly.html#cb21-18" tabindex="-1"></a>)</span>
+<span id="cb21-19"><a href="plotly.html#cb21-19" tabindex="-1"></a></span>
+<span id="cb21-20"><a href="plotly.html#cb21-20" tabindex="-1"></a></span>
+<span id="cb21-21"><a href="plotly.html#cb21-21" tabindex="-1"></a></span>
+<span id="cb21-22"><a href="plotly.html#cb21-22" tabindex="-1"></a></span>
+<span id="cb21-23"><a href="plotly.html#cb21-23" tabindex="-1"></a><span class="co"># get_metadata_table_varval(50907)</span></span>
+<span id="cb21-24"><a href="plotly.html#cb21-24" tabindex="-1"></a><span class="co"># get_metadata_variables()</span></span>
+<span id="cb21-25"><a href="plotly.html#cb21-25" tabindex="-1"></a></span>
+<span id="cb21-26"><a href="plotly.html#cb21-26" tabindex="-1"></a>filter <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb21-27"><a href="plotly.html#cb21-27" tabindex="-1"></a>  <span class="st">&quot;3&quot;</span> <span class="ot">=</span> <span class="st">&quot;74&quot;</span>, <span class="co"># Fk_variable=Id</span></span>
+<span id="cb21-28"><a href="plotly.html#cb21-28" tabindex="-1"></a>  <span class="st">&quot;269&quot;</span> <span class="ot">=</span> <span class="st">&quot;12850&quot;</span> <span class="co"># Fk_variable=Id</span></span>
+<span id="cb21-29"><a href="plotly.html#cb21-29" tabindex="-1"></a>)</span>
+<span id="cb21-30"><a href="plotly.html#cb21-30" tabindex="-1"></a><span class="co"># Filter core cpi</span></span>
+<span id="cb21-31"><a href="plotly.html#cb21-31" tabindex="-1"></a>filter <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">values =</span> <span class="fu">c</span>(</span>
+<span id="cb21-32"><a href="plotly.html#cb21-32" tabindex="-1"></a>  <span class="st">&quot;variación anual&quot;</span>,</span>
+<span id="cb21-33"><a href="plotly.html#cb21-33" tabindex="-1"></a>  <span class="st">&quot;General sin alimentos no elaborados ni productos energéticos&quot;</span></span>
+<span id="cb21-34"><a href="plotly.html#cb21-34" tabindex="-1"></a>))</span>
+<span id="cb21-35"><a href="plotly.html#cb21-35" tabindex="-1"></a></span>
+<span id="cb21-36"><a href="plotly.html#cb21-36" tabindex="-1"></a><span class="co"># Request data of core cpi</span></span>
+<span id="cb21-37"><a href="plotly.html#cb21-37" tabindex="-1"></a><span class="co"># Table url: https://www.ine.es/jaxiT3/Tabla.htm?t=50907&amp;L=0</span></span>
+<span id="cb21-38"><a href="plotly.html#cb21-38" tabindex="-1"></a>subyacente <span class="ot">&lt;-</span> <span class="fu">get_data_table</span>(</span>
+<span id="cb21-39"><a href="plotly.html#cb21-39" tabindex="-1"></a>  <span class="at">idTable =</span> <span class="dv">50907</span>, <span class="at">filter =</span> filter, <span class="at">unnest =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb21-40"><a href="plotly.html#cb21-40" tabindex="-1"></a>  <span class="at">tip =</span> <span class="st">&quot;A&quot;</span>, <span class="at">validate =</span> <span class="cn">FALSE</span></span>
+<span id="cb21-41"><a href="plotly.html#cb21-41" tabindex="-1"></a>)</span>
+<span id="cb21-42"><a href="plotly.html#cb21-42" tabindex="-1"></a></span>
+<span id="cb21-43"><a href="plotly.html#cb21-43" tabindex="-1"></a><span class="co"># Format Fecha column as date</span></span>
+<span id="cb21-44"><a href="plotly.html#cb21-44" tabindex="-1"></a>general<span class="sc">$</span>Fecha <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(general<span class="sc">$</span>Fecha)</span>
+<span id="cb21-45"><a href="plotly.html#cb21-45" tabindex="-1"></a>subyacente<span class="sc">$</span>Fecha <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(subyacente<span class="sc">$</span>Fecha)</span></code></pre></div>
+<p>Una vez hemos preparado los datos, los dibujamos en un gráfico interactivo:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="plotly.html#cb22-1" tabindex="-1"></a><span class="co"># Plot cpi overall index</span></span>
+<span id="cb22-2"><a href="plotly.html#cb22-2" tabindex="-1"></a>fig <span class="ot">&lt;-</span> <span class="fu">plot_ly</span>(general,</span>
+<span id="cb22-3"><a href="plotly.html#cb22-3" tabindex="-1"></a>  <span class="at">x =</span> <span class="sc">~</span>Fecha, <span class="at">y =</span> <span class="sc">~</span>Valor, <span class="at">name =</span> <span class="st">&quot;General&quot;</span>,</span>
+<span id="cb22-4"><a href="plotly.html#cb22-4" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">&quot;scatter&quot;</span>, <span class="at">mode =</span> <span class="st">&quot;lines&quot;</span>, <span class="at">line =</span> <span class="fu">list</span>(<span class="at">color =</span> <span class="st">&quot;#457e76&quot;</span>, <span class="at">dash =</span> <span class="st">&quot;dashed&quot;</span>)</span>
+<span id="cb22-5"><a href="plotly.html#cb22-5" tabindex="-1"></a>)</span>
+<span id="cb22-6"><a href="plotly.html#cb22-6" tabindex="-1"></a></span>
+<span id="cb22-7"><a href="plotly.html#cb22-7" tabindex="-1"></a><span class="do">## Plot core cpi</span></span>
+<span id="cb22-8"><a href="plotly.html#cb22-8" tabindex="-1"></a>fig <span class="ot">&lt;-</span> fig <span class="sc">%&gt;%</span></span>
+<span id="cb22-9"><a href="plotly.html#cb22-9" tabindex="-1"></a>  <span class="fu">add_trace</span>(</span>
+<span id="cb22-10"><a href="plotly.html#cb22-10" tabindex="-1"></a>    <span class="at">y =</span> <span class="sc">~</span> subyacente<span class="sc">$</span>Valor, <span class="at">name =</span> <span class="st">&quot;Subyacente&quot;</span>,</span>
+<span id="cb22-11"><a href="plotly.html#cb22-11" tabindex="-1"></a>    <span class="at">mode =</span> <span class="st">&quot;lines&quot;</span>, <span class="at">line =</span> <span class="fu">list</span>(<span class="at">color =</span> <span class="st">&quot;#881333&quot;</span>, <span class="at">dash =</span> <span class="st">&quot;dashed&quot;</span>)</span>
+<span id="cb22-12"><a href="plotly.html#cb22-12" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb22-13"><a href="plotly.html#cb22-13" tabindex="-1"></a>  <span class="fu">layout</span>(</span>
+<span id="cb22-14"><a href="plotly.html#cb22-14" tabindex="-1"></a>    <span class="at">yaxis =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">&quot;Variación anual (%)&quot;</span>),</span>
+<span id="cb22-15"><a href="plotly.html#cb22-15" tabindex="-1"></a>    <span class="at">legend =</span> <span class="fu">list</span>(</span>
+<span id="cb22-16"><a href="plotly.html#cb22-16" tabindex="-1"></a>      <span class="at">title =</span> <span class="fu">list</span>(<span class="at">text =</span> <span class="st">&quot;&lt;b&gt; IPC &lt;/b&gt;&quot;</span>),</span>
+<span id="cb22-17"><a href="plotly.html#cb22-17" tabindex="-1"></a>      <span class="at">x =</span> <span class="fl">0.25</span>,</span>
+<span id="cb22-18"><a href="plotly.html#cb22-18" tabindex="-1"></a>      <span class="at">y =</span> <span class="sc">-</span><span class="fl">0.25</span>,</span>
+<span id="cb22-19"><a href="plotly.html#cb22-19" tabindex="-1"></a>      <span class="at">orientation =</span> <span class="st">&quot;h&quot;</span></span>
+<span id="cb22-20"><a href="plotly.html#cb22-20" tabindex="-1"></a>    ),</span>
+<span id="cb22-21"><a href="plotly.html#cb22-21" tabindex="-1"></a>    <span class="at">hovermode =</span> <span class="st">&quot;x&quot;</span></span>
+<span id="cb22-22"><a href="plotly.html#cb22-22" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb22-23"><a href="plotly.html#cb22-23" tabindex="-1"></a>  <span class="fu">config</span>(<span class="at">displayModeBar =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb22-24"><a href="plotly.html#cb22-24" tabindex="-1"></a></span>
+<span id="cb22-25"><a href="plotly.html#cb22-25" tabindex="-1"></a>fig</span></code></pre></div>
+<div class="plotly html-widget html-fill-item" id="htmlwidget-59a589491b0f2e61b84b" style="width:100%;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-59a589491b0f2e61b84b">{"x":{"visdat":{"176d61d6fe53":["function () ","plotlyVisDat"]},"cur_data":"176d61d6fe53","attrs":{"176d61d6fe53":{"x":{},"y":{},"mode":"lines","line":{"color":"#457e76","dash":"dashed"},"name":"General","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter"},"176d61d6fe53.1":{"x":{},"y":{},"mode":"lines","line":{"color":"#881333","dash":"dashed"},"name":"Subyacente","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter","inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"yaxis":{"domain":[0,1],"automargin":true,"title":"Variación anual (%)"},"legend":{"title":{"text":"<b> IPC <\/b>"},"x":0.25,"y":-0.25,"orientation":"h"},"hovermode":"x","xaxis":{"domain":[0,1],"automargin":true,"title":"Fecha"},"showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false,"displayModeBar":false},"data":[{"x":["2024-09-01","2024-08-01","2024-07-01","2024-06-01","2024-05-01","2024-04-01","2024-03-01","2024-02-01","2024-01-01","2023-12-01","2023-11-01","2023-10-01","2023-09-01","2023-08-01","2023-07-01","2023-06-01","2023-05-01","2023-04-01","2023-03-01","2023-02-01","2023-01-01","2022-12-01","2022-11-01","2022-10-01","2022-09-01","2022-08-01","2022-07-01","2022-06-01","2022-05-01","2022-04-01","2022-03-01","2022-02-01","2022-01-01","2021-12-01","2021-11-01","2021-10-01","2021-09-01","2021-08-01","2021-07-01","2021-06-01","2021-05-01","2021-04-01","2021-03-01","2021-02-01","2021-01-01","2020-12-01","2020-11-01","2020-10-01","2020-09-01","2020-08-01","2020-07-01","2020-06-01","2020-05-01","2020-04-01","2020-03-01","2020-02-01","2020-01-01","2019-12-01","2019-11-01","2019-10-01","2019-09-01","2019-08-01","2019-07-01","2019-06-01","2019-05-01","2019-04-01","2019-03-01","2019-02-01","2019-01-01","2018-12-01","2018-11-01","2018-10-01","2018-09-01","2018-08-01","2018-07-01","2018-06-01","2018-05-01","2018-04-01","2018-03-01","2018-02-01","2018-01-01","2017-12-01","2017-11-01","2017-10-01","2017-09-01","2017-08-01","2017-07-01","2017-06-01","2017-05-01","2017-04-01","2017-03-01","2017-02-01","2017-01-01","2016-12-01","2016-11-01","2016-10-01","2016-09-01","2016-08-01","2016-07-01","2016-06-01","2016-05-01","2016-04-01","2016-03-01","2016-02-01","2016-01-01","2015-12-01","2015-11-01","2015-10-01","2015-09-01","2015-08-01","2015-07-01","2015-06-01","2015-05-01","2015-04-01","2015-03-01","2015-02-01","2015-01-01","2014-12-01","2014-11-01","2014-10-01","2014-09-01","2014-08-01","2014-07-01","2014-06-01","2014-05-01","2014-04-01","2014-03-01","2014-02-01","2014-01-01","2013-12-01","2013-11-01","2013-10-01","2013-09-01","2013-08-01","2013-07-01","2013-06-01","2013-05-01","2013-04-01","2013-03-01","2013-02-01","2013-01-01","2012-12-01","2012-11-01","2012-10-01","2012-09-01","2012-08-01","2012-07-01","2012-06-01","2012-05-01","2012-04-01","2012-03-01","2012-02-01","2012-01-01","2011-12-01","2011-11-01","2011-10-01","2011-09-01","2011-08-01","2011-07-01","2011-06-01","2011-05-01","2011-04-01","2011-03-01","2011-02-01","2011-01-01","2010-12-01","2010-11-01","2010-10-01","2010-09-01","2010-08-01","2010-07-01","2010-06-01","2010-05-01","2010-04-01","2010-03-01","2010-02-01","2010-01-01","2009-12-01","2009-11-01","2009-10-01","2009-09-01","2009-08-01","2009-07-01","2009-06-01","2009-05-01","2009-04-01","2009-03-01","2009-02-01","2009-01-01","2008-12-01","2008-11-01","2008-10-01","2008-09-01","2008-08-01","2008-07-01","2008-06-01","2008-05-01","2008-04-01","2008-03-01","2008-02-01","2008-01-01","2007-12-01","2007-11-01","2007-10-01","2007-09-01","2007-08-01","2007-07-01","2007-06-01","2007-05-01","2007-04-01","2007-03-01","2007-02-01","2007-01-01","2006-12-01","2006-11-01","2006-10-01","2006-09-01","2006-08-01","2006-07-01","2006-06-01","2006-05-01","2006-04-01","2006-03-01","2006-02-01","2006-01-01","2005-12-01","2005-11-01","2005-10-01","2005-09-01","2005-08-01","2005-07-01","2005-06-01","2005-05-01","2005-04-01","2005-03-01","2005-02-01","2005-01-01","2004-12-01","2004-11-01","2004-10-01","2004-09-01","2004-08-01","2004-07-01","2004-06-01","2004-05-01","2004-04-01","2004-03-01","2004-02-01","2004-01-01","2003-12-01","2003-11-01","2003-10-01","2003-09-01","2003-08-01","2003-07-01","2003-06-01","2003-05-01","2003-04-01","2003-03-01","2003-02-01","2003-01-01","2002-12-01","2002-11-01","2002-10-01","2002-09-01","2002-08-01","2002-07-01","2002-06-01","2002-05-01","2002-04-01","2002-03-01","2002-02-01","2002-01-01"],"y":[1.5,2.2999999999999998,2.7999999999999998,3.3999999999999999,3.6000000000000001,3.2999999999999998,3.2000000000000002,2.7999999999999998,3.3999999999999999,3.1000000000000001,3.2000000000000002,3.5,3.5,2.6000000000000001,2.2999999999999998,1.8999999999999999,3.2000000000000002,4.0999999999999996,3.2999999999999998,6,5.9000000000000004,5.7000000000000002,6.7999999999999998,7.2999999999999998,8.9000000000000004,10.5,10.800000000000001,10.199999999999999,8.6999999999999993,8.3000000000000007,9.8000000000000007,7.5999999999999996,6.0999999999999996,6.5,5.5,5.4000000000000004,4,3.2999999999999998,2.8999999999999999,2.7000000000000002,2.7000000000000002,2.2000000000000002,1.3,0,0.5,-0.5,-0.80000000000000004,-0.80000000000000004,-0.40000000000000002,-0.5,-0.59999999999999998,-0.29999999999999999,-0.90000000000000002,-0.69999999999999996,0,0.69999999999999996,1.1000000000000001,0.80000000000000004,0.40000000000000002,0.10000000000000001,0.10000000000000001,0.29999999999999999,0.5,0.40000000000000002,0.80000000000000004,1.5,1.3,1.1000000000000001,1,1.2,1.7,2.2999999999999998,2.2999999999999998,2.2000000000000002,2.2000000000000002,2.2999999999999998,2.1000000000000001,1.1000000000000001,1.2,1.1000000000000001,0.59999999999999998,1.1000000000000001,1.7,1.6000000000000001,1.8,1.6000000000000001,1.5,1.5,1.8999999999999999,2.6000000000000001,2.2999999999999998,3,3,1.6000000000000001,0.69999999999999996,0.69999999999999996,0.20000000000000001,-0.10000000000000001,-0.59999999999999998,-0.80000000000000004,-1,-1.1000000000000001,-0.80000000000000004,-0.80000000000000004,-0.29999999999999999,0,-0.29999999999999999,-0.69999999999999996,-0.90000000000000002,-0.40000000000000002,0.10000000000000001,0.10000000000000001,-0.20000000000000001,-0.59999999999999998,-0.69999999999999996,-1.1000000000000001,-1.3,-1,-0.40000000000000002,-0.10000000000000001,-0.20000000000000001,-0.5,-0.29999999999999999,0.10000000000000001,0.20000000000000001,0.40000000000000002,-0.10000000000000001,0,0.20000000000000001,0.29999999999999999,0.20000000000000001,-0.10000000000000001,0.29999999999999999,1.5,1.8,2.1000000000000001,1.7,1.3999999999999999,2.3999999999999999,2.7999999999999998,2.7000000000000002,2.8999999999999999,2.8999999999999999,3.5,3.3999999999999999,2.7000000000000002,2.2000000000000002,1.8999999999999999,1.8999999999999999,2.1000000000000001,1.8999999999999999,2,2,2.3999999999999999,2.8999999999999999,3,3.1000000000000001,3,3.1000000000000001,3.2000000000000002,3.5,3.7999999999999998,3.6000000000000001,3.6000000000000001,3.2999999999999998,3,2.2999999999999998,2.2999999999999998,2.1000000000000001,1.8,1.8999999999999999,1.5,1.8,1.5,1.3999999999999999,0.80000000000000004,1,0.80000000000000004,0.29999999999999999,-0.69999999999999996,-1,-0.80000000000000004,-1.3999999999999999,-1,-0.90000000000000002,-0.20000000000000001,-0.10000000000000001,0.69999999999999996,0.80000000000000004,1.3999999999999999,2.3999999999999999,3.6000000000000001,4.5,4.9000000000000004,5.2999999999999998,5,4.5999999999999996,4.2000000000000002,4.5,4.4000000000000004,4.2999999999999998,4.2000000000000002,4.0999999999999996,3.6000000000000001,2.7000000000000002,2.2000000000000002,2.2000000000000002,2.3999999999999999,2.2999999999999998,2.3999999999999999,2.5,2.3999999999999999,2.3999999999999999,2.7000000000000002,2.6000000000000001,2.5,2.8999999999999999,3.7000000000000002,4,3.8999999999999999,4,3.8999999999999999,3.8999999999999999,4,4.2000000000000002,3.7000000000000002,3.3999999999999999,3.5,3.7000000000000002,3.2999999999999998,3.2999999999999998,3.1000000000000001,3.1000000000000001,3.5,3.3999999999999999,3.2999999999999998,3.1000000000000001,3.2000000000000002,3.5,3.6000000000000001,3.2000000000000002,3.2999999999999998,3.3999999999999999,3.5,3.3999999999999999,2.7000000000000002,2.1000000000000001,2.1000000000000001,2.2999999999999998,2.6000000000000001,2.7999999999999998,2.6000000000000001,2.8999999999999999,3,2.7999999999999998,2.7000000000000002,2.7000000000000002,3.1000000000000001,3.7000000000000002,3.7999999999999998,3.7000000000000002,4,3.8999999999999999,4,3.5,3.6000000000000001,3.3999999999999999,3.3999999999999999,3.6000000000000001,3.6000000000000001,3.1000000000000001,3.1000000000000001,3.1000000000000001],"mode":"lines","line":{"color":"#457e76","dash":"dashed"},"name":"General","type":"scatter","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["2024-09-01","2024-08-01","2024-07-01","2024-06-01","2024-05-01","2024-04-01","2024-03-01","2024-02-01","2024-01-01","2023-12-01","2023-11-01","2023-10-01","2023-09-01","2023-08-01","2023-07-01","2023-06-01","2023-05-01","2023-04-01","2023-03-01","2023-02-01","2023-01-01","2022-12-01","2022-11-01","2022-10-01","2022-09-01","2022-08-01","2022-07-01","2022-06-01","2022-05-01","2022-04-01","2022-03-01","2022-02-01","2022-01-01","2021-12-01","2021-11-01","2021-10-01","2021-09-01","2021-08-01","2021-07-01","2021-06-01","2021-05-01","2021-04-01","2021-03-01","2021-02-01","2021-01-01","2020-12-01","2020-11-01","2020-10-01","2020-09-01","2020-08-01","2020-07-01","2020-06-01","2020-05-01","2020-04-01","2020-03-01","2020-02-01","2020-01-01","2019-12-01","2019-11-01","2019-10-01","2019-09-01","2019-08-01","2019-07-01","2019-06-01","2019-05-01","2019-04-01","2019-03-01","2019-02-01","2019-01-01","2018-12-01","2018-11-01","2018-10-01","2018-09-01","2018-08-01","2018-07-01","2018-06-01","2018-05-01","2018-04-01","2018-03-01","2018-02-01","2018-01-01","2017-12-01","2017-11-01","2017-10-01","2017-09-01","2017-08-01","2017-07-01","2017-06-01","2017-05-01","2017-04-01","2017-03-01","2017-02-01","2017-01-01","2016-12-01","2016-11-01","2016-10-01","2016-09-01","2016-08-01","2016-07-01","2016-06-01","2016-05-01","2016-04-01","2016-03-01","2016-02-01","2016-01-01","2015-12-01","2015-11-01","2015-10-01","2015-09-01","2015-08-01","2015-07-01","2015-06-01","2015-05-01","2015-04-01","2015-03-01","2015-02-01","2015-01-01","2014-12-01","2014-11-01","2014-10-01","2014-09-01","2014-08-01","2014-07-01","2014-06-01","2014-05-01","2014-04-01","2014-03-01","2014-02-01","2014-01-01","2013-12-01","2013-11-01","2013-10-01","2013-09-01","2013-08-01","2013-07-01","2013-06-01","2013-05-01","2013-04-01","2013-03-01","2013-02-01","2013-01-01","2012-12-01","2012-11-01","2012-10-01","2012-09-01","2012-08-01","2012-07-01","2012-06-01","2012-05-01","2012-04-01","2012-03-01","2012-02-01","2012-01-01","2011-12-01","2011-11-01","2011-10-01","2011-09-01","2011-08-01","2011-07-01","2011-06-01","2011-05-01","2011-04-01","2011-03-01","2011-02-01","2011-01-01","2010-12-01","2010-11-01","2010-10-01","2010-09-01","2010-08-01","2010-07-01","2010-06-01","2010-05-01","2010-04-01","2010-03-01","2010-02-01","2010-01-01","2009-12-01","2009-11-01","2009-10-01","2009-09-01","2009-08-01","2009-07-01","2009-06-01","2009-05-01","2009-04-01","2009-03-01","2009-02-01","2009-01-01","2008-12-01","2008-11-01","2008-10-01","2008-09-01","2008-08-01","2008-07-01","2008-06-01","2008-05-01","2008-04-01","2008-03-01","2008-02-01","2008-01-01","2007-12-01","2007-11-01","2007-10-01","2007-09-01","2007-08-01","2007-07-01","2007-06-01","2007-05-01","2007-04-01","2007-03-01","2007-02-01","2007-01-01","2006-12-01","2006-11-01","2006-10-01","2006-09-01","2006-08-01","2006-07-01","2006-06-01","2006-05-01","2006-04-01","2006-03-01","2006-02-01","2006-01-01","2005-12-01","2005-11-01","2005-10-01","2005-09-01","2005-08-01","2005-07-01","2005-06-01","2005-05-01","2005-04-01","2005-03-01","2005-02-01","2005-01-01","2004-12-01","2004-11-01","2004-10-01","2004-09-01","2004-08-01","2004-07-01","2004-06-01","2004-05-01","2004-04-01","2004-03-01","2004-02-01","2004-01-01","2003-12-01","2003-11-01","2003-10-01","2003-09-01","2003-08-01","2003-07-01","2003-06-01","2003-05-01","2003-04-01","2003-03-01","2003-02-01","2003-01-01","2002-12-01","2002-11-01","2002-10-01","2002-09-01","2002-08-01","2002-07-01","2002-06-01","2002-05-01","2002-04-01","2002-03-01","2002-02-01","2002-01-01"],"y":[2.3999999999999999,2.7000000000000002,2.7999999999999998,3,3,2.8999999999999999,3.2999999999999998,3.5,3.6000000000000001,3.7999999999999998,4.5,5.2000000000000002,5.7999999999999998,6.0999999999999996,6.2000000000000002,5.9000000000000004,6.0999999999999996,6.5999999999999996,7.5,7.5999999999999996,7.5,7,6.2999999999999998,6.2000000000000002,6.2000000000000002,6.4000000000000004,6.0999999999999996,5.5,4.9000000000000004,4.4000000000000004,3.3999999999999999,3,2.3999999999999999,2.1000000000000001,1.7,1.3999999999999999,1,0.69999999999999996,0.59999999999999998,0.20000000000000001,0.20000000000000001,0,0.29999999999999999,0.29999999999999999,0.59999999999999998,0.10000000000000001,0.20000000000000001,0.29999999999999999,0.40000000000000002,0.40000000000000002,0.59999999999999998,1,1.1000000000000001,1.1000000000000001,1.1000000000000001,1.2,1,1,1,1,1,0.90000000000000002,0.90000000000000002,0.90000000000000002,0.69999999999999996,0.90000000000000002,0.69999999999999996,0.69999999999999996,0.80000000000000004,0.90000000000000002,0.90000000000000002,1,0.80000000000000004,0.80000000000000004,0.90000000000000002,1,1.1000000000000001,0.80000000000000004,1.2,1.1000000000000001,0.80000000000000004,0.80000000000000004,0.80000000000000004,0.90000000000000002,1.2,1.2,1.3999999999999999,1.2,1,1.2,0.90000000000000002,1,1.1000000000000001,1,0.80000000000000004,0.80000000000000004,0.80000000000000004,0.90000000000000002,0.69999999999999996,0.59999999999999998,0.69999999999999996,0.69999999999999996,1.1000000000000001,1,0.90000000000000002,0.90000000000000002,1,0.90000000000000002,0.80000000000000004,0.69999999999999996,0.80000000000000004,0.59999999999999998,0.5,0.29999999999999999,0.20000000000000001,0.20000000000000001,0.20000000000000001,0,-0.10000000000000001,-0.10000000000000001,-0.10000000000000001,0,0,0,0,0.29999999999999999,0,0.10000000000000001,0.20000000000000001,0.20000000000000001,0.40000000000000002,0.20000000000000001,0.80000000000000004,1.6000000000000001,1.7,2,2,1.8999999999999999,2.2999999999999998,2.2999999999999998,2.2000000000000002,2.1000000000000001,2.2999999999999998,2.5,2.1000000000000001,1.3999999999999999,1.3999999999999999,1.3,1.1000000000000001,1.1000000000000001,1.2,1.2,1.3,1.5,1.7,1.7,1.7,1.6000000000000001,1.6000000000000001,1.7,2.1000000000000001,2.1000000000000001,1.7,1.8,1.6000000000000001,1.5,1.2,1.1000000000000001,1.1000000000000001,1,0.80000000000000004,0.40000000000000002,0.20000000000000001,-0.10000000000000001,0.20000000000000001,0.10000000000000001,0.10000000000000001,0.29999999999999999,0.20000000000000001,0.10000000000000001,0.10000000000000001,0.40000000000000002,0.59999999999999998,0.80000000000000004,0.90000000000000002,1.3,1.3,1.6000000000000001,2,2.3999999999999999,2.7000000000000002,2.8999999999999999,3.3999999999999999,3.5,3.5,3.2999999999999998,3.2999999999999998,3.1000000000000001,3.3999999999999999,3.2999999999999998,3.1000000000000001,3.2999999999999998,3.2000000000000002,3.1000000000000001,2.6000000000000001,2.5,2.3999999999999999,2.3999999999999999,2.5,2.5,2.5,2.7999999999999998,2.7000000000000002,2.5,2.6000000000000001,2.7999999999999998,2.8999999999999999,3,3.1000000000000001,3,3,3.1000000000000001,3.1000000000000001,2.8999999999999999,2.8999999999999999,2.8999999999999999,2.7000000000000002,2.6000000000000001,2.5,2.3999999999999999,2.5,2.5,2.6000000000000001,2.7999999999999998,2.8999999999999999,2.7999999999999998,2.7999999999999998,2.8999999999999999,2.8999999999999999,2.8999999999999999,2.8999999999999999,2.8999999999999999,2.7999999999999998,2.7999999999999998,2.7000000000000002,2.3999999999999999,2.2000000000000002,2.2999999999999998,2.2999999999999998,2.5,2.6000000000000001,2.6000000000000001,2.7999999999999998,2.7999999999999998,2.8999999999999999,2.8999999999999999,3,3.2999999999999998,3.2000000000000002,3.2999999999999998,3.2000000000000002,3.5,3.6000000000000001,3.7000000000000002,3.5,3.7999999999999998,3.7999999999999998,4.0999999999999996,4.0999999999999996,3.8999999999999999,3.5,3.7000000000000002,3.6000000000000001],"mode":"lines","line":{"color":"#881333","dash":"dashed"},"name":"Subyacente","type":"scatter","marker":{"color":"rgba(255,127,14,1)","line":{"color":"rgba(255,127,14,1)"}},"error_y":{"color":"rgba(255,127,14,1)"},"error_x":{"color":"rgba(255,127,14,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="grafico-de-barras" class="section level3 hasAnchor" number="4.3.3">
+<h3><span class="header-section-number">4.3.3</span> Grafico de barras<a href="plotly.html#grafico-de-barras" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Los gráficos de barras en Plotly permiten comparar fácilmente valores entre diferentes categorías. Pueden ser verticales u horizontales, y se pueden personalizar con colores específicos para cada barra. También soportan la agrupación de barras (bar charts) y la apilación (stacked bar charts). La orientación, orden y formato de los ejes pueden ser ajustados para mejorar la legibilidad, y se pueden añadir anotaciones y etiquetas detalladas para proporcionar contexto adicional a los datos visualizados.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="plotly.html#cb23-1" tabindex="-1"></a><span class="co"># get_metadata_table_varval(2915)</span></span>
+<span id="cb23-2"><a href="plotly.html#cb23-2" tabindex="-1"></a><span class="co"># 34(Tamaño municipios)=20275(Total)</span></span>
+<span id="cb23-3"><a href="plotly.html#cb23-3" tabindex="-1"></a><span class="co"># nlast=1 nos devuelve el útlimo año sólo</span></span>
+<span id="cb23-4"><a href="plotly.html#cb23-4" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="plotly.html#cb23-5" tabindex="-1"></a>filter <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="st">&quot;34&quot;</span> <span class="ot">=</span> <span class="st">&quot;20275&quot;</span>)</span>
+<span id="cb23-6"><a href="plotly.html#cb23-6" tabindex="-1"></a>data2 <span class="ot">&lt;-</span> <span class="fu">get_data_table</span>(<span class="dv">2915</span>, <span class="at">filter =</span> filter, <span class="at">unnest =</span> <span class="cn">TRUE</span>, <span class="at">tip =</span> <span class="st">&quot;AM&quot;</span>, <span class="at">nlast =</span> <span class="dv">1</span>, <span class="at">metanames =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb23-7"><a href="plotly.html#cb23-7" tabindex="-1"></a>data2 <span class="ot">&lt;-</span> data2[<span class="sc">-</span><span class="dv">1</span>, ] <span class="co"># Quitamos primera observación. Total España</span></span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="plotly.html#cb24-1" tabindex="-1"></a><span class="co"># Ordenar el dataframe por la columna &#39;poblacion&#39;</span></span>
+<span id="cb24-2"><a href="plotly.html#cb24-2" tabindex="-1"></a>data2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">poblacion =</span> data2<span class="sc">$</span>Valor, <span class="at">ccaa =</span> data2<span class="sc">$</span>Comunidades.y.Ciudades.Autónomas)</span>
+<span id="cb24-3"><a href="plotly.html#cb24-3" tabindex="-1"></a>data2 <span class="ot">&lt;-</span> data2[<span class="fu">order</span>(data2<span class="sc">$</span>poblacion), ]</span>
+<span id="cb24-4"><a href="plotly.html#cb24-4" tabindex="-1"></a></span>
+<span id="cb24-5"><a href="plotly.html#cb24-5" tabindex="-1"></a></span>
+<span id="cb24-6"><a href="plotly.html#cb24-6" tabindex="-1"></a></span>
+<span id="cb24-7"><a href="plotly.html#cb24-7" tabindex="-1"></a><span class="co"># Crear el gráfico de barras horizontales</span></span>
+<span id="cb24-8"><a href="plotly.html#cb24-8" tabindex="-1"></a>fig <span class="ot">&lt;-</span> <span class="fu">plot_ly</span>(data2,</span>
+<span id="cb24-9"><a href="plotly.html#cb24-9" tabindex="-1"></a>  <span class="at">x =</span> <span class="sc">~</span>poblacion, <span class="at">y =</span> <span class="sc">~</span> <span class="fu">factor</span>(ccaa, <span class="at">levels =</span> data2<span class="sc">$</span>ccaa), <span class="at">type =</span> <span class="st">&quot;bar&quot;</span>, <span class="at">orientation =</span> <span class="st">&quot;h&quot;</span>,</span>
+<span id="cb24-10"><a href="plotly.html#cb24-10" tabindex="-1"></a>  <span class="at">marker =</span> <span class="fu">list</span>(<span class="at">color =</span> <span class="st">&quot;#ddeeec&quot;</span>, <span class="at">line =</span> <span class="fu">list</span>(<span class="at">color =</span> <span class="st">&quot;#457e76&quot;</span>, <span class="at">width =</span> <span class="fl">1.5</span>))</span>
+<span id="cb24-11"><a href="plotly.html#cb24-11" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb24-12"><a href="plotly.html#cb24-12" tabindex="-1"></a>  <span class="fu">layout</span>(</span>
+<span id="cb24-13"><a href="plotly.html#cb24-13" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Población por Comunidad Autónoma&quot;</span>,</span>
+<span id="cb24-14"><a href="plotly.html#cb24-14" tabindex="-1"></a>    <span class="at">xaxis =</span> <span class="fu">list</span>(</span>
+<span id="cb24-15"><a href="plotly.html#cb24-15" tabindex="-1"></a>      <span class="at">title =</span> <span class="st">&quot;Población&quot;</span>,</span>
+<span id="cb24-16"><a href="plotly.html#cb24-16" tabindex="-1"></a>      <span class="at">tickformat =</span> <span class="st">&quot;.,&quot;</span>, <span class="co"># Formatear los números para que se muestren con punto como separador de miles</span></span>
+<span id="cb24-17"><a href="plotly.html#cb24-17" tabindex="-1"></a>      <span class="at">tickprefix =</span> <span class="st">&quot; &quot;</span>, <span class="co"># Espacio para mejorar la legibilidad</span></span>
+<span id="cb24-18"><a href="plotly.html#cb24-18" tabindex="-1"></a>      <span class="at">separatethousands =</span> <span class="cn">TRUE</span> <span class="co"># Asegurar que los miles se separen correctamente</span></span>
+<span id="cb24-19"><a href="plotly.html#cb24-19" tabindex="-1"></a>    ),</span>
+<span id="cb24-20"><a href="plotly.html#cb24-20" tabindex="-1"></a>    <span class="at">yaxis =</span> <span class="fu">list</span>(<span class="at">title =</span> <span class="st">&quot;Comunidad Autónoma&quot;</span>),</span>
+<span id="cb24-21"><a href="plotly.html#cb24-21" tabindex="-1"></a>    <span class="at">margin =</span> <span class="fu">list</span>(<span class="at">l =</span> <span class="dv">150</span>) <span class="co"># Ajustar el margen izquierdo para evitar que las etiquetas se corten</span></span>
+<span id="cb24-22"><a href="plotly.html#cb24-22" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="plotly.html#cb25-1" tabindex="-1"></a><span class="co"># Mostrar el gráfico</span></span>
+<span id="cb25-2"><a href="plotly.html#cb25-2" tabindex="-1"></a>fig</span></code></pre></div>
+<div class="plotly html-widget html-fill-item" id="htmlwidget-c279f88174d531aebecf" style="width:100%;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-c279f88174d531aebecf">{"x":{"visdat":{"176d659d86932":["function () ","plotlyVisDat"]},"cur_data":"176d659d86932","attrs":{"176d659d86932":{"x":{},"y":{},"orientation":"h","marker":{"color":"#ddeeec","line":{"color":"#457e76","width":1.5}},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"}},"layout":{"margin":{"b":40,"l":150,"t":25,"r":10},"title":"Población por Comunidad Autónoma","xaxis":{"domain":[0,1],"automargin":true,"title":"Población","tickformat":".,","tickprefix":" ","separatethousands":true},"yaxis":{"domain":[0,1],"automargin":true,"title":"Comunidad Autónoma","type":"category","categoryorder":"array","categoryarray":["Ceuta","Melilla","Rioja, La","Cantabria","Navarra, Comunidad Foral de","Asturias, Principado de","Extremadura","Balears, Illes","Aragón","Murcia, Región de","Castilla - La Mancha","Canarias","País Vasco","Castilla y León","Galicia","Comunitat Valenciana","Madrid, Comunidad de","Cataluña","Andalucía"]},"hovermode":"closest","showlegend":false},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[83517,86261,319796,584507,661537,1011792,1059501,1173008,1326261,1518486,2049562,2172944,2213993,2383139,2695645,5058138,6751251,7763362,8472407],"y":["Ceuta","Melilla","Rioja, La","Cantabria","Navarra, Comunidad Foral de","Asturias, Principado de","Extremadura","Balears, Illes","Aragón","Murcia, Región de","Castilla - La Mancha","Canarias","País Vasco","Castilla y León","Galicia","Comunitat Valenciana","Madrid, Comunidad de","Cataluña","Andalucía"],"orientation":"h","marker":{"color":"#ddeeec","line":{"color":"#457e76","width":1.5}},"type":"bar","error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="gráfico-sankey" class="section level3 hasAnchor" number="4.3.4">
+<h3><span class="header-section-number">4.3.4</span> Gráfico Sankey<a href="plotly.html#gráfico-sankey" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Este tipo de gráfico es poco conocido pero muy útil para visualizar ciertos fenómenos sociales/demográficos. Por ejemplo: mostrar la evolución de la intención de voto, representando como se han desplazado las intenciones entre diferentes periodos; mostrar la evolución de la situación laboral de la comunidad, mostrando los flujos entre distintos estados laborales en distintos periodos.</p>
+<p>Veamos pues este último gráfico. El objetivo es intentar reproducir la aplicación del INE <a href="https://public.tableau.com/views/EPAFlujosSankeyES_16252266850430/Dashboardccaa?:showVizHome=no&amp;:embed=true#5">Flujos de personas en el mercado laboral</a>. En este caso, dentro de bookdown, la aplicación no se puede hacer tan dinámica como la presentada en la web del INE, ya que el formato no es el adecuado para ello <a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a>.</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="plotly.html#cb26-1" tabindex="-1"></a><span class="co"># Tabla 66257. Información del mercado laboral</span></span>
+<span id="cb26-2"><a href="plotly.html#cb26-2" tabindex="-1"></a><span class="co"># Vemos sus metadatos para ver por que filtrar</span></span>
+<span id="cb26-3"><a href="plotly.html#cb26-3" tabindex="-1"></a><span class="fu">get_metadata_table_varval</span>(<span class="dv">66257</span>)</span></code></pre></div>
+<pre><code>##        Id Fk_Variable                         Nombre Codigo
+## 1     454          18                    Ambos sexos       
+## 2     452          18                        Hombres      1
+## 3     453          18                        Mujeres      6
+## 4  283949         386       Total (trimestre actual)       
+## 5   21332         386    Ocupados (trimestre actual)       
+## 6   21335         386     Parados (trimestre actual)       
+## 7   20279         386   Inactivos (trimestre actual)       
+## 8  283949         539     Total (trimestre anterior)       
+## 9   21332         539  Ocupados (trimestre anterior)       
+## 10  21335         539   Parados (trimestre anterior)       
+## 11  20279         539 Inactivos (trimestre anterior)       
+## 12 283997         539 No consta (trimestre anterior)</code></pre>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="plotly.html#cb28-1" tabindex="-1"></a>filter <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="st">&quot;18&quot;</span> <span class="ot">=</span> <span class="st">&quot;454&quot;</span>) <span class="co"># &quot;Sexo&quot;=&quot;Ambos sexos&quot;</span></span>
+<span id="cb28-2"><a href="plotly.html#cb28-2" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="plotly.html#cb28-3" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">get_data_table</span>(<span class="dv">66257</span>, <span class="at">filter =</span> filter, <span class="at">metanames =</span> <span class="cn">TRUE</span>, <span class="at">tip =</span> <span class="st">&quot;AM&quot;</span>, <span class="at">metacodes =</span> <span class="cn">TRUE</span>, <span class="at">unnest =</span> <span class="cn">TRUE</span>, <span class="at">nlast =</span> <span class="dv">1</span>)</span>
+<span id="cb28-4"><a href="plotly.html#cb28-4" tabindex="-1"></a></span>
+<span id="cb28-5"><a href="plotly.html#cb28-5" tabindex="-1"></a><span class="co"># Quitamos los datos totales</span></span>
+<span id="cb28-6"><a href="plotly.html#cb28-6" tabindex="-1"></a>datos <span class="ot">&lt;-</span> datos <span class="sc">%&gt;%</span></span>
+<span id="cb28-7"><a href="plotly.html#cb28-7" tabindex="-1"></a>  <span class="fu">filter</span>(Relación.con.la.actividad.en.el.trimestre.actual.Id <span class="sc">!=</span> <span class="st">&quot;283949&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb28-8"><a href="plotly.html#cb28-8" tabindex="-1"></a>  <span class="fu">filter</span>(Relación.con.la.actividad.en.trimestre.anterior.Id <span class="sc">!=</span> <span class="st">&quot;283949&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="plotly.html#cb29-1" tabindex="-1"></a><span class="co">#Necesario para el sankey plot</span></span>
+<span id="cb29-2"><a href="plotly.html#cb29-2" tabindex="-1"></a><span class="co"># Crear etiquetas únicas</span></span>
+<span id="cb29-3"><a href="plotly.html#cb29-3" tabindex="-1"></a>labels <span class="ot">&lt;-</span> <span class="fu">unique</span>(<span class="fu">c</span>(</span>
+<span id="cb29-4"><a href="plotly.html#cb29-4" tabindex="-1"></a>  datos<span class="sc">$</span>Relación.con.la.actividad.en.trimestre.anterior,</span>
+<span id="cb29-5"><a href="plotly.html#cb29-5" tabindex="-1"></a>  datos<span class="sc">$</span>Relación.con.la.actividad.en.el.trimestre.actual</span>
+<span id="cb29-6"><a href="plotly.html#cb29-6" tabindex="-1"></a>))</span>
+<span id="cb29-7"><a href="plotly.html#cb29-7" tabindex="-1"></a>labels <span class="ot">&lt;-</span> <span class="fu">c</span>(labels[<span class="dv">3</span>], labels[<span class="dv">1</span>], labels[<span class="dv">2</span>], labels[<span class="dv">4</span>], labels[<span class="dv">7</span>], labels[<span class="dv">5</span>], labels[<span class="dv">6</span>])</span>
+<span id="cb29-8"><a href="plotly.html#cb29-8" tabindex="-1"></a><span class="co"># Crear un dataframe para mapear las etiquetas a índices</span></span>
+<span id="cb29-9"><a href="plotly.html#cb29-9" tabindex="-1"></a>label_map <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">label =</span> labels, <span class="at">id =</span> <span class="fu">seq_along</span>(labels) <span class="sc">-</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="plotly.html#cb30-1" tabindex="-1"></a><span class="co"># Hacemos join con las etiquetas</span></span>
+<span id="cb30-2"><a href="plotly.html#cb30-2" tabindex="-1"></a>filtered_data <span class="ot">&lt;-</span> datos <span class="sc">%&gt;%</span></span>
+<span id="cb30-3"><a href="plotly.html#cb30-3" tabindex="-1"></a>  <span class="fu">left_join</span>(label_map, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;Relación.con.la.actividad.en.trimestre.anterior&quot;</span> <span class="ot">=</span> <span class="st">&quot;label&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb30-4"><a href="plotly.html#cb30-4" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">source =</span> id) <span class="sc">%&gt;%</span></span>
+<span id="cb30-5"><a href="plotly.html#cb30-5" tabindex="-1"></a>  <span class="fu">left_join</span>(label_map, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;Relación.con.la.actividad.en.el.trimestre.actual&quot;</span> <span class="ot">=</span> <span class="st">&quot;label&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb30-6"><a href="plotly.html#cb30-6" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">target =</span> id)</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="plotly.html#cb31-1" tabindex="-1"></a><span class="co"># Asignar colores a los enlaces (opcional)</span></span>
+<span id="cb31-2"><a href="plotly.html#cb31-2" tabindex="-1"></a>link_colors <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(filtered_data<span class="sc">$</span>source <span class="sc">==</span> <span class="dv">0</span>, <span class="st">&quot;#FFD700&quot;</span>, <span class="co">#Inactivos</span></span>
+<span id="cb31-3"><a href="plotly.html#cb31-3" tabindex="-1"></a>                      <span class="fu">ifelse</span>(filtered_data<span class="sc">$</span>source  <span class="sc">==</span><span class="dv">1</span>,<span class="st">&quot;#CD853F&quot;</span>, <span class="co">#Ocupados</span></span>
+<span id="cb31-4"><a href="plotly.html#cb31-4" tabindex="-1"></a>                             <span class="fu">ifelse</span>(filtered_data<span class="sc">$</span>source  <span class="sc">==</span> <span class="dv">2</span>,<span class="st">&quot;#FF4500&quot;</span>, <span class="co">#Parados</span></span>
+<span id="cb31-5"><a href="plotly.html#cb31-5" tabindex="-1"></a>                              <span class="st">&quot;#9e3a26&quot;</span> <span class="co">#No consta</span></span>
+<span id="cb31-6"><a href="plotly.html#cb31-6" tabindex="-1"></a>                              )))</span>
+<span id="cb31-7"><a href="plotly.html#cb31-7" tabindex="-1"></a></span>
+<span id="cb31-8"><a href="plotly.html#cb31-8" tabindex="-1"></a></span>
+<span id="cb31-9"><a href="plotly.html#cb31-9" tabindex="-1"></a>fig <span class="ot">&lt;-</span> <span class="fu">plot_ly</span>(</span>
+<span id="cb31-10"><a href="plotly.html#cb31-10" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">&quot;sankey&quot;</span>,</span>
+<span id="cb31-11"><a href="plotly.html#cb31-11" tabindex="-1"></a>  <span class="at">orientation =</span> <span class="st">&quot;h&quot;</span>,</span>
+<span id="cb31-12"><a href="plotly.html#cb31-12" tabindex="-1"></a>  <span class="at">node =</span> <span class="fu">list</span>(</span>
+<span id="cb31-13"><a href="plotly.html#cb31-13" tabindex="-1"></a>    <span class="at">label =</span> labels,</span>
+<span id="cb31-14"><a href="plotly.html#cb31-14" tabindex="-1"></a>    <span class="at">color =</span> <span class="fu">c</span>(<span class="st">&quot;#FFD700&quot;</span>, <span class="st">&quot;#CD853F&quot;</span>, <span class="st">&quot;#FF4500&quot;</span>, <span class="st">&quot;#9e3a26&quot;</span>, <span class="st">&quot;#FFD700&quot;</span>, <span class="st">&quot;#CD853F&quot;</span>, <span class="st">&quot;#FF4500&quot;</span>, <span class="st">&quot;#9e3a26&quot;</span>),</span>
+<span id="cb31-15"><a href="plotly.html#cb31-15" tabindex="-1"></a>    <span class="at">pad =</span> <span class="dv">15</span>,</span>
+<span id="cb31-16"><a href="plotly.html#cb31-16" tabindex="-1"></a>    <span class="at">thickness =</span> <span class="dv">20</span>,</span>
+<span id="cb31-17"><a href="plotly.html#cb31-17" tabindex="-1"></a>    <span class="at">line =</span> <span class="fu">list</span>(<span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">width =</span> <span class="fl">0.5</span>)</span>
+<span id="cb31-18"><a href="plotly.html#cb31-18" tabindex="-1"></a>  ),</span>
+<span id="cb31-19"><a href="plotly.html#cb31-19" tabindex="-1"></a>  <span class="at">link =</span> <span class="fu">list</span>(</span>
+<span id="cb31-20"><a href="plotly.html#cb31-20" tabindex="-1"></a>    <span class="at">source =</span> filtered_data<span class="sc">$</span>source,</span>
+<span id="cb31-21"><a href="plotly.html#cb31-21" tabindex="-1"></a>    <span class="at">target =</span> filtered_data<span class="sc">$</span>target,</span>
+<span id="cb31-22"><a href="plotly.html#cb31-22" tabindex="-1"></a>    <span class="at">value =</span> filtered_data<span class="sc">$</span>Valor,</span>
+<span id="cb31-23"><a href="plotly.html#cb31-23" tabindex="-1"></a>    <span class="at">color =</span> link_colors</span>
+<span id="cb31-24"><a href="plotly.html#cb31-24" tabindex="-1"></a>  )</span>
+<span id="cb31-25"><a href="plotly.html#cb31-25" tabindex="-1"></a>)</span>
+<span id="cb31-26"><a href="plotly.html#cb31-26" tabindex="-1"></a></span>
+<span id="cb31-27"><a href="plotly.html#cb31-27" tabindex="-1"></a>fig <span class="ot">&lt;-</span> fig <span class="sc">%&gt;%</span></span>
+<span id="cb31-28"><a href="plotly.html#cb31-28" tabindex="-1"></a>  <span class="fu">layout</span>(</span>
+<span id="cb31-29"><a href="plotly.html#cb31-29" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Transición de Actividades Económicas entre Trimestres&quot;</span>,</span>
+<span id="cb31-30"><a href="plotly.html#cb31-30" tabindex="-1"></a>    <span class="at">font =</span> <span class="fu">list</span>(<span class="at">size =</span> <span class="dv">10</span>)</span>
+<span id="cb31-31"><a href="plotly.html#cb31-31" tabindex="-1"></a>  )</span>
+<span id="cb31-32"><a href="plotly.html#cb31-32" tabindex="-1"></a>fig</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-30"></span>
+<div class="plotly html-widget html-fill-item" id="htmlwidget-09c48bed318bba90dcd4" style="width:100%;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-09c48bed318bba90dcd4">{"x":{"visdat":{"176d615b4da43":["function () ","plotlyVisDat"]},"cur_data":"176d615b4da43","attrs":{"176d615b4da43":{"orientation":"h","node":{"label":["Inactivos (trimestre anterior)","Ocupados (trimestre anterior)","Parados (trimestre anterior)","No consta (trimestre anterior)","Inactivos (trimestre actual)","Ocupados (trimestre actual)","Parados (trimestre actual)"],"color":["#FFD700","#CD853F","#FF4500","#9e3a26","#FFD700","#CD853F","#FF4500","#9e3a26"],"pad":15,"thickness":20,"line":{"color":"black","width":0.5}},"link":{"source":[1,2,0,3,1,2,0,3,1,2,0,3],"target":[5,5,5,5,6,6,6,6,4,4,4,4],"value":[20322.900000000001,815.39999999999998,544.39999999999998,2.1000000000000001,484.39999999999998,1517.9000000000001,749.5,3.5,445.30000000000001,591.39999999999998,15856.299999999999,164],"color":["#CD853F","#FF4500","#FFD700","#9e3a26","#CD853F","#FF4500","#FFD700","#9e3a26","#CD853F","#FF4500","#FFD700","#9e3a26"]},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"sankey"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"title":"Transición de Actividades Económicas entre Trimestres","font":{"size":10},"hovermode":"closest","showlegend":false},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"orientation":"h","node":{"label":["Inactivos (trimestre anterior)","Ocupados (trimestre anterior)","Parados (trimestre anterior)","No consta (trimestre anterior)","Inactivos (trimestre actual)","Ocupados (trimestre actual)","Parados (trimestre actual)"],"color":["#FFD700","#CD853F","#FF4500","#9e3a26","#FFD700","#CD853F","#FF4500","#9e3a26"],"pad":15,"thickness":20,"line":{"color":"black","width":0.5}},"link":{"source":[1,2,0,3,1,2,0,3,1,2,0,3],"target":[5,5,5,5,6,6,6,6,4,4,4,4],"value":[20322.900000000001,815.39999999999998,544.39999999999998,2.1000000000000001,484.39999999999998,1517.9000000000001,749.5,3.5,445.30000000000001,591.39999999999998,15856.299999999999,164],"color":["#CD853F","#FF4500","#FFD700","#9e3a26","#CD853F","#FF4500","#FFD700","#9e3a26","#CD853F","#FF4500","#FFD700","#9e3a26"]},"type":"sankey","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<p class="caption">
+FIGURA 4.1: Flujos de personas en el mercado laboral en España 2024 T2
+</p>
+</div>
+</div>
+</div>
+<div id="más-información-1" class="section level2 hasAnchor" number="4.4">
+<h2><span class="header-section-number">4.4</span> Más información<a href="plotly.html#más-información-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Para más información sobre el paquete plotly y sus posibles funciones, buscar en la siguiente web:</p>
+<pre><code>- [https://plotly.com/r/getting-started/](https://plotly.com/r/getting-started/)</code></pre>
+
+</div>
+</div>
+<h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-ineapir" class="csl-entry">
+Crespo, David. 2024. <em>Ineapir: Obtaining Data Published by the National Statistics Institute</em>. <a href="https://github.com/es-ine/ineapir">https://github.com/es-ine/ineapir</a>.
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="8">
+<li id="fn8"><p>Para ver una aplicación dinámica como la presente en la web del INE, ver apartado de Shiny Apps o FlexDashboards.<a href="plotly.html#fnref8" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="lattice.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="sdf.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": false,
+"twitter": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": false
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/davidperezros/r_plotting_review/edit/main/02-ploty.Rmd",
+"text": "Editar"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/davidperezros/r_plotting_review/blob/main/02-ploty.Rmd",
+"text": null
+},
+"download": ["r_plotting_review.pdf", "r_plotting_review.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+},
+"code-fold": true,
+"info": false
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

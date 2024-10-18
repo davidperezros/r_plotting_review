@@ -1,0 +1,16 @@
+book_filename: "r_plotting_review"
+output_dir: "docs"
+delete_merged_file: true
+clean: ["r_packages_bookdown.bbl", "R-packages_bookdown.aux",
+"r_packages_bookdown.bcf","r_packages_bookdown.log", "r_packages_bookdown.run.xml",
+"r_packages_bookdown.toc","r_packages_bookdown.blg", "preamble.log",
+"test_files"]
+edit: https://github.com/davidperezros/r_plotting_review/edit/main/%s
+view: https://github.com/davidperezros/r_plotting_review/blob/main/%s
+language:
+  label:
+    fig: "FIGURA "
+    tab: "TABLA "
+  ui:
+    edit: "Editar"
+    chapter_name: " "

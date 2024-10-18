@@ -1,0 +1,7 @@
+#Estos ficheros no se cargarán a .github
+.Rhistory
+.Ruserdata
+.RData
+.Rproj.user
+r_packages_bookdown_cache/
+bookdown_files/
