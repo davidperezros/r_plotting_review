@@ -1,0 +1,6 @@
+*.html linguist-detectable=false
+*.css linguist-detectable=false
+*.Rmd linguist-detectable
+*.yml linguist-detectable
+
+
