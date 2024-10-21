@@ -1,4 +1,3 @@
-# (APPENDIX) Anexos {-}
 
 # Leaflet 
 
@@ -61,8 +60,61 @@
 
 
 ## Mapas
+
+
+###  Obtener datos
+Vamos a representar la esperanza de vida por comunidades autónomas en un mapa de España. Para ello necesitamos **extraer primero los datos**, que como ya se ha comentado previamente se obtienen a partir del paquete `ineapir`.
+
+1. En la web del ine **buscamos la tabla que contiene los datos deseados**, que tiene por id `27154`.
+
+2. Usando `ineapir` extraemos los datos usando el servicio API del INE. Los filtramos por "sexo"="total", "0 años" y "esperanza de vida", todo ello para todas comunidades autónomas.
+
+
 ```{r}
-# Verificar si está instalado
+# Filtrar por esperanza de vida
+# "" para indicar que tome todos los valores
+filter = list(ccaa = "", sexo = "total", values = c("0 años", "esperanza de vida"))
+
+# Tabl de mortalidad por año, ccaa, ciudadaes, sexo, edad y funciones. 
+# Table url: https://www.ine.es/jaxiT3/Tabla.htm?t=27154&L=0
+esp <- get_data_table(idTable = 27154, filter = filter, nlast = 1, unnest = TRUE,
+                       metacodes = TRUE, tip = "AM", validate = FALSE)
+
+# Seleccionamos columnas de interés
+esp <- subset(esp, select = c("Comunidades.y.Ciudades.Autónomas.Id", "T3_Periodo",
+                                "Anyo","Valor"))
+```
+
+
+### Contornos
+
+Una vez obtenidos los datos que se quieren incluir en el mapa, es necesario **disponer de los contornos geográficos** sobre los cuales se quieren representar dichos datos. En este caso, los contornos de las comunidades autónomas.
+
+El ine dispone acceso de contornos para los limites geográficos en la siguiente web:
+
+
+
+
+
+::: {.infobox .caution data-latex="{caution}"}
+**Web**
+`https://www.ine.es/wstempus/geojs/ES/CONTORNOS/XXXX`
+
+sustituyendo `XXXX` por el código del ámbito geográfico necesario, siendo estos:
+  
+  - `349`: total nacional
+  - `70`: ccaa
+  - `115`: provincias
+  - `19`: municipios
+
+:::
+
+
+Para colorear el mapa, se desea que se muestren colores para intervalos de Esperanza de Vida (tomando los cuartiles), para ello será necesario usar la función `colorBin()`. Por tanto, tenemos:
+  
+
+```{r}
+# Verificar si los paquetes están instalados
 if (!require("leaflet")) install.packages("leaflet")
 if (!require("sf")) install.packages("sf")
 if (!require("htmltools")) install.packages("htmltools")
@@ -72,26 +124,16 @@ library(leaflet)
 library(sf)
 library(htmltools)
 
-# Get the boundaries of the autonomous communities
+# Contornos de las ccaa
 ccaa <- read_sf("https://www.ine.es/wstempus/geojs/ES/CONTORNOS/70")
 
-# Filter for life expectancy
-filter = list(ccaa = "", sexo = "total", values = c("0 años", "esperanza de vida"))
 
-# Table: Mortality tables by year, autonomous communities and cities, sex, age and functions.
-# Table url: https://www.ine.es/jaxiT3/Tabla.htm?t=27154&L=0
-esp <- get_data_table(idTable = 27154, filter = filter, nlast = 1, unnest = TRUE,
-                       metacodes = TRUE, tip = "AM", validate = FALSE)
 
-# Select a set on columns from data
-esp <- subset(esp, select = c("Comunidades.y.Ciudades.Autónomas.Id", "T3_Periodo",
-                                "Anyo","Valor"))
-
-# Join boundaries information with data information
+# join de los contornos y el dataset
 ccaa <- merge(ccaa, esp, by.x = "id_region", 
               by.y = "Comunidades.y.Ciudades.Autónomas.Id" )
 
-# Create the palette of the legend
+# Creamos colores para cada rango de esperanza de vida
 pal <- colorBin("plasma", domain = NULL, bins = c(quantile(ccaa$Valor)))
 
 # Labels of the map
@@ -125,7 +167,9 @@ m <- leaflet(ccaa) %>%
 
 ```
 
-```{r, webshot="webshot",out.width = "100%"}
+```{r, webshot="webshot",out.width = "80%"}
 m
 ```
+
+
 

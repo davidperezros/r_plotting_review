@@ -87,7 +87,6 @@ knitr::include_graphics("fig/capturas/plot3.png")
 ```
 
 
-# (PART\*) Paquetes principales {-}
 
 
 

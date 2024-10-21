@@ -129,7 +129,7 @@ data <- data %>%
 
 
 
-```{r, caption= "Población de España. Fuente: INE", webshot = "webshot",out.width = "800%"}
+```{r, caption= "Población de España. Fuente: INE", webshot = "webshot", out.width = "80%"}
 # Crear el gráfico interactivo
 fig <- plot_ly(data, x = ~Year) %>%
   add_lines(y = ~Mujeres, name = "Mujeres", line = list(color = "#457e76")) %>%
@@ -202,7 +202,7 @@ subyacente$Fecha <- as.Date(subyacente$Fecha)
 
 Una vez hemos preparado los datos, los dibujamos en un gráfico interactivo:
 
-```{r , webshot="webshot",out.width = "100%"}
+```{r , webshot="webshot",out.width = "80%"}
 
 # Plot cpi overall index
 fig <- plot_ly(general,
@@ -327,7 +327,7 @@ filtered_data <- datos %>%
 ```
  
  
-```{r, out.width="100%",fig.cap="Flujos de personas en el mercado laboral en España 2024 T2",webshot="webshot"}
+```{r, out.width="80%",fig.cap="Flujos de personas en el mercado laboral en España 2024 T2",webshot="webshot"}
 
 
 # Asignar colores a los enlaces (opcional)

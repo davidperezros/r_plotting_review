@@ -38,3 +38,33 @@
 \renewcommand{\textbf}[1]{\textcolor{verde_fuerte_ine}{\oldtextbf{#1}}}
 
 
+
+
+% Para las cajas de información en pdf
+
+\usepackage{tcolorbox}
+
+\newtcolorbox{blackbox}{
+  colback=verde_claro_ine,
+  colframe=granate_ine,
+  coltext=verde_fuerte_ine,
+  boxsep=5pt,
+  arc=4pt}
+
+\newenvironment{infobox}[1]
+  {
+  \begin{itemize}
+  \renewcommand{\labelitemi}{
+    \raisebox{-.7\height}[0pt][0pt]{
+      {\setkeys{Gin}{width=3em,keepaspectratio}
+        \includegraphics{fig/caution.png}}
+    }
+  }
+  \setlength{\fboxsep}{1em}
+  \begin{blackbox}
+  \item
+  }
+  {
+  \end{blackbox}
+  \end{itemize}
+  }

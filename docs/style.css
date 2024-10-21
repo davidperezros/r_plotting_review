@@ -30,25 +30,30 @@ p code {
 }
 
 
-/* Colorea los chunks de r en los posibles formatos que puedan tomar
+/* Colorea los chunks de r en los posibles formatos que puedan tomar */
+
 .Rchunk {
   background-color: #ddeeec !important;
   font-weight: bolder;
   /* color: red !important;*/
 }
 
+
+/* Como formatear chunks entrada R */
 .sourceCode {
   background-color: #ddeeec !important;
   font-weight: bolder;
   /* color: red !important;*/
 }
 
-
+/* Como formatear chunks salida R */
 .Rout {
   background-color: #ddeeec !important;
   font-weight: bolder;
   /* color: blue !important;*/
 }
+
+/* Como formatear la negrita */
 strong {
    color: #457e76;
    }
@@ -57,10 +62,12 @@ strong {
   background: #ddeeec;
   border-right: none;
 }
+
+
   /*COLORES INE
   
- Rojo: #881333 RGB:136/19/51 HSB: 344º/86/53 LAB: 34/56/23
-Verde: #457e76 RGB:69/126/118 HSB:172º/45/49 LAB: 47/-33/-4
+ granate: #881333 RGB:136/19/51 HSB: 344º/86/53 LAB: 34/56/23
+Verde fuerte: #457e76 RGB:69/126/118 HSB:172º/45/49 LAB: 47/-33/-4
 Verde claro:#ddeeec RGB: 221/238/236 HSB:173º/7/93 LAB: 92/-8/-2
 
 -- 
@@ -84,14 +91,18 @@ Verde claro:#ddeeec RGB: 221/238/236 HSB:173º/7/93 LAB: 92/-8/-2
     margin-bottom: 1em;
 }
 
-.d-wrap[data-wrap="info"] {
-    @include admonition(#084298, #cfe2ff, #b6d4fe, "/images/emoji/google/information_source.png");
+
+
+/*  Para las cajas de información en html*/
+
+.infobox {
+  padding: 1em 1em 1em 4em;
+  margin-bottom: 10px;
+  border: 2px solid #881333 ;
+  border-radius: 10px;
+  background: #ddeeec 5px center/3em no-repeat;
 }
 
-.d-wrap[data-wrap="warning"] {
-    @include admonition(#664d03, #fff3cd, #ffecb5, "/images/emoji/google/warning.png");
-}
-
-.d-wrap[data-wrap="danger"] {
-    @include admonition(#842029, #f8d7da, #f5c2c7, "/images/emoji/google/stop_sign.png");
+.caution {
+  background-image: url("fig/caution.png");
 }

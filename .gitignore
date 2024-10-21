@@ -5,3 +5,5 @@
 .Rproj.user
 r_packages_bookdown_cache/
 bookdown_files/
+trial.Rmd
+06-ineapir.Rmd

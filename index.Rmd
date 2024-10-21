@@ -95,7 +95,7 @@ Este proyecto se ha realizado en [Bookdown](https://bookdown.org/)[^9] con la id
 [^3]: Sarkar, D. (2008). *Lattice: Multivariate Data Visualization with R*. Springer.
 
 
-  -  **sf** y **tmap**: para la visualización de datos espaciales, los paquetes **sf** y **tmap** proporcionan herramientas especializadas. **sf** facilita la manipulación de datos geoespaciales, mientras que **tmap** permite la creación de mapas temáticos interactivos y estáticos[^5]. Estos paquetes son esenciales para el análisis geoespacial y la presentación de resultados en disciplinas como la geografía y la ecología.
+  -  **leaflet**, **sf** y **tmap**: para la visualización de datos espaciales, los paquetes **sf** y **tmap** proporcionan herramientas especializadas. **sf** facilita la manipulación de datos geoespaciales, mientras que **tmap** permite la creación de mapas temáticos interactivos y estáticos[^5]. Estos paquetes son esenciales para el análisis geoespacial y la presentación de resultados en disciplinas como la geografía y la ecología.
 
 [^5]: Lovelace, R., Nowosad, J., & Muenchow, J. (2019). *Geocomputation with R*. CRC Press.
 
@@ -110,6 +110,9 @@ Este proyecto se ha realizado en [Bookdown](https://bookdown.org/)[^9] con la id
 
 
 En este proyecto la mayor parte de datos usados se han extraído directamente del servicio API del INE, a través del paquete `ineapir`. Para más información, (véase [@ineapir]). Esto contribuye a la independencia del proyecto, sin necesidad de descargar datos de fuentes externas de manera "manual" para poder replicar los ejemplos. Del mismo modo, promociona y expone casos de uso para dicha herramienta.
+
+
+**Nota**: Este espacio de trabajo se encuentra todavía en proceso de elaboración y por ello seguirá incluyendo información nueva de manera periódica.
 
 
 [^9]: Ver [@main_book] para más información sobre Bookdown. 
