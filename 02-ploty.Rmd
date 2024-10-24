@@ -42,11 +42,16 @@ A continuación se muestra un ejemplo básico de cómo crear un gráfico interac
 # install.packages("plotly")
 
 # Verificar si está instalado
-if (!require("plotly")) install.packages("dplyr")
+if (!require("plotly")) install.packages("plotly")
+if (!require("dplyr")) install.packages("dplyr")
 if (!require("webshot")) install.packages("webshot")
+if (!require("ineapir")) install.packages("ineapir")
+
 # Cargar paquete
 library(dplyr)
+library(plotly)
 library(webshot)
+library(ineapir)
 
 # Datos de ejemplo
 data <- mtcars
@@ -69,6 +74,186 @@ p
 ```
 
 En este ejemplo, se utiliza el conjunto de datos mtcars para crear un gráfico de dispersión interactivo que muestra la relación entre el peso del vehículo y el consumo de combustible. El argumento marker permite personalizar la apariencia de los puntos en el gráfico, mientras que layout se utiliza para añadir títulos y etiquetas a los ejes.
+
+### Tree Maps
+
+
+En este apartado se va a exponer como crear los [Tree Maps](https://en.wikipedia.org/wiki/Treemapping) un tipo de gráfico muy útil para ver como se distribuye una cierta característica entre diferentes categorías. Por ejemplo, en este caso, como se distribuye el gasto medio por persona en España dentro de los grupos ECOICOP[^39].
+
+[^39]: La [ECOICOP](https://www.ine.es/daco/daco42/daco4213/anexo_ecoicop.pdf) es una clasificación europea de consumo, que facilita la consulta conjunta con otras estadísticas como el IPC, y a su vez permite la comparabilidad de datos con otros países. Clasifica los bienes y servicios en 12 grandes grupos de gasto (del 01 al 12).
+
+
+
+La ventaja de usar `plotly` es que nos permite construir TreeMaps interactivos, es decir, con distintos niveles de profundidad. En este caso en particular si apretamos en como se distribuye el gasto para el **ECOICOP 01: Agricultura, ganadería, caza y servicios relacionados con las mismas**, nos permite inspeccionar como se distribuye el gasto medio dentro de ese subnivel.
+
+
+
+1. En la web del ine **buscamos la tabla que contiene los datos deseados**, relativos a *Gasto total, gastos medios y distribución del gasto de los hogares*, que tiene por id `25143`. (Véase [https://www.ine.es/jaxiT3/Tabla.htm?t=25143&L=0](https://www.ine.es/jaxiT3/Tabla.htm?t=25143&L=0))
+
+2. Usando `ineapir` extraemos los datos usando el servicio API del INE. Ejecutando  `get_metadata_table_varval(25143)` vemos por que variables debemos filtrar para obtener los datos deseados.
+
+```{r}
+
+get_metadata_table_varval(25143)
+```
+
+
+Vemos que necesitamos filtrar por:
+
+- **Geografía**: Total Nacional.
+- **ECOICOP**(2 dígitos): Todos.
+- **Tipo de dato**: Dato base.
+- **Gasto**: Gasto medio por persona.
+
+
+Es decir, lo ponemos en formato de lista para poder pasarlo por la función `get_data_table()`como filtro.
+
+```{r,eval=TRUE}
+
+#Filtro
+filter_ecoicop_1 <- list(
+  "349" = "16473", # Total Nacional
+  "762" = "", # Todos GRUPOS de 2 dígitos del ECOICOP
+  "3" = "72", # Dato Base
+  "57" = "8859" # Gasto medio por persona
+) # Dato base
+
+
+# Obtenemos datos
+# nlast=1 para devolver sólo para el último periodo
+data_ecoicop_1 <- get_data_table(
+  filter = filter_ecoicop_1, idTable = 25143, nlast = 1, tip = "AM", unnest = TRUE,
+  metacodes = TRUE, validate = FALSE, metanames = TRUE
+)
+
+```
+
+
+Como hemos dicho que queremos que en el gráfico se pueda mostrar cómo se distribuye el gasto también dentro de cada grupo de ECOICOP, necesitamos un dígito más de desagregación en la clasificación ECOICOP. Buscamos de nuevo en la web del INE en que tabla se encuentran estos datos y filtramos de nuevo por lo pertinente.
+
+
+```{r}
+# Vemos por que variables se puede fitrar
+get_metadata_table_varval(25144)
+
+```
+```{r}
+
+filter_ecoicop_2 <- list(
+  "349" = "16473", # Total Nacional
+  "796" = "", # Todos GRUPOS de 2 dígitos del ECOICOP
+  "3" = "72", # Dato base
+  "57" = "8859" # Gasto medio por persona
+) 
+
+# Obtenemos datos
+# nlast=1 para devolver sólo para el último periodo
+data_ecoicop_2 <- get_data_table(filter = filter_ecoicop_2, idTable = 25144, nlast = 1, tip = "AM", unnest = TRUE, metacodes = TRUE, validate = FALSE, metanames = TRUE)
+
+```
+
+
+Una vez obtenidos todos los datos, debemos juntar los datos en un data frame que contenga la siguiente estructura:
+
+- **id**: único para cada fila
+- **label**: etiqueta con cada grupo de ECOICOP
+- **parent**: indica quien es el superior jerárquico de dicha fila. Por ejemplo de ECOICOP 01.1 su parent es 01. Es necesario para poder mapear bien el gráfico.
+- **values**: indica el valor que toma dicha entrada.
+
+```{r}
+
+
+# Datos para ECOICOP con 3 dígitos
+data_ecoicop_2 <- data_ecoicop_2[, c("Subgrupos.de.gasto.(3.dígitos)", "Subgrupos.de.gasto.(3.dígitos).Codigo", "Valor")]
+
+# quitamos el total
+data_ecoicop_2 <- data_ecoicop_2[data_ecoicop_2[,"Subgrupos.de.gasto.(3.dígitos).Codigo"] != "00", ]
+
+
+
+
+
+# Función que a cada elemento de ECOICOP 3 dígitos, asocia su grupo de agregación de 2 dígitos
+get_label <- function(inputs, label) {
+  # Extrae los primeros dos caracteres de cada elemento del vector de entrada
+  prefixes <- substr(inputs, 1, 2) #tomamos sólo 2 primeros eltos Ej: 01.1 tomamos 01
+  # Usa sapply para aplicar la función a cada prefijo
+  sapply(prefixes, function(prefix) {
+    if (prefix == "01") {
+      return(label[2])
+    } else if (prefix == "02") {
+      return(label[3])
+    } else if (prefix == "03") {
+      return(label[4])
+    } else if (prefix == "04") {
+      return(label[5])
+    } else if (prefix == "05") {
+      return(label[6])
+    } else if (prefix == "06") {
+      return(label[7])
+    } else if (prefix == "07") {
+      return(label[8])
+    } else if (prefix == "08") {
+      return(label[9])
+    } else if (prefix == "09") {
+      return(label[10])
+    } else if (prefix == "10") {
+      return(label[11])
+    } else if (prefix == "11") {
+      return(label[12])
+    } else if (prefix == "12") {
+      return(label[13])
+    } else {
+      return(NA) # Devuelve NA si el prefijo no coincide con ninguno
+    }
+  })
+}
+
+# Aplicamos funcion a ECOICOP con 3 dígitos y con label las de ECOICOP 2 dígitos
+data_ecoicop_2$parent <- get_label(data_ecoicop_2$`Subgrupos.de.gasto.(3.dígitos).Codigo`, label = data_ecoicop_1$`Grupos.de.gasto.(2.dígitos)`)
+```
+
+
+
+
+```{r}
+
+# Etiquetas
+labels <- c(data_ecoicop_1$`Grupos.de.gasto.(2.dígitos)`,data_ecoicop_2$`Subgrupos.de.gasto.(3.dígitos)`)
+
+# parents, el del primer elemento es , es decir, el total. Los del primer nivel
+# el parent es Índice Total=labels[1]
+# En el segundo nivel, ya lo que corresponda
+aux <- data_ecoicop_1$`Grupos.de.gasto.(2.dígitos)`
+parents<-c("", rep(aux[1], length(aux) - 1), data_ecoicop_2$parent)
+
+
+```
+
+
+
+
+```{r, webshot = "webshot", out.width = "80%"}
+
+fig <- plot_ly(
+  type = "treemap",
+  labels = labels,
+  parents = parents,
+  textinfo = "label+value+percent entry+percent root",
+    hoverinfo = "label+value+percent entry+percent root",
+  values = as.integer(c(data_ecoicop_1$Valor, data_ecoicop_2$Valor),0),
+  maxdepth = 2,
+    branchvalues='total',
+  tiling = list(squarifyratio = 2))
+ # Imporante ajustar este numero para que quede bontito 
+ #Quitarlo para ver que pasa sin el
+
+```
+
+```{r, webshot = "webshot", out.width = "80%",fig.cap="sgf"}
+fig
+```
+
 
 ### Series Temporales
 
@@ -99,12 +284,19 @@ Plotly ofrece potentes herramientas para la visualización de series temporales,
 
 
 Los datos los obtendremos usando `ineapir`, para más información (véase [@ineapir]). 
+
+
+
+1. En la web del ine **buscamos la serie que contiene los datos deseados**, población de españa, que tiene por id `ECP319`(hombres) y `ECP318`(mujeres). 
+
+2. Usando `ineapir` extraemos los datos usando el servicio API del INE. 
+
+
 ```{r}
 # Población Hombres
 # Mirando en la web del INE cual es el código de la operación
 # ECP319
 
-library("ineapir")
 # Hombres
 a <- get_data_series(codSeries = "ECP319", tip = "AM", dateStart = "1971/01/01", unnest = TRUE)
 # Mujeres
@@ -117,14 +309,6 @@ data <- data.frame(fecha = as.Date(a$Fecha), Year = a$Anyo, Hombres = a$Valor, M
 data <- data %>%
   filter(format(as.Date(fecha), "%m") == "01")
 ```
-
-
-
-
-
-
-
-
 
 
 
@@ -142,21 +326,30 @@ fig <- plot_ly(data, x = ~Year) %>%
     yaxis = list(title = "Población"),
     legend = list(title = list(text = "<b>Sexo</b>")),
     hovermode = "closest"
-  )
+  )%>%
+  config(locale = 'es')
 
 # Mostrar el gráfico
 fig
 ```
 
 
+#### Evolución IPC
+
 Ahora vamos a mostrar la evolución del IPC y el IPC Subyacente a lo largo de los años. Para ello, lo primero buscamos en la web del INE en que tabla se encuentran dichos datos, siendo esta la "50902". A continuación, con `get_metadata_table_varval(50902)` vemos que variables y valores hay que tomar para filtrar IPC por Índice General y por Variación Anual.
 
-```{r}
-# get_metadata_table_varval(50902)
-# get_metadata_variables()
 
+
+1. En la web del ine **buscamos la tabla que contiene los datos deseados**, que tiene por id `50902`. (Véase [https://www.ine.es/jaxiT3/Tabla.htm?t=50902&L=0](https://www.ine.es/jaxiT3/Tabla.htm?t=66257&L=0))
+
+2. Usando `ineapir` extraemos los datos usando el servicio API del INE. Ejecutando  `get_metadata_table_varval(50902)` vemos que debemos filtrar por Índice general, y variación anual.
+
+
+```{r}
+ get_metadata_table_varval(50902)
+# get_metadata_variables()
 # Filter cpi overall index
-# Todos los approaches son similares
+# Todos los approaches  de filtrado son similares
 # 762(grupo)= 304092(Indie general).      3(tipodato)=74(Variacion anual)
 filter <- list(values = c("variación anual", "índice general"))
 filter <- list(grupo = "304092", tipodato = "74")
@@ -164,19 +357,15 @@ filter <- list("762" = "304092", "3" = "74")
 
 
 
-# Request data of cpi
+# IPC GENERAL
 # Table url: https://www.ine.es/jaxiT3/Tabla.htm?t=50902&L=0
 general <- get_data_table(
   idTable = 50902, filter = filter, unnest = TRUE,
   tip = "A", validate = FALSE
 )
 
-
-
-
-# get_metadata_table_varval(50907)
-# get_metadata_variables()
-
+# IPC SUBYACENTE
+get_metadata_table_varval(50907)
 filter <- list(
   "3" = "74", # Fk_variable=Id
   "269" = "12850" # Fk_variable=Id
@@ -226,7 +415,8 @@ fig <- fig %>%
     ),
     hovermode = "x"
   ) %>%
-  config(displayModeBar = FALSE)
+  config(displayModeBar = FALSE)%>%
+  config(locale = 'es')
 
 fig
 ```
@@ -238,14 +428,16 @@ fig
 
 Los gráficos de barras en Plotly permiten comparar fácilmente valores entre diferentes categorías. Pueden ser verticales u horizontales, y se pueden personalizar con colores específicos para cada barra. También soportan la agrupación de barras (bar charts) y la apilación (stacked bar charts). La orientación, orden y formato de los ejes pueden ser ajustados para mejorar la legibilidad, y se pueden añadir anotaciones y etiquetas detalladas para proporcionar contexto adicional a los datos visualizados.
 
+1. En la web del ine **buscamos la tabla que contiene los datos deseados**, que tiene por id `2915`. (Véase [https://www.ine.es/jaxiT3/Tabla.htm?t=2915&L=0](https://www.ine.es/jaxiT3/Tabla.htm?t=66257&L=0))
+
+2. Usando `ineapir` extraemos los datos usando el servicio API del INE. Ejecutando  `get_metadata_table_varval(2915)` vemos que debemos filtrar por  todos municipios
+
 
 ```{r}
-# get_metadata_table_varval(2915)
-# 34(Tamaño municipios)=20275(Total)
-# nlast=1 nos devuelve el útlimo año sólo
+ get_metadata_table_varval(2915)
 
-filter <- list("34" = "20275")
-data2 <- get_data_table(2915, filter = filter, unnest = TRUE, tip = "AM", nlast = 1, metanames = TRUE)
+filter <- list("34" = "20275") # 34(Tamaño municipios)=20275(Total)
+data2 <- get_data_table(2915, filter = filter, unnest = TRUE, tip = "AM", nlast = 1, metanames = TRUE) # nlast=1 nos devuelve el útlimo año sólo
 data2 <- data2[-1, ] # Quitamos primera observación. Total España
 ```
 
@@ -271,7 +463,8 @@ fig <- plot_ly(data2,
     ),
     yaxis = list(title = "Comunidad Autónoma"),
     margin = list(l = 150) # Ajustar el margen izquierdo para evitar que las etiquetas se corten
-  )
+  )%>%
+  config(locale = 'es')
 ```
 ```{r, webshot="webshot",out.width = "100%"}
 # Mostrar el gráfico
@@ -286,6 +479,12 @@ Veamos pues este último gráfico. El objetivo es intentar reproducir la aplicac
 
 
 [^21]: Para ver una aplicación dinámica como la presente en la web del INE, ver apartado de Shiny Apps o FlexDashboards.
+
+
+1. En la web del ine **buscamos la tabla que contiene los datos deseados**, que tiene por id `13930`. (Véase [https://www.ine.es/jaxiT3/Tabla.htm?t=66257&L=0](https://www.ine.es/jaxiT3/Tabla.htm?t=66257&L=0))
+
+2. Usando `ineapir` extraemos los datos usando el servicio API del INE. Ejecutando  `get_metadata_table_varval(66257)` vemos que debemos filtrar por  ambos sexos
+
 
 ```{r}
 # Tabla 66257. Información del mercado laboral
@@ -303,7 +502,7 @@ datos <- datos %>%
 ```
  
 
-
+Para el sankey plot hay que crear un "diccionario" de etiquetas para saber como pintarlas. Véase documentación para más información.
  
 ```{r}
 #Necesario para el sankey plot
@@ -360,7 +559,8 @@ fig <- fig %>%
   layout(
     title = "Transición de Actividades Económicas entre Trimestres",
     font = list(size = 10)
-  )
+  )%>%
+  config(locale = 'es')
 fig
 ```
  
@@ -370,4 +570,4 @@ fig
 
 Para más información sobre el paquete plotly y sus posibles funciones, buscar en la siguiente web:
   
-    - [https://plotly.com/r/getting-started/](https://plotly.com/r/getting-started/)
+ [https://plotly.com/r/getting-started/](https://plotly.com/r/getting-started/)

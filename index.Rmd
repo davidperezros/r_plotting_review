@@ -17,12 +17,14 @@ linkcolor: blue
 ---
 
 ```{r,echo=FALSE}
-knitr::opts_chunk$set(
-  cache = TRUE, echo = TRUE, message = FALSE, warning = FALSE,
+knitr::opts_chunk$set( cache= TRUE,
+ echo = TRUE, message = FALSE, warning = FALSE,
   fig.pos = "h",
   fig.align = "center", out.width = "50%"
 )
+
 ```
+
 
 ```{r htmlTemp3, echo=FALSE, eval=TRUE}
 # Esto sirve para que aparezca botón de ocultar chunks

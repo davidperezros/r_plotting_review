@@ -62,17 +62,19 @@
 ## Mapas
 
 
-###  Obtener datos
+###  Ejemplo esperanza de vida
+
 Vamos a representar la esperanza de vida por comunidades autónomas en un mapa de España. Para ello necesitamos **extraer primero los datos**, que como ya se ha comentado previamente se obtienen a partir del paquete `ineapir`.
 
-1. En la web del ine **buscamos la tabla que contiene los datos deseados**, que tiene por id `27154`.
+1. En la web del ine **buscamos la tabla que contiene los datos deseados**, que tiene por id `27154`. (Véase [https://www.ine.es/jaxiT3/Tabla.htm?t=13930&L=0](https://www.ine.es/jaxiT3/Tabla.htm?t=27154&L=0))
 
-2. Usando `ineapir` extraemos los datos usando el servicio API del INE. Los filtramos por "sexo"="total", "0 años" y "esperanza de vida", todo ello para todas comunidades autónomas.
+2. Usando `ineapir` extraemos los datos usando el servicio API del INE. Aplicando `get_metadata_table_varval(27154)` vemos que necesitamos filtrar por "sexo"="total", "0 años" y "esperanza de vida", todo ello para todas comunidades autónomas.
 
 
 ```{r}
 # Filtrar por esperanza de vida
 # "" para indicar que tome todos los valores
+get_metadata_table_varval(27154)
 filter = list(ccaa = "", sexo = "total", values = c("0 años", "esperanza de vida"))
 
 # Tabl de mortalidad por año, ccaa, ciudadaes, sexo, edad y funciones. 
@@ -86,7 +88,7 @@ esp <- subset(esp, select = c("Comunidades.y.Ciudades.Autónomas.Id", "T3_Period
 ```
 
 
-### Contornos
+#### Contornos
 
 Una vez obtenidos los datos que se quieren incluir en el mapa, es necesario **disponer de los contornos geográficos** sobre los cuales se quieren representar dichos datos. En este caso, los contornos de las comunidades autónomas.
 
@@ -139,9 +141,8 @@ pal <- colorBin("plasma", domain = NULL, bins = c(quantile(ccaa$Valor)))
 # Labels of the map
 labels <- sprintf(
   "<strong>%s</strong><br/> Esperanza de vida al nacimiento: %.2f años ",
-  ccaa$nom_region, ccaa$Valor
+  ccaa$nom_region, ccaa$Val
 ) %>% lapply(htmltools::HTML)
-
 
 # Create the map
 m <- leaflet(ccaa) %>% 
@@ -163,7 +164,8 @@ m <- leaflet(ccaa) %>%
   addLegend(pal = pal, values = ~Valor, opacity = 1.0, position = "bottomright",
             labFormat = labelFormat(suffix = " años", digits = 2),
             title = sprintf("Esperanza de vida al nacimiento (%s)",
-                            esp$Anyo[1]))
+                            esp$Anyo[1]))%>%
+  config(locale = 'es')
 
 ```
 
@@ -172,4 +174,119 @@ m
 ```
 
 
+###  Ejemplo salario medio
+
+
+Ahora vamos a representar en un mapa el salario bruto mensual medio en cada comunidad autónoma para el año 2022. Para ello necesitamos:
+
+1. En la web del ine **buscamos la tabla que contiene los datos deseados**, que tiene por id `13930`. (Véase [https://www.ine.es/jaxiT3/Tabla.htm?t=13930&L=0](https://www.ine.es/jaxiT3/Tabla.htm?t=13930&L=0))
+
+2. Usando `ineapir` extraemos los datos usando el servicio API del INE. Ejecutando  `get_metadata_table_varval(13930)` vemos que debemos filtrar por  jornada a tiempo completo, todas ccaa, y total decil.
+
+
+```{r}
+# Filtrar por esperanza de vida
+# "" para indicar que tome todos los valores
+get_metadata_table_varval(13930)
+
+filter2 = list( 
+  "120" = "10758", # Jornada a tiempo completo
+   "70" = "",      # Todas ccaa
+  "684" = "298931" # Total decil
+  )
+
+# Tabl de mortalidad por año, ccaa, ciudadaes, sexo, edad y funciones. 
+# Table url: https://www.ine.es/jaxiT3/Tabla.htm?t=27154&L=0
+esp2 <- get_data_table(idTable = 13930, filter = filter2, nlast = 1, unnest = TRUE,
+                       metacodes = TRUE, tip = "AM", validate = FALSE)
+
+# Seleccionamos columnas de interés
+esp2 <- subset(esp2, select = c("Comunidades.y.Ciudades.Autonómas.Id","Anyo","Valor"))
+
+
+```
+
+
+#### Contornos
+
+Una vez obtenidos los datos que se quieren incluir en el mapa, es necesario **disponer de los contornos geográficos** sobre los cuales se quieren representar dichos datos. En este caso, los contornos de las comunidades autónomas.
+
+El ine dispone acceso de contornos para los limites geográficos en la siguiente web:
+
+
+
+
+
+::: {.infobox .caution data-latex="{caution}"}
+**Web**
+`https://www.ine.es/wstempus/geojs/ES/CONTORNOS/XXXX`
+
+sustituyendo `XXXX` por el código del ámbito geográfico necesario, siendo estos:
+  
+  - `349`: total nacional
+  - `70`: ccaa
+  - `115`: provincias
+  - `19`: municipios
+
+:::
+
+En nuestro caso necesitamos el de las comunidades autónomas.
+
+
+```{r}
+
+# Contornos de las ccaa
+ccaa2 <- read_sf("https://www.ine.es/wstempus/geojs/ES/CONTORNOS/70")
+
+```
+
+
+
+Para colorear el mapa, se desea que se muestren colores para intervalos de Esperanza de Vida (tomando los cuartiles), para ello será necesario usar la función `colorBin()`. Por tanto, tenemos:
+  
+  
+
+```{r}
+# join de los contornos y el dataset
+ccaa2 <- merge(ccaa2, esp2, by.x = "id_region", 
+              by.y = "Comunidades.y.Ciudades.Autonómas.Id" )
+
+# Creamos colores para cada rango de esperanza de vida
+pal2 <- colorNumeric("plasma",domain= NULL)
+
+# Labels of the map
+labels <- sprintf(
+  "<strong>%s</strong><br/> Sueldo bruto mensual %s € ",
+  ccaa2$nom_region, format(ccaa2$Val, big.mark = ".", decimal.mark = ",", nsmall = 2)
+) %>% lapply(htmltools::HTML)
+
+
+# Create the map
+m2 <- leaflet(ccaa2) %>% 
+  addProviderTiles(providers$Esri.WorldImagery) %>%
+  setView(-4, 40, zoom = 5) %>%
+  addPolygons(fillOpacity = 0.8,
+              fillColor = ~pal2(Valor),
+              weight = 1,
+              color = "white",
+              label = labels,
+              labelOptions = labelOptions(
+                style = list("font-weight" = "normal", padding = "3px 8px"),
+                textsize = "15px",
+                direction = "auto"
+              ),
+              highlightOptions = highlightOptions(fillOpacity = 1, bringToFront = TRUE, 
+                                                  weight = 2, color = "white")) %>%
+  addLegend(pal = pal2, values = ~Valor, opacity = 1.0, position = "bottomleft",
+            labFormat = labelFormat(suffix = "€", digits = 2,big.mark = "."),
+            title = sprintf("Sueldo bruto mensual (%s)",
+                            esp$Anyo[1]))%>%
+  config(locale = 'es')
+
+
+```
+
+```{r, webshot="webshot",out.width = "80%"}
+m2
+```
 
