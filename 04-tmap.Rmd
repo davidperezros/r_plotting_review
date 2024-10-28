@@ -1,4 +1,34 @@
-# jk
+# Dashboards
+
+## Flexdashboard
 
 
-fdas
+El propósito de [flexdashboarad](https://pkgs.rstudio.com/flexdashboard/) es proporcionar una forma simple de escribir aplicaciones interactivas en R basadas en lenguaje Markdown, lo que permite escribir el contenido usando bloques de código R y luego transformarlo en un documento HTML o PDF que incluye gráficos y widgets. Las principales características de flexdashboard son:
+
+- **Facilidad de uso**: Permite crear dashboards sin necesidad de escribir mucho código de interfaz. Simplemente organizando el contenido en secciones y filas se genera un diseño de panel intuitivo.
+
+- **Layouts adaptativos**: Ofrece disposiciones flexibles, como filas y columnas, para distribuir los gráficos y tablas.
+
+
+- **Interactividad básica**: Se pueden agregar elementos de interacción usando bibliotecas de gráficos interactivas, como plotly o highcharter, pero el nivel de interactividad es más limitado en comparación con [Shiny](https://shiny.posit.co/r/getstarted/shiny-basics/lesson1/index.html),que aunque no es interactivo por sí mismo, se pueden integrar elementos de Shiny para mejorar la interactividad.
+
+
+| Característica           | Flexdashboard                                         | Shiny                                      |
+|--------------------------|-------------------------------------------------------|--------------------------------------------|
+| **Nivel de Interactividad** | Básica; depende de las bibliotecas de gráficos       | Alta; interactividad avanzada y en tiempo real |
+| **Facilidad de Uso**     | Fácil; requiere poco código de interfaz               | Moderada a compleja; más control pero más configuración |
+| **Diseño y Layout**      | Layout basado en RMarkdown, limitado a filas/columnas | Totalmente personalizable mediante código  |
+| **Reactivo**             | Limitado; necesita Shiny para reactividad             | Totalmente reactivo                        |
+| **Ideal para**           | Dashboards estáticos o semiestáticos                  | Aplicaciones web interactivas complejas    |
+
+
+En general, flexdashboard es una excelente opción cuando se necesita construir dashboards rápidos y fáciles de usar sin necesidad de interactividad avanzada, mientras que [Shiny](https://shiny.posit.co/r/getstarted/shiny-basics/lesson1/index.html) es la mejor elección para aplicaciones complejas donde el usuario necesita manipular datos en tiempo real o realizar análisis detallados. Ambas herramientas pueden complementarse: un flexdashboard puede integrar componentes de [Shiny](https://shiny.posit.co/r/getstarted/shiny-basics/lesson1/index.html) para mejorar su interactividad, combinando la simplicidad de un panel con la potencia de una aplicación reactiva.
+
+
+
+### Ejemplo
+
+De aquí en adelante se usará el siguiente dashboard:
+
+<!-- Otra alternativa es [Shiny Dashboard](https://rstudio.github.io/shinydashboard/) que viene a ser una plantilla de Shiny que facilita el montaje, a cambio de flexibilidad. Es posible crear una plantilla para un determinado organismo (ej INE) o un proceso específico y que se pueda reusar en casos futuros. -->
+

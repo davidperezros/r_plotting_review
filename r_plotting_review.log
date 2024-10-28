@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999996 (TeX Live 2024) (preloaded format=xelatex 2024.10.24)  24 OCT 2024 22:19
+This is XeTeX, Version 3.141592653-2.6-0.999996 (TeX Live 2024) (preloaded format=xelatex 2024.10.24)  28 OCT 2024 09:35
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2329,7 +2329,7 @@ Capítulo 7.
 
 
 [45]
-Overfull \hbox (81.33102pt too wide) in paragraph at lines 2059--2060
+Overfull \hbox (81.33102pt too wide) in paragraph at lines 2101--2102
 []\TU/lmr/m/n/10 Usando \TU/lmtt/m/n/10 ineapir \TU/lmr/m/n/10 extraemos los datos usando el servicio API del INE. Aplicando \TU/lmtt/m/n/10 get_metadata_table_varval(27154)
  []
 
@@ -2346,7 +2346,7 @@ File: fig/caution.png Graphic file (type bmp)
 File: r_plotting_review_files/figure-latex/unnamed-chunk-41-1.pdf Graphic file (type pdf)
 <use r_plotting_review_files/figure-latex/unnamed-chunk-41-1.pdf>
 
-Overfull \hbox (86.47102pt too wide) in paragraph at lines 2244--2245
+Overfull \hbox (86.47102pt too wide) in paragraph at lines 2285--2286
 []\TU/lmr/m/n/10 Usando \TU/lmtt/m/n/10 ineapir \TU/lmr/m/n/10 extraemos los datos usando el servicio API del INE. Ejecutando \TU/lmtt/m/n/10 get_metadata_table_varval(13930)
  []
 
@@ -2360,6 +2360,9 @@ File: fig/caution.png Graphic file (type bmp)
 
 
 [51]
+File: r_plotting_review_files/figure-latex/unnamed-chunk-45-1.pdf Graphic file (type pdf)
+<use r_plotting_review_files/figure-latex/unnamed-chunk-45-1.pdf>
+
 
 [52]
 
@@ -2389,10 +2392,10 @@ Package logreq Info: Writing requests to 'r_plotting_review.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 38491 strings out of 476232
- 781020 string characters out of 5786174
- 1884288 words of memory out of 5000000
- 60491 multiletter control sequences out of 15000+600000
+ 38510 strings out of 476232
+ 781864 string characters out of 5786174
+ 1884431 words of memory out of 5000000
+ 60509 multiletter control sequences out of 15000+600000
  564592 words of font info for 98 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  98i,8n,123p,989b,5514s stack positions out of 10000i,1000n,20000p,200000b,200000s

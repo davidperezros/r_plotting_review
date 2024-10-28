@@ -68,13 +68,26 @@ Vamos a representar la esperanza de vida por comunidades autónomas en un mapa d
 
 1. En la web del ine **buscamos la tabla que contiene los datos deseados**, que tiene por id `27154`. (Véase [https://www.ine.es/jaxiT3/Tabla.htm?t=13930&L=0](https://www.ine.es/jaxiT3/Tabla.htm?t=27154&L=0))
 
-2. Usando `ineapir` extraemos los datos usando el servicio API del INE. Aplicando `get_metadata_table_varval(27154)` vemos que necesitamos filtrar por "sexo"="total", "0 años" y "esperanza de vida", todo ello para todas comunidades autónomas.
+2. Usando `ineapir` extraemos los datos usando el servicio API del INE. Aplicando `get_metadata_table_varval(27154)` 
 
 
 ```{r}
+get_metadata_table_varval(27154)
+
+```
+
+Vemos que necesitamos filtrar por:
+
+- **ccaa**: Seleccionar todas.
+- **sexo**: Total.
+- **Edad**: 0 años
+- **Tipo de dato**: Esperanza de vida.
+
+
+```{r}
+
 # Filtrar por esperanza de vida
 # "" para indicar que tome todos los valores
-get_metadata_table_varval(27154)
 filter = list(ccaa = "", sexo = "total", values = c("0 años", "esperanza de vida"))
 
 # Tabl de mortalidad por año, ccaa, ciudadaes, sexo, edad y funciones. 
@@ -164,8 +177,7 @@ m <- leaflet(ccaa) %>%
   addLegend(pal = pal, values = ~Valor, opacity = 1.0, position = "bottomright",
             labFormat = labelFormat(suffix = " años", digits = 2),
             title = sprintf("Esperanza de vida al nacimiento (%s)",
-                            esp$Anyo[1]))%>%
-  config(locale = 'es')
+                            esp$Anyo[1]))
 
 ```
 
@@ -185,9 +197,22 @@ Ahora vamos a representar en un mapa el salario bruto mensual medio en cada comu
 
 
 ```{r}
-# Filtrar por esperanza de vida
 # "" para indicar que tome todos los valores
 get_metadata_table_varval(13930)
+```
+
+
+Vemos que necesitamos filtrar por:
+
+- **Tipo**: Jornada a tiempo completo
+- **ccaa**: Seleccionar todas.
+- **Decil**: Total decil
+
+
+
+```{r}
+# Filtrar por esperanza de vida
+
 
 filter2 = list( 
   "120" = "10758", # Jornada a tiempo completo
@@ -246,7 +271,7 @@ Para colorear el mapa, se desea que se muestren colores para intervalos de Esper
   
   
 
-```{r}
+```{r, warning=FALSE}
 # join de los contornos y el dataset
 ccaa2 <- merge(ccaa2, esp2, by.x = "id_region", 
               by.y = "Comunidades.y.Ciudades.Autonómas.Id" )
@@ -276,17 +301,20 @@ m2 <- leaflet(ccaa2) %>%
                 direction = "auto"
               ),
               highlightOptions = highlightOptions(fillOpacity = 1, bringToFront = TRUE, 
-                                                  weight = 2, color = "white")) %>%
-  addLegend(pal = pal2, values = ~Valor, opacity = 1.0, position = "bottomleft",
-            labFormat = labelFormat(suffix = "€", digits = 2,big.mark = "."),
-            title = sprintf("Sueldo bruto mensual (%s)",
-                            esp$Anyo[1]))%>%
-  config(locale = 'es')
+                                                  weight = 2, color = "white")
+              )%>%  addLegend(pal = pal2, values = ~Valor, position = "bottomleft",
+            labFormat = labelFormat(suffix = " €", digits = 2,big.mark = "."),
+            title = sprintf("Sueldo bruto mensual (%i)", esp2$Anyo[1]))
+
+
+
+
 
 
 ```
 
-```{r, webshot="webshot",out.width = "80%"}
+
+```{r, webshot="webshot",out.width = "80%",warning=FALSE}
 m2
 ```
 

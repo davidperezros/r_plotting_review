@@ -564,7 +564,13 @@ div.csl-indent {
 <li class="chapter" data-level="4.4" data-path="plotly.html"><a href="plotly.html#más-información-1"><i class="fa fa-check"></i><b>4.4</b> Más información</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="sf.html"><a href="sf.html"><i class="fa fa-check"></i><b>5</b> SF</a></li>
-<li class="chapter" data-level="6" data-path="jk.html"><a href="jk.html"><i class="fa fa-check"></i><b>6</b> jk</a></li>
+<li class="chapter" data-level="6" data-path="dashboards.html"><a href="dashboards.html"><i class="fa fa-check"></i><b>6</b> Dashboards</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="dashboards.html"><a href="dashboards.html#flexdashboard"><i class="fa fa-check"></i><b>6.1</b> Flexdashboard</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="dashboards.html"><a href="dashboards.html#ejemplo"><i class="fa fa-check"></i><b>6.1.1</b> Ejemplo</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="7" data-path="leaflet.html"><a href="leaflet.html"><i class="fa fa-check"></i><b>7</b> Leaflet</a>
 <ul>
 <li class="chapter" data-level="7.1" data-path="leaflet.html"><a href="leaflet.html#general"><i class="fa fa-check"></i><b>7.1</b> General</a>
@@ -584,9 +590,11 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="A.1" data-path="ineapir.html"><a href="ineapir.html#introducción-1"><i class="fa fa-check"></i><b>A.1</b> Introducción</a>
 <ul>
-<li class="chapter" data-level="A.1.1" data-path="ineapir.html"><a href="ineapir.html#beneficios-de-usar-ineapir"><i class="fa fa-check"></i><b>A.1.1</b> Beneficios de Usar ineapir</a></li>
+<li class="chapter" data-level="A.1.1" data-path="ineapir.html"><a href="ineapir.html#beneficios-de-usar-ineapir"><i class="fa fa-check"></i><b>A.1.1</b> Beneficios de usar ineapir</a></li>
 <li class="chapter" data-level="A.1.2" data-path="ineapir.html"><a href="ineapir.html#público-objetivo"><i class="fa fa-check"></i><b>A.1.2</b> Público Objetivo</a></li>
 </ul></li>
+<li class="chapter" data-level="A.2" data-path="ineapir.html"><a href="ineapir.html#primeros-pasos"><i class="fa fa-check"></i><b>A.2</b> Primeros pasos</a></li>
+<li class="chapter" data-level="A.3" data-path="ineapir.html"><a href="ineapir.html#obtención-de-datos"><i class="fa fa-check"></i><b>A.3</b> Obtención de datos</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -615,17 +623,15 @@ Licensed under <img alt="EUROPEAN UNION PUBLIC LICENCE v. 1.2" style="border-wid
 <h1><span class="header-section-number">A</span> Ineapir<a href="ineapir.html#ineapir" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <div id="introducción-1" class="section level2 hasAnchor" number="8.1">
 <h2><span class="header-section-number">A.1</span> Introducción<a href="ineapir.html#introducción-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>En el ámbito de la investigación y el análisis de datos socioeconómicos, el acceso a información precisa y actualizada es fundamental. <strong>ineapir</strong> es una herramienta diseñada para facilitar el acceso y la manipulación de datos proporcionados por el INE. Este paquete de R permite a los usuarios interactuar de manera eficiente con la API del INE, simplificando la tarea de obtener datos detallados sobre diversos aspectos de la economía, demografía y sociedad española.</p>
+<p>En el ámbito de la investigación y el análisis de datos socioeconómicos, el acceso a información precisa y actualizada es fundamental. <strong>ineapir</strong> es paquete de R diseñado para facilitar el acceso y la manipulación de datos proporcionados por el INE. Este paquete permite a los usuarios interactuar de manera eficiente con la API del INE, simplificando la tarea de obtener datos detallados sobre diversos aspectos de la economía, demografía y sociedad española.</p>
 <p>En los siguientes apartados se abordará:</p>
 <ul>
-<li><strong>Introducción a la API del INE</strong>: Una visión general de la API del INE, sus funcionalidades y cómo <strong>ineapir</strong> facilita su uso.</li>
-<li><strong>Instalación y Configuración de ineapir</strong>: Pasos detallados para la instalación del paquete y la configuración inicial para comenzar a utilizarlo.</li>
+<li><strong>Primeros pasos</strong>: Instalación y Configuración de ineapir.</li>
 <li><strong>Obtención de Datos</strong>: Instrucciones sobre cómo realizar consultas específicas a la API del INE y obtener datos en formatos utilizables.</li>
-<li><strong>Manipulación y Visualización de Datos</strong>: Técnicas para limpiar, manipular y visualizar los datos obtenidos, incluyendo ejemplos prácticos.</li>
-<li><strong>Análisis Avanzados</strong>: Métodos y herramientas avanzadas para el análisis de datos socioeconómicos utilizando <strong>ineapir</strong>.</li>
+<li><strong>Manipulación y Visualización de Datos</strong>: Técnicas para limpiar, manipular y visualizar los datos obtenidos, incluyendo ejemplos prácticos. Estos se exponen a lo largo de todo el proyecto.</li>
 </ul>
 <div id="beneficios-de-usar-ineapir" class="section level3 hasAnchor" number="8.1.1">
-<h3><span class="header-section-number">A.1.1</span> Beneficios de Usar ineapir<a href="ineapir.html#beneficios-de-usar-ineapir" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<h3><span class="header-section-number">A.1.1</span> Beneficios de usar ineapir<a href="ineapir.html#beneficios-de-usar-ineapir" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><strong>ineapir</strong> no solo facilita el acceso a los datos del INE, sino que también mejora la eficiencia y precisión en el análisis de estos datos. Entre sus principales ventajas se encuentran:</p>
 <ul>
 <li><strong>Acceso Simplificado</strong>: Permite realizar consultas complejas de manera sencilla y rápida.</li>
@@ -643,9 +649,30 @@ Licensed under <img alt="EUROPEAN UNION PUBLIC LICENCE v. 1.2" style="border-wid
 <li>Estudiantes de ciencias sociales y económicas.</li>
 <li>Cualquier persona interesada en el análisis de datos proporcionados por el INE.</li>
 </ul>
+</div>
+</div>
+<div id="primeros-pasos" class="section level2 hasAnchor" number="8.2">
+<h2><span class="header-section-number">A.2</span> Primeros pasos<a href="ineapir.html#primeros-pasos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Para <strong>instalar</strong> el paquete <strong>inepir</strong> es necesario recurrir al GitHub del INE. Este se encuentra alojado en el siguiente repositorio: <a href="https://github.com/es-ine/ineapir">https://github.com/es-ine/ineapir</a>.</p>
+<p>Para ello, ejecutar la siguiente linea en R, junto a la carga del paquete en la sesión:</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="ineapir.html#cb56-1" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;es-ine/ineapir&quot;</span>)</span>
+<span id="cb56-2"><a href="ineapir.html#cb56-2" tabindex="-1"></a><span class="fu">library</span>(ineapir)</span></code></pre></div>
+<div class="infobox caution">
+<p><strong>Cheatsheet</strong>
+Existe una chaetsheet resumiendo las funcionalidades del paquete, muy útil para principiantes, <a href="https://raw.githubusercontent.com/es-ine/ineapir/main/man/figures/ineapir.pdf">https://raw.githubusercontent.com/es-ine/ineapir/main/man/figures/ineapir.pdf</a></p>
+</div>
+</div>
+<div id="obtención-de-datos" class="section level2 hasAnchor" number="8.3">
+<h2><span class="header-section-number">A.3</span> Obtención de datos<a href="ineapir.html#obtención-de-datos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Una vez se ha cargado<code>ineapir</code> en el entorno de trabajo, se va a proceder a explicar (vía ejemplos ilustrativos), como obtener los datos deseados <a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a>. Se explicará desde</p>
 
 </div>
 </div>
+<div class="footnotes">
+<hr />
+<ol start="10">
+<li id="fn10"><p>Documentación basada en la incluida en el repositorio de origen, <a href="https://github.com/es-ine/ineapir">https://github.com/es-ine/ineapir</a>. Para casos más complejos/ menos frecuentes, consultar dichos repositorios.<a href="ineapir.html#fnref10" class="footnote-back">↩︎</a></p></li>
+</ol>
 </div>
             </section>
 

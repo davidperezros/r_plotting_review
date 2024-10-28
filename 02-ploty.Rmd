@@ -129,14 +129,21 @@ data_ecoicop_1 <- get_data_table(
 ```
 
 
-Como hemos dicho que queremos que en el gráfico se pueda mostrar cómo se distribuye el gasto también dentro de cada grupo de ECOICOP, necesitamos un dígito más de desagregación en la clasificación ECOICOP. Buscamos de nuevo en la web del INE en que tabla se encuentran estos datos y filtramos de nuevo por lo pertinente.
+Como hemos dicho que queremos que en el gráfico se pueda mostrar cómo se distribuye  el gasto también dentro de cada grupo de ECOICOP, necesitamos un dígito más de desagregación en la clasificación ECOICOP, es decir, 3 dígitos. Buscamos de nuevo en la web del INE en que tabla se encuentran estos datos y filtramos de nuevo por lo pertinente. (Véase [https://www.ine.es/jaxiT3/Tabla.htm?t=25144&L=0](https://www.ine.es/jaxiT3/Tabla.htm?t=25144&L=0))
 
 
 ```{r}
 # Vemos por que variables se puede fitrar
-get_metadata_table_varval(25144)
-
+# get_metadata_table_varval(25144)
 ```
+
+Vemos que necesitamos filtrar por:
+
+- **Geografía**: Total Nacional.
+- **ECOICOP**(3 dígitos): Todos.
+- **Tipo de dato**: Dato base.
+- **Gasto**: Gasto medio por persona.
+
 ```{r}
 
 filter_ecoicop_2 <- list(
@@ -209,10 +216,13 @@ get_label <- function(inputs, label) {
   })
 }
 
-# Aplicamos funcion a ECOICOP con 3 dígitos y con label las de ECOICOP 2 dígitos
-data_ecoicop_2$parent <- get_label(data_ecoicop_2$`Subgrupos.de.gasto.(3.dígitos).Codigo`, label = data_ecoicop_1$`Grupos.de.gasto.(2.dígitos)`)
+
 ```
 
+Ahora definimos los elementos `parent`y `labels` necesarios para ejecutar el TreeMap. Concretamente:
+
+- **labels**: Define los nomrbes de cada elemento represetnado en el gráfico.
+- **parent**: Contiene el grupo superior jerárquico de cada elemento. Por ejemplo GRUPO 01. ALIMENTOS Y BEBIDAS NO ALCOHÓLICAS*
 
 
 
@@ -221,15 +231,19 @@ data_ecoicop_2$parent <- get_label(data_ecoicop_2$`Subgrupos.de.gasto.(3.dígito
 # Etiquetas
 labels <- c(data_ecoicop_1$`Grupos.de.gasto.(2.dígitos)`,data_ecoicop_2$`Subgrupos.de.gasto.(3.dígitos)`)
 
+# Aplicamos funcion a ECOICOP con 3 dígitos y con label las de ECOICOP 2 dígitos
+parent <- get_label(data_ecoicop_2$`Subgrupos.de.gasto.(3.dígitos).Codigo`, label = data_ecoicop_1$`Grupos.de.gasto.(2.dígitos)`)
+
 # parents, el del primer elemento es , es decir, el total. Los del primer nivel
 # el parent es Índice Total=labels[1]
 # En el segundo nivel, ya lo que corresponda
 aux <- data_ecoicop_1$`Grupos.de.gasto.(2.dígitos)`
-parents<-c("", rep(aux[1], length(aux) - 1), data_ecoicop_2$parent)
+parents<-c("", rep(aux[1], length(aux) - 1), parent)
 
 
 ```
 
+Ahora, se representan los datos como un TreeMap, ajustando los parámetros para que no haya problemas de visualización.
 
 
 
@@ -250,7 +264,7 @@ fig <- plot_ly(
 
 ```
 
-```{r, webshot = "webshot", out.width = "80%",fig.cap="sgf"}
+```{r, webshot = "webshot", out.width = "80%",fig.cap="Distribución del gasto medio por persona en España para el año 2022."}
 fig
 ```
 
@@ -342,13 +356,21 @@ Ahora vamos a mostrar la evolución del IPC y el IPC Subyacente a lo largo de lo
 
 1. En la web del ine **buscamos la tabla que contiene los datos deseados**, que tiene por id `50902`. (Véase [https://www.ine.es/jaxiT3/Tabla.htm?t=50902&L=0](https://www.ine.es/jaxiT3/Tabla.htm?t=66257&L=0))
 
-2. Usando `ineapir` extraemos los datos usando el servicio API del INE. Ejecutando  `get_metadata_table_varval(50902)` vemos que debemos filtrar por Índice general, y variación anual.
-
-
+2. Usando `ineapir` extraemos los datos usando el servicio API del INE. Ejecutando  `get_metadata_table_varval(50902)`.
 ```{r}
  get_metadata_table_varval(50902)
-# get_metadata_variables()
-# Filter cpi overall index
+```
+
+Vemos que necesitamos filtrar por:
+
+- **Grupo**: Indice general.
+- **Tipo dato**: Variación anual.
+
+Posteriormente, se obtienen los datos, mediante el uso de dicho filtro.
+
+```{r}
+
+
 # Todos los approaches  de filtrado son similares
 # 762(grupo)= 304092(Indie general).      3(tipodato)=74(Variacion anual)
 filter <- list(values = c("variación anual", "índice general"))
@@ -365,7 +387,7 @@ general <- get_data_table(
 )
 
 # IPC SUBYACENTE
-get_metadata_table_varval(50907)
+#get_metadata_table_varval(50907)
 filter <- list(
   "3" = "74", # Fk_variable=Id
   "269" = "12850" # Fk_variable=Id
@@ -430,11 +452,20 @@ Los gráficos de barras en Plotly permiten comparar fácilmente valores entre di
 
 1. En la web del ine **buscamos la tabla que contiene los datos deseados**, que tiene por id `2915`. (Véase [https://www.ine.es/jaxiT3/Tabla.htm?t=2915&L=0](https://www.ine.es/jaxiT3/Tabla.htm?t=66257&L=0))
 
-2. Usando `ineapir` extraemos los datos usando el servicio API del INE. Ejecutando  `get_metadata_table_varval(2915)` vemos que debemos filtrar por  todos municipios
+2. Usando `ineapir` extraemos los datos usando el servicio API del INE. Ejecutando  `get_metadata_table_varval(2915)`.
 
 
 ```{r}
  get_metadata_table_varval(2915)
+```
+
+Vemos que necesitamos filtrar por:
+
+- **Tamaño de municipios**: Total.
+
+
+```{r}
+
 
 filter <- list("34" = "20275") # 34(Tamaño municipios)=20275(Total)
 data2 <- get_data_table(2915, filter = filter, unnest = TRUE, tip = "AM", nlast = 1, metanames = TRUE) # nlast=1 nos devuelve el útlimo año sólo
@@ -483,13 +514,18 @@ Veamos pues este último gráfico. El objetivo es intentar reproducir la aplicac
 
 1. En la web del ine **buscamos la tabla que contiene los datos deseados**, que tiene por id `13930`. (Véase [https://www.ine.es/jaxiT3/Tabla.htm?t=66257&L=0](https://www.ine.es/jaxiT3/Tabla.htm?t=66257&L=0))
 
-2. Usando `ineapir` extraemos los datos usando el servicio API del INE. Ejecutando  `get_metadata_table_varval(66257)` vemos que debemos filtrar por  ambos sexos
-
+2. Usando `ineapir` extraemos los datos usando el servicio API del INE. Ejecutando  `get_metadata_table_varval(66257)`.
 
 ```{r}
 # Tabla 66257. Información del mercado laboral
 # Vemos sus metadatos para ver por que filtrar
 get_metadata_table_varval(66257)
+
+```
+
+Vemos que debemos filtrar por  ambos sexos:
+
+```{r}
 
 filter <- list("18" = "454") # "Sexo"="Ambos sexos"
 

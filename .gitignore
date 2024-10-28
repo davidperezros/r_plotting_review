@@ -2,6 +2,7 @@
 .Rhistory
 .Ruserdata
 .RData
+.log
 .Rproj.user
 r_packages_bookdown_cache/
 bookdown_files/
