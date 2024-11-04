@@ -93,7 +93,6 @@ La ventaja de usar `plotly` es que nos permite construir TreeMaps interactivos, 
 2. Usando `ineapir` extraemos los datos usando el servicio API del INE. Ejecutando  `get_metadata_table_varval(25143)` vemos por que variables debemos filtrar para obtener los datos deseados.
 
 ```{r}
-
 get_metadata_table_varval(25143)
 ```
 
@@ -109,8 +108,7 @@ Vemos que necesitamos filtrar por:
 Es decir, lo ponemos en formato de lista para poder pasarlo por la función `get_data_table()`como filtro.
 
 ```{r,eval=TRUE}
-
-#Filtro
+# Filtro
 filter_ecoicop_1 <- list(
   "349" = "16473", # Total Nacional
   "762" = "", # Todos GRUPOS de 2 dígitos del ECOICOP
@@ -125,7 +123,6 @@ data_ecoicop_1 <- get_data_table(
   filter = filter_ecoicop_1, idTable = 25143, nlast = 1, tip = "AM", unnest = TRUE,
   metacodes = TRUE, validate = FALSE, metanames = TRUE
 )
-
 ```
 
 
@@ -145,18 +142,16 @@ Vemos que necesitamos filtrar por:
 - **Gasto**: Gasto medio por persona.
 
 ```{r}
-
 filter_ecoicop_2 <- list(
   "349" = "16473", # Total Nacional
   "796" = "", # Todos GRUPOS de 2 dígitos del ECOICOP
   "3" = "72", # Dato base
   "57" = "8859" # Gasto medio por persona
-) 
+)
 
 # Obtenemos datos
 # nlast=1 para devolver sólo para el último periodo
 data_ecoicop_2 <- get_data_table(filter = filter_ecoicop_2, idTable = 25144, nlast = 1, tip = "AM", unnest = TRUE, metacodes = TRUE, validate = FALSE, metanames = TRUE)
-
 ```
 
 
@@ -168,13 +163,11 @@ Una vez obtenidos todos los datos, debemos juntar los datos en un data frame que
 - **values**: indica el valor que toma dicha entrada.
 
 ```{r}
-
-
 # Datos para ECOICOP con 3 dígitos
 data_ecoicop_2 <- data_ecoicop_2[, c("Subgrupos.de.gasto.(3.dígitos)", "Subgrupos.de.gasto.(3.dígitos).Codigo", "Valor")]
 
 # quitamos el total
-data_ecoicop_2 <- data_ecoicop_2[data_ecoicop_2[,"Subgrupos.de.gasto.(3.dígitos).Codigo"] != "00", ]
+data_ecoicop_2 <- data_ecoicop_2[data_ecoicop_2[, "Subgrupos.de.gasto.(3.dígitos).Codigo"] != "00", ]
 
 
 
@@ -183,7 +176,7 @@ data_ecoicop_2 <- data_ecoicop_2[data_ecoicop_2[,"Subgrupos.de.gasto.(3.dígitos
 # Función que a cada elemento de ECOICOP 3 dígitos, asocia su grupo de agregación de 2 dígitos
 get_label <- function(inputs, label) {
   # Extrae los primeros dos caracteres de cada elemento del vector de entrada
-  prefixes <- substr(inputs, 1, 2) #tomamos sólo 2 primeros eltos Ej: 01.1 tomamos 01
+  prefixes <- substr(inputs, 1, 2) # tomamos sólo 2 primeros eltos Ej: 01.1 tomamos 01
   # Usa sapply para aplicar la función a cada prefijo
   sapply(prefixes, function(prefix) {
     if (prefix == "01") {
@@ -215,8 +208,6 @@ get_label <- function(inputs, label) {
     }
   })
 }
-
-
 ```
 
 Ahora definimos los elementos `parent`y `labels` necesarios para ejecutar el TreeMap. Concretamente:
@@ -227,9 +218,8 @@ Ahora definimos los elementos `parent`y `labels` necesarios para ejecutar el Tre
 
 
 ```{r}
-
 # Etiquetas
-labels <- c(data_ecoicop_1$`Grupos.de.gasto.(2.dígitos)`,data_ecoicop_2$`Subgrupos.de.gasto.(3.dígitos)`)
+labels <- c(data_ecoicop_1$`Grupos.de.gasto.(2.dígitos)`, data_ecoicop_2$`Subgrupos.de.gasto.(3.dígitos)`)
 
 # Aplicamos funcion a ECOICOP con 3 dígitos y con label las de ECOICOP 2 dígitos
 parent <- get_label(data_ecoicop_2$`Subgrupos.de.gasto.(3.dígitos).Codigo`, label = data_ecoicop_1$`Grupos.de.gasto.(2.dígitos)`)
@@ -238,9 +228,7 @@ parent <- get_label(data_ecoicop_2$`Subgrupos.de.gasto.(3.dígitos).Codigo`, lab
 # el parent es Índice Total=labels[1]
 # En el segundo nivel, ya lo que corresponda
 aux <- data_ecoicop_1$`Grupos.de.gasto.(2.dígitos)`
-parents<-c("", rep(aux[1], length(aux) - 1), parent)
-
-
+parents <- c("", rep(aux[1], length(aux) - 1), parent)
 ```
 
 Ahora, se representan los datos como un TreeMap, ajustando los parámetros para que no haya problemas de visualización.
@@ -248,20 +236,19 @@ Ahora, se representan los datos como un TreeMap, ajustando los parámetros para 
 
 
 ```{r, webshot = "webshot", out.width = "80%"}
-
 fig <- plot_ly(
   type = "treemap",
   labels = labels,
   parents = parents,
   textinfo = "label+value+percent entry+percent root",
-    hoverinfo = "label+value+percent entry+percent root",
-  values = as.integer(c(data_ecoicop_1$Valor, data_ecoicop_2$Valor),0),
+  hoverinfo = "label+value+percent entry+percent root",
+  values = as.integer(c(data_ecoicop_1$Valor, data_ecoicop_2$Valor), 0),
   maxdepth = 2,
-    branchvalues='total',
-  tiling = list(squarifyratio = 2))
- # Imporante ajustar este numero para que quede bontito 
- #Quitarlo para ver que pasa sin el
-
+  branchvalues = "total",
+  tiling = list(squarifyratio = 2)
+)
+# Imporante ajustar este numero para que quede bontito
+# Quitarlo para ver que pasa sin el
 ```
 
 ```{r, webshot = "webshot", out.width = "80%",fig.cap="Distribución del gasto medio por persona en España para el año 2022."}
@@ -340,8 +327,8 @@ fig <- plot_ly(data, x = ~Year) %>%
     yaxis = list(title = "Población"),
     legend = list(title = list(text = "<b>Sexo</b>")),
     hovermode = "closest"
-  )%>%
-  config(locale = 'es')
+  ) %>%
+  config(locale = "es")
 
 # Mostrar el gráfico
 fig
@@ -358,7 +345,7 @@ Ahora vamos a mostrar la evolución del IPC y el IPC Subyacente a lo largo de lo
 
 2. Usando `ineapir` extraemos los datos usando el servicio API del INE. Ejecutando  `get_metadata_table_varval(50902)`.
 ```{r}
- get_metadata_table_varval(50902)
+get_metadata_table_varval(50902)
 ```
 
 Vemos que necesitamos filtrar por:
@@ -369,8 +356,6 @@ Vemos que necesitamos filtrar por:
 Posteriormente, se obtienen los datos, mediante el uso de dicho filtro.
 
 ```{r}
-
-
 # Todos los approaches  de filtrado son similares
 # 762(grupo)= 304092(Indie general).      3(tipodato)=74(Variacion anual)
 filter <- list(values = c("variación anual", "índice general"))
@@ -387,7 +372,7 @@ general <- get_data_table(
 )
 
 # IPC SUBYACENTE
-#get_metadata_table_varval(50907)
+# get_metadata_table_varval(50907)
 filter <- list(
   "3" = "74", # Fk_variable=Id
   "269" = "12850" # Fk_variable=Id
@@ -408,13 +393,11 @@ subyacente <- get_data_table(
 # Format Fecha column as date
 general$Fecha <- as.Date(general$Fecha)
 subyacente$Fecha <- as.Date(subyacente$Fecha)
-
 ```
 
 Una vez hemos preparado los datos, los dibujamos en un gráfico interactivo:
 
 ```{r , webshot="webshot",out.width = "80%"}
-
 # Plot cpi overall index
 fig <- plot_ly(general,
   x = ~Fecha, y = ~Valor, name = "General",
@@ -437,8 +420,8 @@ fig <- fig %>%
     ),
     hovermode = "x"
   ) %>%
-  config(displayModeBar = FALSE)%>%
-  config(locale = 'es')
+  config(displayModeBar = FALSE) %>%
+  config(locale = "es")
 
 fig
 ```
@@ -456,7 +439,7 @@ Los gráficos de barras en Plotly permiten comparar fácilmente valores entre di
 
 
 ```{r}
- get_metadata_table_varval(2915)
+get_metadata_table_varval(2915)
 ```
 
 Vemos que necesitamos filtrar por:
@@ -465,8 +448,6 @@ Vemos que necesitamos filtrar por:
 
 
 ```{r}
-
-
 filter <- list("34" = "20275") # 34(Tamaño municipios)=20275(Total)
 data2 <- get_data_table(2915, filter = filter, unnest = TRUE, tip = "AM", nlast = 1, metanames = TRUE) # nlast=1 nos devuelve el útlimo año sólo
 data2 <- data2[-1, ] # Quitamos primera observación. Total España
@@ -494,8 +475,8 @@ fig <- plot_ly(data2,
     ),
     yaxis = list(title = "Comunidad Autónoma"),
     margin = list(l = 150) # Ajustar el margen izquierdo para evitar que las etiquetas se corten
-  )%>%
-  config(locale = 'es')
+  ) %>%
+  config(locale = "es")
 ```
 ```{r, webshot="webshot",out.width = "100%"}
 # Mostrar el gráfico
@@ -520,13 +501,11 @@ Veamos pues este último gráfico. El objetivo es intentar reproducir la aplicac
 # Tabla 66257. Información del mercado laboral
 # Vemos sus metadatos para ver por que filtrar
 get_metadata_table_varval(66257)
-
 ```
 
 Vemos que debemos filtrar por  ambos sexos:
 
 ```{r}
-
 filter <- list("18" = "454") # "Sexo"="Ambos sexos"
 
 datos <- get_data_table(66257, filter = filter, metanames = TRUE, tip = "AM", metacodes = TRUE, unnest = TRUE, nlast = 1)
@@ -541,7 +520,7 @@ datos <- datos %>%
 Para el sankey plot hay que crear un "diccionario" de etiquetas para saber como pintarlas. Véase documentación para más información.
  
 ```{r}
-#Necesario para el sankey plot
+# Necesario para el sankey plot
 # Crear etiquetas únicas
 labels <- unique(c(
   datos$Relación.con.la.actividad.en.trimestre.anterior,
@@ -563,14 +542,14 @@ filtered_data <- datos %>%
  
  
 ```{r, out.width="80%",fig.cap="Flujos de personas en el mercado laboral en España 2024 T2",webshot="webshot"}
-
-
 # Asignar colores a los enlaces (opcional)
-link_colors <- ifelse(filtered_data$source == 0, "#FFD700", #Inactivos
-                      ifelse(filtered_data$source  ==1,"#CD853F", #Ocupados
-                             ifelse(filtered_data$source  == 2,"#FF4500", #Parados
-                              "#9e3a26" #No consta
-                              )))
+link_colors <- ifelse(filtered_data$source == 0, "#FFD700", # Inactivos
+  ifelse(filtered_data$source == 1, "#CD853F", # Ocupados
+    ifelse(filtered_data$source == 2, "#FF4500", # Parados
+      "#9e3a26" # No consta
+    )
+  )
+)
 
 
 fig <- plot_ly(
@@ -595,8 +574,8 @@ fig <- fig %>%
   layout(
     title = "Transición de Actividades Económicas entre Trimestres",
     font = list(size = 10)
-  )%>%
-  config(locale = 'es')
+  ) %>%
+  config(locale = "es")
 fig
 ```
  
