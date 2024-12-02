@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title> 6 Dashboards | Gráficos en R</title>
+  <title> 6 Dashboards en R | Gráficos en R</title>
   <meta name="description" content="Guia sobre los principales paquetes para graficar en R." />
   <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
 
-  <meta property="og:title" content=" 6 Dashboards | Gráficos en R" />
+  <meta property="og:title" content=" 6 Dashboards en R | Gráficos en R" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Guia sobre los principales paquetes para graficar en R." />
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content=" 6 Dashboards | Gráficos en R" />
+  <meta name="twitter:title" content=" 6 Dashboards en R | Gráficos en R" />
   
   <meta name="twitter:description" content="Guia sobre los principales paquetes para graficar en R." />
   
@@ -564,10 +564,20 @@ div.csl-indent {
 <li class="chapter" data-level="4.4" data-path="plotly.html"><a href="plotly.html#más-información-1"><i class="fa fa-check"></i><b>4.4</b> Más información</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="sf.html"><a href="sf.html"><i class="fa fa-check"></i><b>5</b> SF</a></li>
-<li class="chapter" data-level="6" data-path="dashboards.html"><a href="dashboards.html"><i class="fa fa-check"></i><b>6</b> Dashboards</a>
+<li class="chapter" data-level="6" data-path="dashboards-en-r.html"><a href="dashboards-en-r.html"><i class="fa fa-check"></i><b>6</b> Dashboards en R</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="dashboards.html"><a href="dashboards.html#flexdashboard"><i class="fa fa-check"></i><b>6.1</b> Flexdashboard</a></li>
-<li class="chapter" data-level="6.2" data-path="dashboards.html"><a href="dashboards.html#ejemplo"><i class="fa fa-check"></i><b>6.2</b> Ejemplo</a></li>
+<li class="chapter" data-level="6.1" data-path="dashboards-en-r.html"><a href="dashboards-en-r.html#flexdashboard"><i class="fa fa-check"></i><b>6.1</b> Flexdashboard</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="dashboards-en-r.html"><a href="dashboards-en-r.html#construcción"><i class="fa fa-check"></i><b>6.1.1</b> Construcción</a></li>
+<li class="chapter" data-level="6.1.2" data-path="dashboards-en-r.html"><a href="dashboards-en-r.html#estructura-proyecto"><i class="fa fa-check"></i><b>6.1.2</b> Estructura proyecto</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="dashboards-en-r.html"><a href="dashboards-en-r.html#ventajas-de-cada-servicio"><i class="fa fa-check"></i><b>6.2</b> Ventajas de cada servicio</a></li>
+<li class="chapter" data-level="6.3" data-path="dashboards-en-r.html"><a href="dashboards-en-r.html#shiny"><i class="fa fa-check"></i><b>6.3</b> Shiny</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="dashboards-en-r.html"><a href="dashboards-en-r.html#construcción-y-herramientas-útiles"><i class="fa fa-check"></i><b>6.3.1</b> Construcción y herramientas útiles</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="dashboards-en-r.html"><a href="dashboards-en-r.html#publicación-web"><i class="fa fa-check"></i><b>6.4</b> Publicación web</a></li>
+<li class="chapter" data-level="6.5" data-path="dashboards-en-r.html"><a href="dashboards-en-r.html#shinylive"><i class="fa fa-check"></i><b>6.5</b> Shinylive</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="leaflet.html"><a href="leaflet.html"><i class="fa fa-check"></i><b>7</b> Leaflet</a>
 <ul>
@@ -617,16 +627,189 @@ Licensed under <img alt="EUROPEAN UNION PUBLIC LICENCE v. 1.2" style="border-wid
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="dashboards" class="section level1 hasAnchor" number="6">
-<h1><span class="header-section-number"> 6</span> Dashboards<a href="dashboards.html#dashboards" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="dashboards-en-r" class="section level1 hasAnchor" number="6">
+<h1><span class="header-section-number"> 6</span> Dashboards en R<a href="dashboards-en-r.html#dashboards-en-r" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Una de las principales ventajas de realizar dashboards en R es que este es de <strong>software libre</strong>, y que por tanto no se requiere licencias para su utilización. Además, con apoyo de librerías como <em>ineapir</em>, se puede combinar en un mismo documento el proceso que abarca desde la extracción de datos hasta la generación del dashboard, siendo a posteriori fácilmente actualizable.</p>
+<p>En una época en la que la transparencia por parte de las instituciones se erige como pilar fundamental de sus principios, estos dashboards parecen la herramienta idónea para los constructores de estadísticas oficiales. Al ser de código abierto, se puede compartir el código fuente de los cuadros de mando, lo que conlleva ventajas significativas:</p>
+<ul>
+<li>El <strong>proceso de elaboración</strong> es <strong>público</strong>, sirviendo como base para otros trabajos y viendo que no existen manipulaciones.</li>
+<li>Se puede implementar servicios como <strong>GitHub</strong> que permiten a los usuarios hacer pull requests o abrir issues, creando una comunidad que mejore notablemente dichos recuros y que sirva como respaldo técnico.</li>
+<li>Permite reusar (bajo la licencia elegida) los cuadros de mando fácilmente, aportando valor añadido y que su utlización aumente.</li>
+</ul>
+<p>En el siguiente cuadro se expone la comparación de distintos servicios de creación de dashboards:</p>
+<table>
+<colgroup>
+<col width="26%" />
+<col width="24%" />
+<col width="24%" />
+<col width="24%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Característica</th>
+<th>R (Shiny)</th>
+<th>Tableau</th>
+<th>PowerBI</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Facilidad de uso</strong></td>
+<td>Intermedio, requiere conocimientos en R y programación</td>
+<td>Alto, interfaz intuitiva y fácil de usar</td>
+<td>Alto, interfaz intuitiva y fácil de usar</td>
+</tr>
+<tr class="even">
+<td><strong>Precio</strong></td>
+<td>Software libre</td>
+<td>Licencia pagada, versiones disponibles según características</td>
+<td>Licencia pagada, versiones disponibles según características</td>
+</tr>
+<tr class="odd">
+<td><strong>Proceso completo</strong></td>
+<td>Sí, desde la extracción de datos hasta la creación del dashboard</td>
+<td>No, requiere herramientas adicionales para la extracción y procesamiento de datos</td>
+<td>No, requiere herramientas adicionales para la extracción y procesamiento de datos</td>
+</tr>
+<tr class="even">
+<td><strong>Publicación web</strong></td>
+<td>Sí, con <code>shinyapps.io</code> o servidores propios</td>
+<td>Sí, con Tableau Public o Tableau Server</td>
+<td>Sí, con PowerBI Service</td>
+</tr>
+<tr class="odd">
+<td><strong>Actualización fácil</strong></td>
+<td>Sí, puede automatizarse con scripts de R</td>
+<td>Sí, pero puede requerir configuración adicional</td>
+<td>Sí, pero puede requerir configuración adicional</td>
+</tr>
+<tr class="even">
+<td><strong>Código reutilizable</strong></td>
+<td>Sí, scripts y funciones en R reutilizables</td>
+<td>Limitado, se pueden reutilizar algunos componentes</td>
+<td>Limitado, se pueden reutilizar algunos componentes</td>
+</tr>
+<tr class="odd">
+<td><strong>Código abierto y replicable</strong></td>
+<td>Sí, código en R es abierto y puede ser revisado para transparencia</td>
+<td>No, código cerrado</td>
+<td>No, código cerrado</td>
+</tr>
+<tr class="even">
+<td><strong>Capacidad de integración</strong></td>
+<td>Alta, puede integrarse con muchas fuentes de datos y otras herramientas de R</td>
+<td>Alta, se puede conectar a muchas fuentes de datos pero con limitaciones en algunas integraciones</td>
+<td>Alta, se puede conectar a muchas fuentes de datos pero con limitaciones en algunas integraciones</td>
+</tr>
+<tr class="odd">
+<td><strong>Interactividad</strong></td>
+<td>Alta, permite una interactividad compleja con <code>shiny</code> y <code>plotly</code></td>
+<td>Alta, permite interactividad pero con menos flexibilidad que Shiny</td>
+<td>Alta, permite interactividad pero con menos flexibilidad que Shiny</td>
+</tr>
+<tr class="even">
+<td><strong>Escalabilidad</strong></td>
+<td>Alta, puede manejar grandes volúmenes de datos dependiendo de la implementación</td>
+<td>Media, puede manejar grandes volúmenes de datos pero requiere hardware adecuado</td>
+<td>Alta, diseñado para manejar grandes volúmenes de datos con infraestructura adecuada</td>
+</tr>
+<tr class="odd">
+<td><strong>Soporte y comunidad</strong></td>
+<td>Amplia, fuerte comunidad de usuarios y mucha documentación</td>
+<td>Amplia, fuerte comunidad de usuarios y soporte oficial</td>
+<td>Amplia, fuerte comunidad de usuarios y soporte oficial</td>
+</tr>
+<tr class="even">
+<td><strong>Curva de aprendizaje</strong></td>
+<td>Pronunciada, requiere aprender R y conceptos de programación</td>
+<td>Baja, más fácil de aprender para usuarios sin experiencia técnica</td>
+<td>Baja, más fácil de aprender para usuarios sin experiencia técnica</td>
+</tr>
+<tr class="odd">
+<td><strong>Seguridad</strong></td>
+<td>Alta, depende de la configuración del servidor</td>
+<td>Alta, con opciones robustas en Tableau Server</td>
+<td>Alta, con opciones robustas en PowerBI Service</td>
+</tr>
+<tr class="even">
+<td><strong>Visualización</strong></td>
+<td>Alta, con gran flexibilidad y personalización</td>
+<td>Alta, con una amplia gama de visualizaciones listas para usar</td>
+<td>Alta, con una amplia gama de visualizaciones listas para usar</td>
+</tr>
+<tr class="odd">
+<td><strong>Colaboración</strong></td>
+<td>Media, se puede hacer a través de Git y otras herramientas de control de versiones</td>
+<td>Alta, con Tableau Server y Tableau Online para colaboración en tiempo real</td>
+<td>Alta, con PowerBI Service para colaboración en tiempo real</td>
+</tr>
+<tr class="even">
+<td><strong>Mantenimiento</strong></td>
+<td>Requiere mantenimiento manual y gestión de dependencias</td>
+<td>Requiere mantenimiento regular y gestión de licencias</td>
+<td>Requiere mantenimiento regular y gestión de licencias</td>
+</tr>
+<tr class="odd">
+<td><strong>Despliegue</strong></td>
+<td>Flexible, puede desplegarse en cualquier servidor compatible</td>
+<td>Controlado, generalmente a través de Tableau Server o Tableau Public</td>
+<td>Controlado, generalmente a través de PowerBI Service</td>
+</tr>
+</tbody>
+</table>
+<p>A continuación se expondrán las dos principales herramientas de creación de dashboards en R, que son <strong>FlexDashboard</strong> y <strong>Shiny</strong>.</p>
 <div id="flexdashboard" class="section level2 hasAnchor" number="6.1">
-<h2><span class="header-section-number">6.1</span> Flexdashboard<a href="dashboards.html#flexdashboard" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>El propósito de <a href="https://pkgs.rstudio.com/flexdashboard/">flexdashboarad</a> es proporcionar una forma simple de escribir aplicaciones interactivas en R basadas en lenguaje Markdown, lo que permite escribir el contenido usando bloques de código R y luego transformarlo en un documento HTML o PDF que incluye gráficos y widgets. Las principales características de flexdashboard son:</p>
+<h2><span class="header-section-number">6.1</span> Flexdashboard<a href="dashboards-en-r.html#flexdashboard" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Se trata de un paquete de R, <a href="https://pkgs.rstudio.com/flexdashboard/">flexdashboarad</a>, cuyo propósito es proporcionar una forma simple de escribir aplicaciones interactivas en R basadas en lenguaje Markdown, lo que permite escribir el contenido usando bloques de código R y luego transformarlo en un documento HTML o PDF que incluye gráficos y widgets. Las principales características de flexdashboard son:</p>
 <ul>
 <li><p><strong>Facilidad de uso</strong>: Permite crear dashboards sin necesidad de escribir mucho código de interfaz. Simplemente organizando el contenido en secciones y filas se genera un diseño de panel intuitivo.</p></li>
 <li><p><strong>Layouts adaptativos</strong>: Ofrece disposiciones flexibles, como filas y columnas, para distribuir los gráficos y tablas.</p></li>
 <li><p><strong>Interactividad básica</strong>: Se pueden agregar elementos de interacción usando bibliotecas de gráficos interactivas, como plotly o highcharter, pero el nivel de interactividad es más limitado en comparación con <a href="https://shiny.posit.co/r/getstarted/shiny-basics/lesson1/index.html">Shiny</a>,que aunque no es interactivo por sí mismo, se pueden integrar elementos de Shiny para mejorar la interactividad.</p></li>
 </ul>
+<div id="construcción" class="section level3 hasAnchor" number="6.1.1">
+<h3><span class="header-section-number">6.1.1</span> Construcción<a href="dashboards-en-r.html#construcción" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>De aquí en adelante se usará el siguiente dashboard:</p>
+
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="dashboards-en-r.html#cb45-1" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;fig/capturas/flexdashboard.png&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:imagencapas2"></span>
+<img src="fig/capturas/flexdashboard.png" alt="Flexdashboard disponible en la siguiente web shinyapps.io/r_flexdashboard y código fuente en repositorio github.com/davidperezros/r_flexdashboard." width="80%" />
+<p class="caption">
+FIGURA 6.1: Flexdashboard disponible en la siguiente web <a href="http://yoiswv-david-p0rez.shinyapps.io/r_flexdashboard_copia">shinyapps.io/r_flexdashboard</a> y código fuente en repositorio <a href="https://github.com/davidperezros/r_flexdashboard">github.com/davidperezros/r_flexdashboard</a>.
+</p>
+</div>
+<p>Este cuadro de mando contiene los siguientes <strong>elementos fundamentales</strong>:</p>
+<ul>
+<li><p><strong>Filtro</strong>: Permite seleccionar una Comunidad Autónoma y un Año, para el que se muestran los elementos visuales del dashboard.</p></li>
+<li><p><strong>Cards</strong>: Tarjetas visuales superiores que permiten resumir información de manera muy visual. Más adelante se muestra cómo se han construido.</p></li>
+<li><p><strong>TreeMap</strong>: Gráfico que muestra el la distribución del gasto medio por persona en la comunidad y año seleccionado dentro de los grupos ECOICOP. Para ver como se construye (Sección <a href="plotly.html#treemaps">4.3.2</a>).</p></li>
+<li><p><strong>Leaflet Map</strong>: Mapa interactivo que muestra el ámbito geográfico seleccionado en el filtro.</p></li>
+</ul>
+</div>
+<div id="estructura-proyecto" class="section level3 hasAnchor" number="6.1.2">
+<h3><span class="header-section-number">6.1.2</span> Estructura proyecto<a href="dashboards-en-r.html#estructura-proyecto" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Para crear un flexdashboard se ha seguido la guía oficial, disponible en <a href="https://pkgs.rstudio.com/flexdashboard/">https://pkgs.rstudio.com/flexdashboard/</a>.
+Concretamente tenemos el siguiente esquema,</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="dashboards-en-r.html#cb46-1" tabindex="-1"></a>r_flexdashboard_project<span class="sc">/</span></span>
+<span id="cb46-2"><a href="dashboards-en-r.html#cb46-2" tabindex="-1"></a>├── .gitignore                <span class="co"># Archivo de configuración para Git</span></span>
+<span id="cb46-3"><a href="dashboards-en-r.html#cb46-3" tabindex="-1"></a>├── .Rhistory                 <span class="co"># Archivo de historial de R</span></span>
+<span id="cb46-4"><a href="dashboards-en-r.html#cb46-4" tabindex="-1"></a>├── _site.yml                 <span class="co"># Archivo de configuración del sitio</span></span>
+<span id="cb46-5"><a href="dashboards-en-r.html#cb46-5" tabindex="-1"></a>├── index.Rmd                 <span class="co"># Archivo principal de flexdashboard</span></span>
+<span id="cb46-6"><a href="dashboards-en-r.html#cb46-6" tabindex="-1"></a>├── r_flexdashboard.Rproj     <span class="co"># Archivo de proyecto de RStudio</span></span>
+<span id="cb46-7"><a href="dashboards-en-r.html#cb46-7" tabindex="-1"></a>├── README.md                 <span class="co"># Archivo de documentación README</span></span>
+<span id="cb46-8"><a href="dashboards-en-r.html#cb46-8" tabindex="-1"></a>└── style.css                 <span class="co"># Archivo CSS (este puede estar dentro de la carpeta styles/)</span></span></code></pre></div>
+<p>donde:</p>
+<ul>
+<li><strong>.gitignore </strong>: Contiene los archivos que se deben ignorar en git, es decir que no se desea tener un control de versiones de ellos.</li>
+<li>**_site.yml **: Archivo de configuración del sitio.</li>
+<li><strong>index.Rmd</strong>: Contiene todo el cuadro de mando. Desde la lectura de datos hasta la creación de elementos visuales y su presentación.</li>
+<li><strong>r_flexdashboard.Rproj</strong>: Ajustes globales del proyecto en R.</li>
+<li><strong>README.md</strong>: Archivo que muestra información en la página principal del repositorio en GitHub.</li>
+<li><strong>style.css</strong>: Archivo css de estilos, modificando los colores de las fuentes, tamaños, estructuras de elementos visuales…</li>
+</ul>
+</div>
+</div>
+<div id="ventajas-de-cada-servicio" class="section level2 hasAnchor" number="6.2">
+<h2><span class="header-section-number">6.2</span> Ventajas de cada servicio<a href="dashboards-en-r.html#ventajas-de-cada-servicio" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <table>
 <colgroup>
 <col width="20%" />
@@ -670,41 +853,44 @@ Licensed under <img alt="EUROPEAN UNION PUBLIC LICENCE v. 1.2" style="border-wid
 </table>
 <p>En general, flexdashboard es una excelente opción cuando se necesita construir dashboards rápidos y fáciles de usar sin necesidad de interactividad avanzada, mientras que <a href="https://shiny.posit.co/r/getstarted/shiny-basics/lesson1/index.html">Shiny</a> es la mejor elección para aplicaciones complejas donde el usuario necesita manipular datos en tiempo real o realizar análisis detallados. Ambas herramientas pueden complementarse: un flexdashboard puede integrar componentes de <a href="https://shiny.posit.co/r/getstarted/shiny-basics/lesson1/index.html">Shiny</a> para mejorar su interactividad, combinando la simplicidad de un panel con la potencia de una aplicación reactiva.</p>
 </div>
-<div id="ejemplo" class="section level2 hasAnchor" number="6.2">
-<h2><span class="header-section-number">6.2</span> Ejemplo<a href="dashboards.html#ejemplo" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>De aquí en adelante se usará el siguiente dashboard:</p>
-
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="dashboards.html#cb45-1" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;fig/capturas/flexdashboard.png&quot;</span>)</span></code></pre></div>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:imagencapas2"></span>
-<img src="fig/capturas/flexdashboard.png" alt="Flexdashboard disponible en la siguiente web shinyapps.io/r_flexdashboard y código fuente en repositorio github.com/davidperezros/r_flexdashboard." width="80%" />
-<p class="caption">
-FIGURA 6.1: Flexdashboard disponible en la siguiente web <a href="http://yoiswv-david-p0rez.shinyapps.io/r_flexdashboard_copia">shinyapps.io/r_flexdashboard</a> y código fuente en repositorio <a href="https://github.com/davidperezros/r_flexdashboard">github.com/davidperezros/r_flexdashboard</a>.
-</p>
-</div>
-<p>Este cuadro de mando contiene los siguientes <strong>elementos fundamentales</strong>:</p>
+<div id="shiny" class="section level2 hasAnchor" number="6.3">
+<h2><span class="header-section-number">6.3</span> Shiny<a href="dashboards-en-r.html#shiny" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Se trata de un paquete de R, <a href="https://pkgs.rstudio.com/shiny/">shiny</a>, cuyo propósito es proporcionar una forma simple de realizar aplicaciones interactivas en R. Las principales características de flexdashboard son:</p>
 <ul>
-<li><p><strong>Filtro</strong>: Permite seleccionar una Comunidad Autónoma y un Año, para el que se muestran los elementos visuales del dashboard.</p></li>
-<li><p><strong>Cards</strong>: Tarjetas visuales superiores que permiten resumir información de manera muy visual. Más adelante se muestra cómo se han construido.</p></li>
-<li><p><strong>TreeMap</strong>: Gráfico que muestra el la distribución del gasto medio por persona en la comunidad y año seleccionado dentro de los grupos ECOICOP. Para ver como se construye, consúltese Sección <a href="plotly.html#treemaps">4.3.2</a>.</p></li>
+<li><p><strong>Separación de componentes</strong>: Una aplicación Shiny típica se divide en dos partes principales: ui (interfaz de usuario) y server (servidor).</p>
+<ul>
+<li><p><strong>ui:</strong> Define el diseño y la apariencia de la aplicación. Incluye los elementos de la interfaz de usuario como botones, gráficos, tablas, etc.</p></li>
+<li><p><strong>server:</strong> Contiene la lógica de la aplicación, es decir, el código R que procesa los datos y genera la salida que se mostrará en la interfaz de usuario.</p></li>
+</ul></li>
+<li><p><strong>Flexibilidad</strong>: Aunque la curva de aprendizaje de la herramienta puede ser un poco lenta, ofrece una alta flexibilidad a la hora de mostrar los elementos interactivos y manejar los datos.</p></li>
+<li><p><strong>Alta reactividad</strong>: alta capacidad para actualizar de manera automática y eficiente la interfaz de usuario en respuesta a cambios en los datos de entrada o en la interacción del usuario.</p></li>
+<li><p><strong>Comunidad web</strong>: Shiny cuneta con una amplia comunidad web (mayoritariamente en inglés), donde se puede encontrar ejemplos y respuesta a muchos de los problemas que puedan surgir durante su creación</p></li>
+<li><p><strong>Shiny para Pyhton</strong>: La librería de shiny también está disponible en Python, por lo que una vez se aprenda a manejar se puede usar en ambos lenguajes de programación. Aunque tienen elementos diferentes propios de cada lenguaje de programación, la base es la misma y por tanto shiny se usa de manera similar en ambos lenguajes.</p></li>
 </ul>
-<!-- Otra alternativa es [Shiny Dashboard](https://rstudio.github.io/shinydashboard/) que viene a ser una plantilla de Shiny que facilita el montaje, a cambio de flexibilidad. Es posible crear una plantilla para un determinado organismo (ej INE) o un proceso específico y que se pueda reusar en casos futuros. -->
-<p>Flexdashboard no es tan facil subirlas a github</p>
-<p>Hablar de shiny que tiene una app interactiva para editar shinys <a href="https://rstudio.github.io/shinyuieditor/" class="uri">https://rstudio.github.io/shinyuieditor/</a></p>
-<p>Luego de bslib que también tiene una para hacer cards</p>
-<p><strong>VENTAJAS DE SHINY</strong></p>
-<p><strong>Shiny</strong> y <strong>Flexdashboard</strong> son dos potentes herramientas en el ecosistema de R que permiten crear aplicaciones web interactivas y dashboards, respectivamente. Estas herramientas están elaboradas en lenguaje R, lo que significa que los usuarios pueden utilizar el mismo lenguaje tanto para extraer y transformar datos como para visualizarlos. Esto elimina la necesidad de aprender un nuevo lenguaje/técnicas de programación, haciendo que el flujo de trabajo sea más eficiente y permitiendo realizar transformaciones de datos complejas directamente en el entorno de desarrollo.</p>
-<p>Shiny es ideal para construir aplicaciones web interactivas. Ofrece una gran flexibilidad y personalización, ya que permite la integración de HTML, CSS y JavaScript. Por otro lado, Flexdashboard facilita la creación de dashboards interactivos a partir de documentos R Markdown, combinando análisis y visualización en un solo archivo.</p>
-<p>Por otro lado, herramientas de Business Intelligence como Power BI y Tableau son soluciones comerciales que ofrecen capacidades de análisis y visualización de datos. Estas herramientas están diseñadas para ser intuitivas y fáciles de usar, con interfaces de arrastrar y soltar que permiten a los usuarios sin conocimientos técnicos profundos crear visualizaciones efectivas rápidamente. Además, ofrecen una rica integración con otras herramientas empresariales y sistemas de datos.</p>
-<p>Las ventajas de usar Shiny y Flexdashboard radican en su flexibilidad y el hecho de ser de código abierto. Esto permite personalizar y adaptar las aplicaciones y dashboards a necesidades específicas sin los costos asociados a licencias comerciales. Sin embargo, la creación de aplicaciones con Shiny y Flexdashboard puede requerir más tiempo y habilidades técnicas en comparación con Power BI y Tableau, que están diseñados para facilitar el desarrollo rápido de visualizaciones.</p>
-<p><strong>Cosas útiles de shiny</strong>
-Se recomienda la primera vez empezar siguiendo algún tutorial ya que el aprendizaje requiere más esfuerzo al principio. Hay herramientas útiles como <a href="https://rstudio.github.io/shinyuieditor/">https://rstudio.github.io/shinyuieditor/</a> que permiten construir interactivamente un shiny para tener una base sobre la que empezar. La libreria <code>bslib</code>
-dispone de una app interactiva en la que se permmite construir flash cards con el formato y iconos/gráficas deseados. Por otro lado en la web oficial de shiny se incluye un menu interactivo con objetos tipo sliders, barras de búsqueda,… y su código para incluirlo en shiny.</p>
-<p><strong>Subir Shiny Apps</strong></p>
-<p>Hay varias opciones para publicarlo. Como se comentaba, una de las ventajas de usar shiny bajo la interfaz de R (también está disponible para python) es que al ser código abierto no requiere de licencias ni costes asociados. Sin embargo, si se quiere publicar la aplicación en la web, la mayor parte de casos pasa por servicios de pago. Los más comunes son:</p>
+<div id="construcción-y-herramientas-útiles" class="section level3 hasAnchor" number="6.3.1">
+<h3><span class="header-section-number">6.3.1</span> Construcción y herramientas útiles<a href="dashboards-en-r.html#construcción-y-herramientas-útiles" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>A la hora de empezar a crear una Shiny App (tanto en R como en Python), se recomienda seguir la guía <a href="https://shiny.posit.co">https://shiny.posit.co</a>, donde se explica los pasos básicos para crear una aplicación interactiva.
+Además existen otras webs muy útiles como pueden ser:</p>
+<ul>
+<li><p><strong>Shiny Gallery</strong>: <a href="https://shiny.posit.co/r/gallery/">https://shiny.posit.co/r/gallery/</a>. Ofrece ejemplos de código de diversas aplicaciones shiny.</p></li>
+<li><p><strong>Componentes</strong>:<a href="https://shiny.posit.co/r/components/">https://shiny.posit.co/r/components/</a>. Ofrece ejemplos de como incluir en la aplicación componentes que van desde sliders hasta value boxes,numeric inputs,..</p></li>
+<li><p><strong>Layouts</strong>: Ofrece ejemplos de como implementar distintos layouts en nuestra aplicación, dependiento de nuestro objetivo. <a href="https://shiny.posit.co/r/layouts/">https://shiny.posit.co/r/layouts/</a></p></li>
+<li><p><strong>bslib</strong>: <a href="https://rstudio.github.io/bslib/">https://rstudio.github.io/bslib/</a> Librería de R que dispone de una interfaz interactiva y actualizada para shiny. Contiene layouts, theming y una <a href="https://bslib.shinyapps.io/build-a-box/">app interactiva</a> en la que se permite construir value boxes con el formato y iconos/gráficas deseados. Realmente útil.</p></li>
+</ul>
+<p>Además hay infinidad de documentación web en internet sobre como realizar un shiny, mucha de ella en libros en formato bookdown.</p>
+</div>
+</div>
+<div id="publicación-web" class="section level2 hasAnchor" number="6.4">
+<h2><span class="header-section-number">6.4</span> Publicación web<a href="dashboards-en-r.html#publicación-web" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>PExisten varias opciones para publicar tanto un shiny como un flexdahsboard y que un espectro amplio de potenciales consumidores tengan acceso a el. Las más comunes son:</p>
 <ul>
 <li><strong>PositCloud</strong>: La cuenta básica es gratuita pero tiene un límite de apps publicadas y horas de consulta mensuales.</li>
-<li><strong>ShinyServer</strong>: Completamente de pago.</li>
+<li><strong>ShinyApps.io</strong>: Es un producto de software como servicio (SaaS) alojado en la nube por Posit. Tiene planes gratuitos y de pago.</li>
 </ul>
+<p>Para más información y ventajas de cada una, consultar las respectivas páginas principales de estos servicios. El flexdashboard y el shiny de estos ejemplos se han publicado con <em>ShinyApps.io</em>.</p>
+</div>
+<div id="shinylive" class="section level2 hasAnchor" number="6.5">
+<h2><span class="header-section-number">6.5</span> Shinylive<a href="dashboards-en-r.html#shinylive" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Leyendo por la web, existe un paquete de R llamado <a href="https://posit-dev.github.io/r-shinylive/">shinylive</a> que permite ejecutar una aplicación shiny en la web sin necesidad de un servidor. Por lo tanto, puede ser interesante para subirlo a github y permitir crear una github pages. Es prometedor.</p>
 
 </div>

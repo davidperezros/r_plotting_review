@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999996 (TeX Live 2024) (preloaded format=xelatex 2024.10.24)  28 OCT 2024 09:35
+This is XeTeX, Version 3.141592653-2.6-0.999996 (TeX Live 2024) (preloaded format=xelatex 2024.10.24)  27 NOV 2024 12:44
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1266,21 +1266,21 @@ LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
 (Font)              scaled to size 6.99925pt on input line 2.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
 (Font)              scaled to size 4.99947pt on input line 2.
-)
+
+
+[3])
 \tf@toc=\write6
 \openout6 = `r_plotting_review.toc'.
 
 
 
-[3]
-
-[4
-
-]
+[4]
 Capítulo 1.
 
 
-[5]
+[5
+
+]
 
 [6]
 Capítulo 2.
@@ -1596,791 +1596,286 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 [21]
 
 [22]
-Overfull \hbox (161.2821pt too wide) in paragraph at lines 1071--1071
-[]\TU/lmtt/m/n/10 ##                                                                                                             Nombre[] 
- []
-
-
-Overfull \hbox (161.2821pt too wide) in paragraph at lines 1072--1072
-[]\TU/lmtt/m/n/10 ## 1                                                                                                   Total Nacional[] 
- []
-
-
-Overfull \hbox (161.2821pt too wide) in paragraph at lines 1073--1073
-[]\TU/lmtt/m/n/10 ## 2                                                                                                        Andalucía[] 
- []
-
-
-Overfull \hbox (161.2821pt too wide) in paragraph at lines 1074--1074
-[]\TU/lmtt/m/n/10 ## 3                                                                                                           Aragón[] 
- []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
 
 [23]
-Overfull \hbox (161.2821pt too wide) in paragraph at lines 1075--1075
-[]\TU/lmtt/m/n/10 ## 4                                                                                          Asturias, Principado de[] 
- []
+File: r_plotting_review_files/figure-latex/unnamed-chunk-27-1.pdf Graphic file (type pdf)
+<use r_plotting_review_files/figure-latex/unnamed-chunk-27-1.pdf>
 
-
-Overfull \hbox (161.2821pt too wide) in paragraph at lines 1076--1076
-[]\TU/lmtt/m/n/10 ## 5                                                                                                   Balears, Illes[] 
- []
-
-
-Overfull \hbox (161.2821pt too wide) in paragraph at lines 1077--1077
-[]\TU/lmtt/m/n/10 ## 6                                                                                                         Canarias[] 
- []
-
-
-Overfull \hbox (161.2821pt too wide) in paragraph at lines 1078--1078
-[]\TU/lmtt/m/n/10 ## 7                                                                                                        Cantabria[] 
- []
-
-
-Overfull \hbox (161.2821pt too wide) in paragraph at lines 1079--1079
-[]\TU/lmtt/m/n/10 ## 8                                                                                                  Castilla y León[] 
- []
-
-
-Overfull \hbox (161.2821pt too wide) in paragraph at lines 1080--1080
-[]\TU/lmtt/m/n/10 ## 9                                                                                             Castilla - La Mancha[] 
- []
-
-
-Overfull \hbox (161.2821pt too wide) in paragraph at lines 1081--1081
-[]\TU/lmtt/m/n/10 ## 10                                                                                                        Cataluña[] 
- []
-
-
-Overfull \hbox (161.2821pt too wide) in paragraph at lines 1082--1082
-[]\TU/lmtt/m/n/10 ## 11                                                                                            Comunitat Valenciana[] 
- []
-
-
-Overfull \hbox (161.2821pt too wide) in paragraph at lines 1083--1083
-[]\TU/lmtt/m/n/10 ## 12                                                                                                     Extremadura[] 
- []
-
-
-Overfull \hbox (161.2821pt too wide) in paragraph at lines 1084--1084
-[]\TU/lmtt/m/n/10 ## 13                                                                                                         Galicia[] 
- []
-
-
-Overfull \hbox (161.2821pt too wide) in paragraph at lines 1085--1085
-[]\TU/lmtt/m/n/10 ## 14                                                                                            Madrid, Comunidad de[] 
- []
-
-
-Overfull \hbox (161.2821pt too wide) in paragraph at lines 1086--1086
-[]\TU/lmtt/m/n/10 ## 15                                                                                               Murcia, Región de[] 
- []
-
-
-Overfull \hbox (161.2821pt too wide) in paragraph at lines 1087--1087
-[]\TU/lmtt/m/n/10 ## 16                                                                                     Navarra, Comunidad Foral de[] 
- []
-
-
-Overfull \hbox (161.2821pt too wide) in paragraph at lines 1088--1088
-[]\TU/lmtt/m/n/10 ## 17                                                                                                      País Vasco[] 
- []
-
-
-Overfull \hbox (161.2821pt too wide) in paragraph at lines 1089--1089
-[]\TU/lmtt/m/n/10 ## 18                                                                                                       Rioja, La[] 
- []
-
-
-Overfull \hbox (161.2821pt too wide) in paragraph at lines 1090--1090
-[]\TU/lmtt/m/n/10 ## 19                                                                                                           Ceuta[] 
- []
-
-
-Overfull \hbox (161.2821pt too wide) in paragraph at lines 1091--1091
-[]\TU/lmtt/m/n/10 ## 20                                                                                                         Melilla[] 
- []
-
-
-Overfull \hbox (161.2821pt too wide) in paragraph at lines 1092--1092
-[]\TU/lmtt/m/n/10 ## 21                                                                                                           Total[] 
- []
-
-
-Overfull \hbox (161.2821pt too wide) in paragraph at lines 1093--1093
-[]\TU/lmtt/m/n/10 ## 22                                                                                                       Alimentos[] 
- []
-
-
-Overfull \hbox (161.2821pt too wide) in paragraph at lines 1094--1094
-[]\TU/lmtt/m/n/10 ## 23                                                                                          Bebidas no alcohólicas[] 
- []
-
-
-Overfull \hbox (161.2821pt too wide) in paragraph at lines 1095--1095
-[]\TU/lmtt/m/n/10 ## 24                                                                                             Bebidas alcohólicas[] 
- []
-
-
-Overfull \hbox (161.2821pt too wide) in paragraph at lines 1096--1096
-[]\TU/lmtt/m/n/10 ## 25                                                                                                          Tabaco[] 
- []
-
-
-Overfull \hbox (161.2821pt too wide) in paragraph at lines 1097--1097
-[]\TU/lmtt/m/n/10 ## 26                                                                                                         Vestido[] 
- []
-
-
-Overfull \hbox (161.2821pt too wide) in paragraph at lines 1098--1098
-[]\TU/lmtt/m/n/10 ## 27                                                                                                         Calzado[] 
- []
-
-
-Overfull \hbox (161.2821pt too wide) in paragraph at lines 1099--1099
-[]\TU/lmtt/m/n/10 ## 28                                                                                   Alquileres reales de vivienda[] 
- []
-
-
-Overfull \hbox (161.2821pt too wide) in paragraph at lines 1100--1100
-[]\TU/lmtt/m/n/10 ## 29                                                                                Alquileres imputados de vivienda[] 
- []
-
-
-Overfull \hbox (161.2821pt too wide) in paragraph at lines 1101--1101
-[]\TU/lmtt/m/n/10 ## 30                                                                        Conservación y reparación de la vivienda[] 
- []
-
-
-Overfull \hbox (161.2821pt too wide) in paragraph at lines 1102--1102
-[]\TU/lmtt/m/n/10 ## 31                                               Suministro de agua y otros servicios relacionados con la vivienda[] 
- []
-
-
-Overfull \hbox (161.2821pt too wide) in paragraph at lines 1103--1103
-[]\TU/lmtt/m/n/10 ## 32                                                                          Electricidad, gas y otros combustibles[] 
- []
-
-
-Overfull \hbox (161.2821pt too wide) in paragraph at lines 1104--1104
-[]\TU/lmtt/m/n/10 ## 33                                                Muebles y accesorios, alfombras y otros revestimientos de suelos[] 
- []
-
-
-Overfull \hbox (161.2821pt too wide) in paragraph at lines 1105--1105
-[]\TU/lmtt/m/n/10 ## 34                                                                                Artículos textiles para el hogar[] 
- []
-
-
-Overfull \hbox (161.2821pt too wide) in paragraph at lines 1106--1106
-[]\TU/lmtt/m/n/10 ## 35                                                                                             Aparatos domésticos[] 
- []
-
-
-Overfull \hbox (161.2821pt too wide) in paragraph at lines 1107--1107
-[]\TU/lmtt/m/n/10 ## 36                                                                                 Menaje y herramientas del hogar[] 
- []
-
-
-Overfull \hbox (161.2821pt too wide) in paragraph at lines 1108--1108
-[]\TU/lmtt/m/n/10 ## 37                                                    Bienes y servicios para el mantenimiento corriente del hogar[] 
- []
-
-
-Overfull \hbox (161.2821pt too wide) in paragraph at lines 1109--1109
-[]\TU/lmtt/m/n/10 ## 38                                                                           Productos, aparatos y equipos médicos[] 
- []
-
-
-Overfull \hbox (161.2821pt too wide) in paragraph at lines 1110--1110
-[]\TU/lmtt/m/n/10 ## 39                                                                 Servicios médicos, ambulatorios y hospitalarios[] 
- []
-
-
-Overfull \hbox (161.2821pt too wide) in paragraph at lines 1111--1111
-[]\TU/lmtt/m/n/10 ## 40                                                                                        Adquisición de vehículos[] 
- []
-
-
-Overfull \hbox (161.2821pt too wide) in paragraph at lines 1112--1112
-[]\TU/lmtt/m/n/10 ## 41                                                                             Utilización de vehículos personales[] 
- []
-
-
-Overfull \hbox (161.2821pt too wide) in paragraph at lines 1113--1113
-[]\TU/lmtt/m/n/10 ## 42                                                                                         Servicios de transporte[] 
- []
-
-
-Overfull \hbox (161.2821pt too wide) in paragraph at lines 1114--1114
-[]\TU/lmtt/m/n/10 ## 43                                                                                      Equipos de telefonía y fax[] 
- []
-
-
-Overfull \hbox (161.2821pt too wide) in paragraph at lines 1115--1115
-[]\TU/lmtt/m/n/10 ## 44                                                                          Servicios postales, de telefonía y fax[] 
- []
-
-
-Overfull \hbox (161.2821pt too wide) in paragraph at lines 1116--1116
-[]\TU/lmtt/m/n/10 ## 45                                           Equipos audiovisuales, fotográficos y de procesamiento de información[] 
- []
-
-
-Overfull \hbox (161.2821pt too wide) in paragraph at lines 1117--1117
-[]\TU/lmtt/m/n/10 ## 46 Otros bienes para el ocio, el deporte y la cultura (juegos, instrumentos musicales, jardinería, mascotas, etc.)[] 
- []
-
-
-Overfull \hbox (161.2821pt too wide) in paragraph at lines 1118--1118
-[]\TU/lmtt/m/n/10 ## 47                                                                  Servicios recreativos, deportivos y culturales[] 
- []
-
-
-Overfull \hbox (161.2821pt too wide) in paragraph at lines 1119--1119
-[]\TU/lmtt/m/n/10 ## 48                                                                         Prensa, libros y artículos de papelería[] 
- []
-
-
-Overfull \hbox (161.2821pt too wide) in paragraph at lines 1120--1120
-[]\TU/lmtt/m/n/10 ## 49                                                                                             Paquetes turísticos[] 
- []
-
-
-Overfull \hbox (161.2821pt too wide) in paragraph at lines 1121--1121
-[]\TU/lmtt/m/n/10 ## 50                                                                                   Enseñanza Infantil y Primaria[] 
- []
-
-
-Overfull \hbox (161.2821pt too wide) in paragraph at lines 1122--1122
-[]\TU/lmtt/m/n/10 ## 51                                                               Enseñanza Secundaria y Postsecundaria no Superior[] 
- []
-
-
-Overfull \hbox (161.2821pt too wide) in paragraph at lines 1123--1123
-[]\TU/lmtt/m/n/10 ## 52                                                                                              Enseñanza Superior[] 
- []
-
-
-Overfull \hbox (161.2821pt too wide) in paragraph at lines 1124--1124
-[]\TU/lmtt/m/n/10 ## 53                                                                                Enseñanzas no definida por nivel[] 
- []
-
-
-Overfull \hbox (161.2821pt too wide) in paragraph at lines 1125--1125
-[]\TU/lmtt/m/n/10 ## 54                                                                                        Restauración y comedores[] 
- []
-
-
-Overfull \hbox (161.2821pt too wide) in paragraph at lines 1126--1126
-[]\TU/lmtt/m/n/10 ## 55                                                                                        Servicios de alojamiento[] 
- []
-
-
-Overfull \hbox (161.2821pt too wide) in paragraph at lines 1127--1127
-[]\TU/lmtt/m/n/10 ## 56                                                                                                Cuidado personal[] 
- []
-
-
-Overfull \hbox (161.2821pt too wide) in paragraph at lines 1128--1128
-[]\TU/lmtt/m/n/10 ## 57                                                                                     Efectos personales n.c.o.p.[] 
- []
-
-
-Overfull \hbox (161.2821pt too wide) in paragraph at lines 1129--1129
-[]\TU/lmtt/m/n/10 ## 58                                                                                               Protección social[] 
- []
-
-
-Overfull \hbox (161.2821pt too wide) in paragraph at lines 1130--1130
-[]\TU/lmtt/m/n/10 ## 59                                                                                                         Seguros[] 
- []
-
-
-Overfull \hbox (161.2821pt too wide) in paragraph at lines 1131--1131
-[]\TU/lmtt/m/n/10 ## 60                                                                                  Servicios financieros n.c.o.p.[] 
- []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
+LaTeX Warning: `h' float specifier changed to `ht'.
 
 
 
 [24]
-Overfull \hbox (161.2821pt too wide) in paragraph at lines 1132--1132
-[]\TU/lmtt/m/n/10 ## 61                                                                                        Otros servicios n.c.o.p.[] 
- []
-
-
-Overfull \hbox (161.2821pt too wide) in paragraph at lines 1133--1133
-[]\TU/lmtt/m/n/10 ## 62                                                                                                       Dato base[] 
- []
-
-
-Overfull \hbox (161.2821pt too wide) in paragraph at lines 1134--1134
-[]\TU/lmtt/m/n/10 ## 63                                                                              Variación respecto al año anterior[] 
- []
-
-
-Overfull \hbox (161.2821pt too wide) in paragraph at lines 1135--1135
-[]\TU/lmtt/m/n/10 ## 64                                                                                  Variación respecto al año base[] 
- []
-
-
-Overfull \hbox (161.2821pt too wide) in paragraph at lines 1136--1136
-[]\TU/lmtt/m/n/10 ## 65                                                                                                     Gasto total[] 
- []
-
-
-Overfull \hbox (161.2821pt too wide) in paragraph at lines 1137--1137
-[]\TU/lmtt/m/n/10 ## 66                                                                                         Distribución porcentual[] 
- []
-
-
-Overfull \hbox (161.2821pt too wide) in paragraph at lines 1138--1138
-[]\TU/lmtt/m/n/10 ## 67                                                                                           Gasto medio por hogar[] 
- []
-
-
-Overfull \hbox (161.2821pt too wide) in paragraph at lines 1139--1139
-[]\TU/lmtt/m/n/10 ## 68                                                                                         Gasto medio por persona[] 
- []
-
-
-Overfull \hbox (161.2821pt too wide) in paragraph at lines 1140--1140
-[]\TU/lmtt/m/n/10 ## 69                                                                               Gasto medio por unidad de consumo[] 
- []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
 
 [25]
-
-[26]
-
-[27]
-File: r_plotting_review_files/figure-latex/unnamed-chunk-27-1.pdf Graphic file (type pdf)
-<use r_plotting_review_files/figure-latex/unnamed-chunk-27-1.pdf>
-
-
-[28]
 File: r_plotting_review_files/figure-latex/unnamed-chunk-29-1.pdf Graphic file (type pdf)
 <use r_plotting_review_files/figure-latex/unnamed-chunk-29-1.pdf>
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-
-[29]
-Overfull \hbox (86.47102pt too wide) in paragraph at lines 1448--1449
-[]\TU/lmr/m/n/10 Usando \TU/lmtt/m/n/10 ineapir \TU/lmr/m/n/10 extraemos los datos usando el servicio API del INE. Ejecutando \TU/lmtt/m/n/10 get_metadata_table_varval(50902)
+Overfull \hbox (89.25102pt too wide) in paragraph at lines 1262--1263
+[]\TU/lmr/m/n/10 Usando \TU/lmtt/m/n/10 ineapir \TU/lmr/m/n/10 extraemos los datos usando el servicio API del INE. Ejecutando \TU/lmtt/m/n/10 get_metadata_table_varval(50902)\TU/lmr/m/n/10 . 
  []
 
 
-Overfull \hbox (9.0321pt too wide) in paragraph at lines 1476--1476
+
+[26]
+Overfull \hbox (9.0321pt too wide) in paragraph at lines 1290--1290
 []\TU/lmtt/m/n/10 ##                                                                                Nombre[] 
  []
 
 
-
-[30]
-Overfull \hbox (9.0321pt too wide) in paragraph at lines 1477--1477
+Overfull \hbox (9.0321pt too wide) in paragraph at lines 1291--1291
 []\TU/lmtt/m/n/10 ## 1                                                                      Índice general[] 
  []
 
 
-Overfull \hbox (9.0321pt too wide) in paragraph at lines 1478--1478
+Overfull \hbox (9.0321pt too wide) in paragraph at lines 1292--1292
 []\TU/lmtt/m/n/10 ## 2                                                  Alimentos y bebidas no alcohólicas[] 
  []
 
 
-Overfull \hbox (9.0321pt too wide) in paragraph at lines 1479--1479
+Overfull \hbox (9.0321pt too wide) in paragraph at lines 1293--1293
 []\TU/lmtt/m/n/10 ## 3                                                        Bebidas alcohólicas y tabaco[] 
  []
 
 
-Overfull \hbox (9.0321pt too wide) in paragraph at lines 1480--1480
+Overfull \hbox (9.0321pt too wide) in paragraph at lines 1294--1294
 []\TU/lmtt/m/n/10 ## 4                                                                   Vestido y calzado[] 
  []
 
 
-Overfull \hbox (9.0321pt too wide) in paragraph at lines 1481--1481
+Overfull \hbox (9.0321pt too wide) in paragraph at lines 1295--1295
 []\TU/lmtt/m/n/10 ## 5                              Vivienda, agua, electricidad, gas y otros combustibles[] 
  []
 
 
-Overfull \hbox (9.0321pt too wide) in paragraph at lines 1482--1482
+Overfull \hbox (9.0321pt too wide) in paragraph at lines 1296--1296
 []\TU/lmtt/m/n/10 ## 6  Muebles, artículos del hogar y artículos para el mantenimiento corriente del hogar[] 
  []
 
 
-Overfull \hbox (9.0321pt too wide) in paragraph at lines 1483--1483
+Overfull \hbox (9.0321pt too wide) in paragraph at lines 1297--1297
 []\TU/lmtt/m/n/10 ## 7                                                                             Sanidad[] 
  []
 
 
-Overfull \hbox (9.0321pt too wide) in paragraph at lines 1484--1484
+Overfull \hbox (9.0321pt too wide) in paragraph at lines 1298--1298
 []\TU/lmtt/m/n/10 ## 8                                                                          Transporte[] 
  []
 
 
-Overfull \hbox (9.0321pt too wide) in paragraph at lines 1485--1485
+Overfull \hbox (9.0321pt too wide) in paragraph at lines 1299--1299
 []\TU/lmtt/m/n/10 ## 9                                                                      Comunicaciones[] 
  []
 
 
-Overfull \hbox (9.0321pt too wide) in paragraph at lines 1486--1486
+Overfull \hbox (9.0321pt too wide) in paragraph at lines 1300--1300
 []\TU/lmtt/m/n/10 ## 10                                                                     Ocio y cultura[] 
  []
 
 
-Overfull \hbox (9.0321pt too wide) in paragraph at lines 1487--1487
+Overfull \hbox (9.0321pt too wide) in paragraph at lines 1301--1301
 []\TU/lmtt/m/n/10 ## 11                                                                          Enseñanza[] 
  []
 
 
-Overfull \hbox (9.0321pt too wide) in paragraph at lines 1488--1488
+Overfull \hbox (9.0321pt too wide) in paragraph at lines 1302--1302
 []\TU/lmtt/m/n/10 ## 12                                                             Restaurantes y hoteles[] 
  []
 
 
-Overfull \hbox (9.0321pt too wide) in paragraph at lines 1489--1489
+Overfull \hbox (9.0321pt too wide) in paragraph at lines 1303--1303
 []\TU/lmtt/m/n/10 ## 13                                                           Otros bienes y servicios[] 
  []
 
 
-Overfull \hbox (9.0321pt too wide) in paragraph at lines 1490--1490
+Overfull \hbox (9.0321pt too wide) in paragraph at lines 1304--1304
 []\TU/lmtt/m/n/10 ## 14                                                                             Índice[] 
  []
 
 
-Overfull \hbox (9.0321pt too wide) in paragraph at lines 1491--1491
+Overfull \hbox (9.0321pt too wide) in paragraph at lines 1305--1305
 []\TU/lmtt/m/n/10 ## 15                                                                  Variación mensual[] 
  []
 
 
-Overfull \hbox (9.0321pt too wide) in paragraph at lines 1492--1492
+Overfull \hbox (9.0321pt too wide) in paragraph at lines 1306--1306
 []\TU/lmtt/m/n/10 ## 16                                                                    Variación anual[] 
  []
 
 
-Overfull \hbox (9.0321pt too wide) in paragraph at lines 1493--1493
+Overfull \hbox (9.0321pt too wide) in paragraph at lines 1307--1307
 []\TU/lmtt/m/n/10 ## 17                                                      Variación en lo que va de año[] 
  []
 
 
 
+[27]
+
+LaTeX Font Warning: Font shape `TU/lmtt/bx/it' in size <10> not available
+(Font)              Font shape `TU/lmtt/b/sl' tried instead on input line 1392.
+
+
+
+[28]
+File: r_plotting_review_files/figure-latex/unnamed-chunk-32-1.pdf Graphic file (type pdf)
+<use r_plotting_review_files/figure-latex/unnamed-chunk-32-1.pdf>
+
+Overfull \hbox (84.00102pt too wide) in paragraph at lines 1427--1428
+[]\TU/lmr/m/n/10 Usando \TU/lmtt/m/n/10 ineapir \TU/lmr/m/n/10 extraemos los datos usando el servicio API del INE. Ejecutando \TU/lmtt/m/n/10 get_metadata_table_varval(2915)\TU/lmr/m/n/10 . 
+ []
+
+
+
+[29]
+
+[30]
+File: r_plotting_review_files/figure-latex/unnamed-chunk-36-1.pdf Graphic file (type pdf)
+<use r_plotting_review_files/figure-latex/unnamed-chunk-36-1.pdf>
+
+Underfull \hbox (badness 2042) in paragraph at lines 1528--1529
+\TU/lmr/m/n/10 Este tipo de gráfico es poco conocido pero muy útil para visualizar ciertos fenómenos so-
+ []
+
+
+Overfull \hbox (89.25102pt too wide) in paragraph at lines 1537--1538
+[]\TU/lmr/m/n/10 Usando \TU/lmtt/m/n/10 ineapir \TU/lmr/m/n/10 extraemos los datos usando el servicio API del INE. Ejecutando \TU/lmtt/m/n/10 get_metadata_table_varval(66257)\TU/lmr/m/n/10 . 
+ []
+
+
+
 [31]
-Overfull \hbox (35.2821pt too wide) in paragraph at lines 1574--1574
-[]\TU/lmtt/m/n/10 ##                                                                                     Nombre[] 
- []
-
-
-Overfull \hbox (35.2821pt too wide) in paragraph at lines 1575--1575
-[]\TU/lmtt/m/n/10 ## 1                                                                           Índice general[] 
- []
-
-
-Overfull \hbox (35.2821pt too wide) in paragraph at lines 1576--1576
-[]\TU/lmtt/m/n/10 ## 2                                              Alimentos con elaboración, bebidas y tabaco[] 
- []
-
-
-Overfull \hbox (35.2821pt too wide) in paragraph at lines 1577--1577
-[]\TU/lmtt/m/n/10 ## 3                                                                Alimentos sin elaboración[] 
- []
-
-
-Overfull \hbox (35.2821pt too wide) in paragraph at lines 1578--1578
-[]\TU/lmtt/m/n/10 ## 4                                                                      Bienes industriales[] 
- []
-
-
-Overfull \hbox (35.2821pt too wide) in paragraph at lines 1579--1579
-[]\TU/lmtt/m/n/10 ## 5                                                       Servicios sin alquiler de vivienda[] 
- []
-
-
-Overfull \hbox (35.2821pt too wide) in paragraph at lines 1580--1580
-[]\TU/lmtt/m/n/10 ## 6                                                               Carburantes y combustibles[] 
- []
-
-
-Overfull \hbox (35.2821pt too wide) in paragraph at lines 1581--1581
-[]\TU/lmtt/m/n/10 ## 7                                                            Bienes industriales duraderos[] 
- []
-
-
-Overfull \hbox (35.2821pt too wide) in paragraph at lines 1582--1582
-[]\TU/lmtt/m/n/10 ## 8                                                                    Productos energéticos[] 
- []
-
-
-Overfull \hbox (35.2821pt too wide) in paragraph at lines 1583--1583
-[]\TU/lmtt/m/n/10 ## 9                                                  General sin alimentos, bebidas y tabaco[] 
- []
-
-
-Overfull \hbox (35.2821pt too wide) in paragraph at lines 1584--1584
-[]\TU/lmtt/m/n/10 ## 10                                                        General sin alquiler de vivienda[] 
- []
-
-
-Overfull \hbox (35.2821pt too wide) in paragraph at lines 1585--1585
-[]\TU/lmtt/m/n/10 ## 11                                                 General sin carburantes ni combustibles[] 
- []
-
-
-Overfull \hbox (35.2821pt too wide) in paragraph at lines 1586--1586
-[]\TU/lmtt/m/n/10 ## 12                                                       General sin productos energéticos[] 
- []
-
-
-Overfull \hbox (35.2821pt too wide) in paragraph at lines 1587--1587
-[]\TU/lmtt/m/n/10 ## 13                            General sin alimentos no elaborados ni productos energéticos[] 
- []
-
-
-Overfull \hbox (35.2821pt too wide) in paragraph at lines 1588--1588
-[]\TU/lmtt/m/n/10 ## 14                                    General sin servicios (incluye alquiler de vivienda)[] 
- []
-
-
-Overfull \hbox (35.2821pt too wide) in paragraph at lines 1589--1589
-[]\TU/lmtt/m/n/10 ## 15                                           General sin servicios ni alquiler de vivienda[] 
- []
-
-
-Overfull \hbox (35.2821pt too wide) in paragraph at lines 1590--1590
-[]\TU/lmtt/m/n/10 ## 16                      General sin alimentos ni bebidas ni tabaco ni alquiler de vivienda[] 
- []
-
-
-Overfull \hbox (35.2821pt too wide) in paragraph at lines 1591--1591
-[]\TU/lmtt/m/n/10 ## 17               General sin alimentos ni bebidas ni tabaco ni carburantes ni combustibles[] 
- []
-
-
-Overfull \hbox (35.2821pt too wide) in paragraph at lines 1592--1592
-[]\TU/lmtt/m/n/10 ## 18                     General sin alimentos ni bebidas ni tabaco ni productos energéticos[] 
- []
-
-
-Overfull \hbox (35.2821pt too wide) in paragraph at lines 1593--1593
-[]\TU/lmtt/m/n/10 ## 19 General sin alimentos ni bebidas ni tabaco ni servicios (incluido alquiler de vivienda)[] 
- []
-
-
-Overfull \hbox (35.2821pt too wide) in paragraph at lines 1594--1594
-[]\TU/lmtt/m/n/10 ## 20         General sin alimentos ni bebidas ni tabaco ni servicios ni alquiler de vivienda[] 
- []
-
-
-Overfull \hbox (35.2821pt too wide) in paragraph at lines 1595--1595
-[]\TU/lmtt/m/n/10 ## 21                                                        Bienes industriales no duraderos[] 
- []
-
-
-Overfull \hbox (35.2821pt too wide) in paragraph at lines 1596--1596
-[]\TU/lmtt/m/n/10 ## 22                                                                      General sin tabaco[] 
- []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
 
 [32]
-Overfull \hbox (35.2821pt too wide) in paragraph at lines 1597--1597
-[]\TU/lmtt/m/n/10 ## 23                                                                     Alimentos y bebidas[] 
- []
+File: r_plotting_review_files/figure-latex/unnamed-chunk-41-1.pdf Graphic file (type pdf)
+<use r_plotting_review_files/figure-latex/unnamed-chunk-41-1.pdf>
 
-
-Overfull \hbox (35.2821pt too wide) in paragraph at lines 1598--1598
-[]\TU/lmtt/m/n/10 ## 24                                                                    Alimentos elaborados[] 
- []
-
-
-Overfull \hbox (35.2821pt too wide) in paragraph at lines 1599--1599
-[]\TU/lmtt/m/n/10 ## 25                                                         Bienes industriales sin energía[] 
- []
-
-
-Overfull \hbox (35.2821pt too wide) in paragraph at lines 1600--1600
-[]\TU/lmtt/m/n/10 ## 26                                                                               Servicios[] 
- []
-
-
-Overfull \hbox (35.2821pt too wide) in paragraph at lines 1601--1601
-[]\TU/lmtt/m/n/10 ## 27                                                             Alimentos, bebidas y tabaco[] 
- []
-
-
-Overfull \hbox (35.2821pt too wide) in paragraph at lines 1602--1602
-[]\TU/lmtt/m/n/10 ## 28                                         Alimentos no elaborados y productos energéticos[] 
- []
-
-
-Overfull \hbox (35.2821pt too wide) in paragraph at lines 1603--1603
-[]\TU/lmtt/m/n/10 ## 29                                           Bienes industriales sin productos energéticos[] 
- []
-
-
-Overfull \hbox (35.2821pt too wide) in paragraph at lines 1604--1604
-[]\TU/lmtt/m/n/10 ## 30                                        General sin carburantes ni combustibles líquidos[] 
- []
-
-
-Overfull \hbox (35.2821pt too wide) in paragraph at lines 1605--1605
-[]\TU/lmtt/m/n/10 ## 31                                                                                  Índice[] 
- []
-
-
-Overfull \hbox (35.2821pt too wide) in paragraph at lines 1606--1606
-[]\TU/lmtt/m/n/10 ## 32                                                                       Variación mensual[] 
- []
-
-
-Overfull \hbox (35.2821pt too wide) in paragraph at lines 1607--1607
-[]\TU/lmtt/m/n/10 ## 33                                                                         Variación anual[] 
- []
-
-
-Overfull \hbox (35.2821pt too wide) in paragraph at lines 1608--1608
-[]\TU/lmtt/m/n/10 ## 34                                                           Variación en lo que va de año[] 
- []
+LaTeX Warning: `h' float specifier changed to `ht'.
 
 
 
 [33]
 
-LaTeX Font Warning: Font shape `TU/lmtt/bx/it' in size <10> not available
-(Font)              Font shape `TU/lmtt/b/sl' tried instead on input line 1681.
-
-File: r_plotting_review_files/figure-latex/unnamed-chunk-31-1.pdf Graphic file (type pdf)
-<use r_plotting_review_files/figure-latex/unnamed-chunk-31-1.pdf>
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-
 [34]
-Overfull \hbox (81.22102pt too wide) in paragraph at lines 1716--1717
-[]\TU/lmr/m/n/10 Usando \TU/lmtt/m/n/10 ineapir \TU/lmr/m/n/10 extraemos los datos usando el servicio API del INE. Ejecutando \TU/lmtt/m/n/10 get_metadata_table_varval(2915)
- []
-
-
-
-[35]
-File: r_plotting_review_files/figure-latex/unnamed-chunk-34-1.pdf Graphic file (type pdf)
-<use r_plotting_review_files/figure-latex/unnamed-chunk-34-1.pdf>
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-
-[36]
-Underfull \hbox (badness 2042) in paragraph at lines 1809--1810
-\TU/lmr/m/n/10 Este tipo de gráfico es poco conocido pero muy útil para visualizar ciertos fenómenos so-
- []
-
-
-Overfull \hbox (86.47102pt too wide) in paragraph at lines 1818--1819
-[]\TU/lmr/m/n/10 Usando \TU/lmtt/m/n/10 ineapir \TU/lmr/m/n/10 extraemos los datos usando el servicio API del INE. Ejecutando \TU/lmtt/m/n/10 get_metadata_table_varval(66257)
- []
-
-
-
-[37]
-
-[38]
-File: r_plotting_review_files/figure-latex/unnamed-chunk-38-1.pdf Graphic file (type pdf)
-<use r_plotting_review_files/figure-latex/unnamed-chunk-38-1.pdf>
-
-
-[39]
-
-[40
-
-]
 Capítulo 5.
 
 
-[41]
+[35
 
-[42
+]
+
+[36
 
 ]
 Capítulo 6.
+[37]
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
-[43]
 
-[44
+[38]
+File: fig/capturas/flexdashboard.png Graphic file (type bmp)
+<fig/capturas/flexdashboard.png>
 
-]
+
+[39]
+Missing character: There is no ├ (U+251C) in font [lmmono10-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono10-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono10-regular]:!
+Missing character: There is no ├ (U+251C) in font [lmmono10-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono10-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono10-regular]:!
+Missing character: There is no ├ (U+251C) in font [lmmono10-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono10-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono10-regular]:!
+Missing character: There is no ├ (U+251C) in font [lmmono10-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono10-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono10-regular]:!
+Missing character: There is no ├ (U+251C) in font [lmmono10-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono10-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono10-regular]:!
+Missing character: There is no ├ (U+251C) in font [lmmono10-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono10-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono10-regular]:!
+Missing character: There is no └ (U+2514) in font [lmmono10-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono10-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono10-regular]:!
+
+
+[40]
+
+[41]
+
+[42]
 Capítulo 7.
 
 
-[45]
-Overfull \hbox (81.33102pt too wide) in paragraph at lines 2101--2102
-[]\TU/lmr/m/n/10 Usando \TU/lmtt/m/n/10 ineapir \TU/lmr/m/n/10 extraemos los datos usando el servicio API del INE. Aplicando \TU/lmtt/m/n/10 get_metadata_table_varval(27154)
+[43
+
+]
+Overfull \hbox (81.33102pt too wide) in paragraph at lines 2014--2015
+[]\TU/lmr/m/n/10 Usando \TU/lmtt/m/n/10 ineapir \TU/lmr/m/n/10 extraemos los datos usando el servicio API del INE. Aplicando \TU/lmtt/m/n/10 get_metadata_table_varval(27154) 
  []
 
 
 
-[46]
+[44]
 
-[47]
+[45]
+Overfull \hbox (1169.2821pt too wide) in paragraph at lines 2107--2107
+[]\TU/lmtt/m/n/10 ## - Processing filter: 0% - Processing filter: 12%        - Processing filter: 25%        - Processing filter: 38%        - Processing filter: 50%        - Processing filter: 62%        - Processing filter: 75%        - Processing filter: 88%        - Processing filter: 100%        - Processing filter: 100% 
+ []
+
+
+Overfull \hbox (297.7821pt too wide) in paragraph at lines 2108--2108
+[]\TU/lmtt/m/n/10 ## - API URL: https://servicios.ine.es/wstempus/js/ES/DATOS_TABLA/27154?nult=1&tip=AM&ver=3&tv=70%3A&tv=18%3A451&tv=355%3A15319&tv=260%3A284290[] 
+ []
+
 File: fig/caution.png Graphic file (type bmp)
 <fig/caution.png>
 
 
-[48]
-File: r_plotting_review_files/figure-latex/unnamed-chunk-41-1.pdf Graphic file (type pdf)
-<use r_plotting_review_files/figure-latex/unnamed-chunk-41-1.pdf>
+[46]
+File: r_plotting_review_files/figure-latex/unnamed-chunk-46-1.pdf Graphic file (type pdf)
+<use r_plotting_review_files/figure-latex/unnamed-chunk-46-1.pdf>
 
-Overfull \hbox (86.47102pt too wide) in paragraph at lines 2285--2286
+
+[47]
+Overfull \hbox (86.47102pt too wide) in paragraph at lines 2221--2222
 []\TU/lmr/m/n/10 Usando \TU/lmtt/m/n/10 ineapir \TU/lmr/m/n/10 extraemos los datos usando el servicio API del INE. Ejecutando \TU/lmtt/m/n/10 get_metadata_table_varval(13930)
  []
 
 
 
-[49]
-
-[50]
+[48]
 File: fig/caution.png Graphic file (type bmp)
 <fig/caution.png>
 
 
-[51]
-File: r_plotting_review_files/figure-latex/unnamed-chunk-45-1.pdf Graphic file (type pdf)
-<use r_plotting_review_files/figure-latex/unnamed-chunk-45-1.pdf>
+[49]
+File: r_plotting_review_files/figure-latex/unnamed-chunk-51-1.pdf Graphic file (type pdf)
+<use r_plotting_review_files/figure-latex/unnamed-chunk-51-1.pdf>
 
+
+[50]
+
+[51
+
+]
 
 [52]
+Appendix A.
+
 
 [53
 
 ]
+File: fig/caution.png Graphic file (type bmp)
+<fig/caution.png>
+
 
 [54]
-Appendix A.
-
 
 [55
-
-]
-
-[56]
-
-[57
 
 ] (./r_plotting_review.aux)
  ***********
@@ -2392,12 +1887,12 @@ Package logreq Info: Writing requests to 'r_plotting_review.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 38510 strings out of 476232
- 781864 string characters out of 5786174
- 1884431 words of memory out of 5000000
- 60509 multiletter control sequences out of 15000+600000
+ 38549 strings out of 476232
+ 782842 string characters out of 5786174
+ 1854243 words of memory out of 5000000
+ 60547 multiletter control sequences out of 15000+600000
  564592 words of font info for 98 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  98i,8n,123p,989b,5514s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on r_plotting_review.pdf (57 pages).
+Output written on r_plotting_review.pdf (55 pages).

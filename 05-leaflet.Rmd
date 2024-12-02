@@ -93,7 +93,7 @@ filter = list(ccaa = "", sexo = "total", values = c("0 años", "esperanza de vid
 # Tabl de mortalidad por año, ccaa, ciudadaes, sexo, edad y funciones. 
 # Table url: https://www.ine.es/jaxiT3/Tabla.htm?t=27154&L=0
 esp <- get_data_table(idTable = 27154, filter = filter, nlast = 1, unnest = TRUE,
-                       metacodes = TRUE, tip = "AM", validate = FALSE)
+                       metacodes = TRUE, tip = "AM", validate = FALSE,verbose = TRUE)
 
 # Seleccionamos columnas de interés
 esp <- subset(esp, select = c("Comunidades.y.Ciudades.Autónomas.Id", "T3_Periodo",

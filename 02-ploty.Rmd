@@ -31,7 +31,7 @@ La base de *plotly* es la interactividad de los gráficos que permite exploracio
 
 Debido a que los gráficos generados con `ploty` son interactivos, se genera un conflicto a la hora de guardar estos como pdf ya que se debe seleccionar una de las posibles vistas estáticas de dichos gráficos. La siguiente línea de código incluye el paquete `webshot` que se encarga de guardar capturas (imágenes estáticas) de dichos gráficos interactivos a la hora de imprimir la página como *.pdf* .
 
-## Ejemplo de Uso
+## Ejemplos de Uso
 
 ### Gráfico interactivo
 
@@ -75,7 +75,7 @@ p
 
 En este ejemplo, se utiliza el conjunto de datos mtcars para crear un gráfico de dispersión interactivo que muestra la relación entre el peso del vehículo y el consumo de combustible. El argumento marker permite personalizar la apariencia de los puntos en el gráfico, mientras que layout se utiliza para añadir títulos y etiquetas a los ejes.
 
-### Tree Maps
+### Tree Maps {#treemaps }
 
 
 En este apartado se va a exponer como crear los [Tree Maps](https://en.wikipedia.org/wiki/Treemapping) un tipo de gráfico muy útil para ver como se distribuye una cierta característica entre diferentes categorías. Por ejemplo, en este caso, como se distribuye el gasto medio por persona en España dentro de los grupos ECOICOP[^39].
@@ -236,19 +236,20 @@ Ahora, se representan los datos como un TreeMap, ajustando los parámetros para 
 
 
 ```{r, webshot = "webshot", out.width = "80%"}
-fig <- plot_ly(
+fig<-plot_ly(
   type = "treemap",
   labels = labels,
   parents = parents,
   textinfo = "label+value+percent entry+percent root",
   hoverinfo = "label+value+percent entry+percent root",
-  values = as.integer(c(data_ecoicop_1$Valor, data_ecoicop_2$Valor), 0),
+  values = as.integer(c(data_ecoicop_1$Valor, data_ecoicop_2$Valor)),
   maxdepth = 2,
   branchvalues = "total",
   tiling = list(squarifyratio = 2)
 )
 # Imporante ajustar este numero para que quede bontito
 # Quitarlo para ver que pasa sin el
+
 ```
 
 ```{r, webshot = "webshot", out.width = "80%",fig.cap="Distribución del gasto medio por persona en España para el año 2022."}
