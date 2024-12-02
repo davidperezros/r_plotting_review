@@ -23,6 +23,7 @@
 <meta name="author" content="David Pérez Ros" />
 
 
+<meta name="date" content="2024-02-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -633,7 +634,7 @@ Licensed under <img alt="EUROPEAN UNION PUBLIC LICENCE v. 1.2" style="border-wid
 <p>En una época en la que la transparencia por parte de las instituciones se erige como pilar fundamental de sus principios, estos dashboards parecen la herramienta idónea para los constructores de estadísticas oficiales. Al ser de código abierto, se puede compartir el código fuente de los cuadros de mando, lo que conlleva ventajas significativas:</p>
 <ul>
 <li>El <strong>proceso de elaboración</strong> es <strong>público</strong>, sirviendo como base para otros trabajos y viendo que no existen manipulaciones.</li>
-<li>Se puede implementar servicios como <strong>GitHub</strong> que permiten a los usuarios hacer pull requests o abrir issues, creando una comunidad que mejore notablemente dichos recuros y que sirva como respaldo técnico.</li>
+<li>Se puede implementar servicios como <strong>GitHub</strong> que permiten a los usuarios hacer pull requests o abrir issues, creando una comunidad que mejore notablemente dichos recursos y que sirva como respaldo técnico.</li>
 <li>Permite reusar (bajo la licencia elegida) los cuadros de mando fácilmente, aportando valor añadido y que su utlización aumente.</li>
 </ul>
 <p>En el siguiente cuadro se expone la comparación de distintos servicios de creación de dashboards:</p>
@@ -800,7 +801,7 @@ Concretamente tenemos el siguiente esquema,</p>
 <p>donde:</p>
 <ul>
 <li><strong>.gitignore </strong>: Contiene los archivos que se deben ignorar en git, es decir que no se desea tener un control de versiones de ellos.</li>
-<li>**_site.yml **: Archivo de configuración del sitio.</li>
+<li><strong>site.yml </strong>: Archivo de configuración del sitio.</li>
 <li><strong>index.Rmd</strong>: Contiene todo el cuadro de mando. Desde la lectura de datos hasta la creación de elementos visuales y su presentación.</li>
 <li><strong>r_flexdashboard.Rproj</strong>: Ajustes globales del proyecto en R.</li>
 <li><strong>README.md</strong>: Archivo que muestra información en la página principal del repositorio en GitHub.</li>
@@ -891,7 +892,14 @@ Además existen otras webs muy útiles como pueden ser:</p>
 </div>
 <div id="shinylive" class="section level2 hasAnchor" number="6.5">
 <h2><span class="header-section-number">6.5</span> Shinylive<a href="dashboards-en-r.html#shinylive" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Leyendo por la web, existe un paquete de R llamado <a href="https://posit-dev.github.io/r-shinylive/">shinylive</a> que permite ejecutar una aplicación shiny en la web sin necesidad de un servidor. Por lo tanto, puede ser interesante para subirlo a github y permitir crear una github pages. Es prometedor.</p>
+<p>Existe una librería en R llamada <a href="https://posit-dev.github.io/r-shinylive/">shinylive</a>
+que permite ejecutar una aplicación shiny en la web sin necesidad de un servidor, como en sitios web estáticos, presentaciones o cursos en línea. Por lo tanto, puede ser interesante para subirlo a github y permitir crear una github pages.</p>
+<p>Internamente, shinylive utiliza <a href="https://webassembly.org/">WebAssembly</a> para permitir la ejecución de aplicaciones Shiny directamente en el navegador sin la necesidad de un servidor backend. Esto se logra al compilar el entorno R y las dependencias necesarias en WebAssembly, permitiendo que las aplicaciones Shiny sean completamente autónomas y puedan ser distribuidas como archivos HTML estáticos.</p>
+<div class="infobox caution">
+<p><strong>CUIDADO:</strong></p>
+<p>Shinylive explora que librerías se están usando en la aplicación shiny, para cargarlas vía precompilados de WebAssembly. En esta web se pueden consultar los paquetes qué se pueden encontrar precompilados, y por tanto usar. <a href="https://repo.r-wasm.org/">https://repo.r-wasm.org/</a></p>
+<p>Por lo tanto, <strong>NO es posible usar</strong> paquetes que no aparezcan en esa lista.</p>
+</div>
 
 </div>
 </div>
@@ -932,7 +940,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/davidperezros/r_plotting_review/edit/main/04-tmap.Rmd",
+"link": "https://github.com/davidperezros/r_plotting_review/edit/main/04-dashboards.Rmd",
 "text": "Editar"
 },
 "history": {
@@ -940,7 +948,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/davidperezros/r_plotting_review/blob/main/04-tmap.Rmd",
+"link": "https://github.com/davidperezros/r_plotting_review/blob/main/04-dashboards.Rmd",
 "text": null
 },
 "download": ["r_plotting_review.pdf"],

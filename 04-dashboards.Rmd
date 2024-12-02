@@ -169,7 +169,7 @@ Existe una librería en R llamada [shinylive](https://posit-dev.github.io/r-shin
  Internamente, shinylive utiliza [WebAssembly](https://webassembly.org/) para permitir la ejecución de aplicaciones Shiny directamente en el navegador sin la necesidad de un servidor backend. Esto se logra al compilar el entorno R y las dependencias necesarias en WebAssembly, permitiendo que las aplicaciones Shiny sean completamente autónomas y puedan ser distribuidas como archivos HTML estáticos.
  
  
- ::: {.infobox .caution data-latex="{caution}"}
+::: {.infobox .caution data-latex="{caution}"}
 **CUIDADO:**
 
 Shinylive explora que librerías se están usando en la aplicación shiny, para cargarlas vía precompilados de WebAssembly. En esta web se pueden consultar los paquetes qué se pueden encontrar precompilados, y por tanto usar. [https://repo.r-wasm.org/](https://repo.r-wasm.org/) 
